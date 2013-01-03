@@ -20,10 +20,9 @@ a {
 }
 
 div#wrapper{
-	min-height: 100%; 
-	height:100% !important;
 	height:100%;
-	position: relative;
+	width:100%;
+	display: table;
 }
 
 /*
@@ -35,6 +34,7 @@ div#header {
 	vertical-align: middle;
 	box-shadow:0 0 5px #000;
 	z-index: 9999999;
+	display: table-row;
 }
 
 div#header #menu {
@@ -76,12 +76,15 @@ div#header #menu a.menu_selected {
 */
 
 div#content {
-	height:80%;
+	height:100%;
+	display: table-row;
 }
 
 div#content #map {
 	height:100%;
+	width:100%;
 	z-index: 0;
+	position:relative;
 }
 
 div#content p {
@@ -111,14 +114,13 @@ div#content p {
 */
 
 div#footer { 
-	/*position: absolute;
-	bottom: 0px;*/
 	height: 3em;
 	width: 100%;
 
 	background-color: #aeaeae;
 	color: #fff;
 	text-align: right;
+	display: table-row;
 }
 
 div#footer img.poweredby.logo {
