@@ -1,0 +1,10 @@
+Requirements:
+	* Webserver (Apache2, Nginx, ...)
+	* PHP 5
+	* PostgreSQL 9.1 with Postgis 2.0
+
+Setup procedure:
+	* Create a spatial database and run Geosoftdatenbank.sql to create database structure
+	* Copy config.inc.sample.php to config.inc.php and add your Cosm api key (it's free!)
+	(TBD) * Set up database connection in ???.conf.php
+	(TBD) * Set up cron jobs
