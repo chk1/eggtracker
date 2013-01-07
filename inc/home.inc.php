@@ -12,7 +12,7 @@ require_once("inc/config.inc.php");
 	var osm_sphm = new OpenLayers.Projection("EPSG:3857"); // OSM Spherical Mercator
 	vectors = new OpenLayers.Layer.Vector("Vector Layer");
 <?php 
-$dbconn = pg_connect("host= ". $conf["db"]["host"] .
+$dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" port=". $conf["db"]["port"] . 
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
