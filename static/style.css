@@ -43,6 +43,7 @@ div#header #menu {
 
 div#header #logo {
 	vertical-align: middle;
+	border:none;
 }
 
 div#header #menu ul {
