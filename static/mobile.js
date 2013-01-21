@@ -37,7 +37,7 @@ var init = function () {
                 transitionEffect: 'resize'
             })
         ],
-        center: new OpenLayers.LonLat(742000, 5861000),
-        zoom: 3
+        center: new OpenLayers.LonLat(848871.118504,6791357.34679),
+        zoom: 12
     });
 };

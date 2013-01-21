@@ -21,17 +21,13 @@ $result = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) a
 if(!$result) { die('SQL Error'); }
 while($row = pg_fetch_assoc($result)) {
 	//echo "#". $row['eggid'] .", #". $row['cosmid'] ." @ (". $row['x'] ."|". $row['y'] .")<br>";
-	echo "var point = new OpenLayers.Geometry.Point(".$row['x'].", ".$row['y'].");";
-	echo "point.transform(wgs84, osm_sphm);";
-	echo "vectors.addFeatures([new OpenLayers.Feature.Vector(point)]);";
+	echo "\t"."var point = new OpenLayers.Geometry.Point(".$row['x'].", ".$row['y'].");".PHP_EOL;
+	echo "\t"."point.transform(wgs84, osm_sphm);".PHP_EOL;
+	echo "\t"."vectors.addFeatures([new OpenLayers.Feature.Vector(point)]);".PHP_EOL;
 
 }
 
 pg_close($dbconn);
 ?>
-	//var point = new OpenLayers.Geometry.Point(350000, 5970000);
-	//var point = new OpenLayers.Geometry.Point(7, 52);
-	//point.transform(wgs84, osm_sphm);
-	//vectors.addFeatures([new OpenLayers.Feature.Vector(point)]);
 	map.addLayer(vectors); 
 </script>
