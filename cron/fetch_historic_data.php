@@ -39,7 +39,7 @@ foreach ($streams as $stream) {
 		$end   = date("Y-m-d\TH:i:s", strtotime($row["last_entry_date"])+3600*24); // +1 Tag
 	};
 	
-	$result = pg_query($dbconn, 'SELECT cosmid, eggid FROM eggs;');
+	$result = pg_query($dbconn, 'SELECT cosmid, eggid FROM eggs WHERE active = true;');
 	if(!$result) { die('SQL Error'); }
 	while($row = pg_fetch_assoc($result)) {
 		$insert = pg_prepare($dbconn, $stream.$row['cosmid'], 'INSERT INTO '.$stream.' (eggid, time, '.$stream.') VALUES ('.$row['cosmid'].', $1, $2);');
