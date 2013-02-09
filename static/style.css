@@ -23,6 +23,7 @@ div#wrapper{
 	height:100%;
 	width:100%;
 	display: table;
+	position: relative;
 }
 
 /*
@@ -84,7 +85,6 @@ div#content {
 div#content #map {
 	height:100%;
 	width:100%;
-	z-index: 0;
 	position:relative;
 }
 
