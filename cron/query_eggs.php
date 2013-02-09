@@ -1,7 +1,7 @@
 <?php
 /*
 	Query COSM Api for Air Quality Eggs in and around Münster
-	and insert eggs into the database.
+	and insert eggs into the database & set deleted eggs inactive.
 */
 
 include("../inc/config.inc.php");
@@ -55,6 +55,7 @@ function new_eggs() {
 }
 
 function old_eggs() {
+	// iterate over all eggs in database and 
 	// set 404'd eggs inactive
 	global $dbconn;
 	global $conf;
