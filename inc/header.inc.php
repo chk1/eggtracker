@@ -8,10 +8,6 @@ include("config.inc.php");
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="static/style.css">
-	<script type="text/javascript">
-		var mapheight = window.innerHeight-16*7; // 1em = 16px
-		document.write('<!--[if IE]><style type="text/css">div#content #map { height:' + mapheight + 'px; width:100%; position:absolute; </style><![endif]-->');
-	</script>
 </head>
 <body>
 
