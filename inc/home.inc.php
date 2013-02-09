@@ -27,7 +27,6 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 $result = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x FROM eggs WHERE active = true');
 if(!$result) { die('SQL Error'); }
 while($row = pg_fetch_assoc($result)) {
-	//echo "#". $row['eggid'] .", #". $row['cosmid'] ." @ (". $row['x'] ."|". $row['y'] .")<br>";
 	echo "\t"."var point = new OpenLayers.Geometry.Point(".$row['x'].", ".$row['y'].");".PHP_EOL;
 	echo "\t"."point.transform(wgs84, osm_sphm);".PHP_EOL;
 	echo "\t"."vectors.addFeatures([new OpenLayers.Feature.Vector(point)]);".PHP_EOL;
