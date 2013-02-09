@@ -2,13 +2,7 @@
 </div>
 
 <div id="footer">
-
-	<span>Powered by: </span>
-	<img src="img/logo_ifgi.png" alt="ifgi" class="poweredby logo">
-	<img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo">
-	<img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo">
-	<img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo">
-
+	<p>Powered by: <b>ifgi</b> - <b>air quality egg</b> - <b>cosm</b> - <b>openlayers</b> - <b>osm</b> - <b>github</b></p>
 </div>
 
 </div>

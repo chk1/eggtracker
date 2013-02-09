@@ -104,28 +104,18 @@ div#content p {
 div#footer { 
 	height: 3em;
 	width: 100%;
-
 	background-color: #aeaeae;
 	color: #fff;
 	text-align: right;
+	vertical-align: bottom;
 	display: table-row;
 }
 
-div#footer img.poweredby.logo {
-	margin-left: 12px;
-	margin-right: 12px;
-	/* http://stackoverflow.com/questions/609273/convert-an-image-to-grayscale-in-html-css */
-	filter: url(../img/filter.svg#grayscale); /* Firefox */
-	filter: gray; /* IE */
-	-webkit-filter: grayscale(1); /* Webkit */
-
+div#footer p {
+	position:absolute;
+	right: 10px;
+	font-size: smaller;
 }
-
-div#footer img.poweredby.logo:hover {
-	filter: none;
-	-webkit-filter: grayscale(0);
-}
-
 
 /*
 	Mobile Browsers
@@ -149,8 +139,8 @@ div#footer img.poweredby.logo:hover {
 	div#header #mobmore {
 		color: #fff;
 	}
-	div#header #menulist {
-		visibility: hidden;
+	div#header #menu {
+		display:none;
 	}
 	div#content, div#content #map {
 		height:100%;
