@@ -17,7 +17,7 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
-$result = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x FROM eggs');
+$result = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x FROM eggs WHERE active = true');
 if(!$result) { die('SQL Error'); }
 while($row = pg_fetch_assoc($result)) {
 	//echo "#". $row['eggid'] .", #". $row['cosmid'] ." @ (". $row['x'] ."|". $row['y'] .")<br>";

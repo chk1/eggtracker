@@ -92,19 +92,6 @@ div#content p {
 	margin-left:10px;
 }
 
-.live { 
-	background-color:#5f5; 
-}
-
-.frozen { 
-	background-color:#f55; 
-}
-
-.egg { 
-	width:50%; 
-	border:1px solid #999; 
-}
-
 .smallbold { 
 	font-weight: bold;
 	font-size: 10px; 
