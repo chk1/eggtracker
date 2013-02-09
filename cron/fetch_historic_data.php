@@ -43,8 +43,8 @@ foreach ($streams as $stream) {
 	if(!$result) { die('SQL Error'); }
 	while($row = pg_fetch_assoc($result)) {
 		$insert = pg_prepare($dbconn, $stream.$row['cosmid'], 'INSERT INTO '.$stream.' (eggid, time, '.$stream.') VALUES ('.$row['cosmid'].', $1, $2);');
-		$url = "http://api.cosm.com/v2/feeds/".$row["cosmid"]."/datastreams/".$stream.".json?start=".$start."&end=".$end."&interval=60";
-		if($f = @file_get_contents($url, false, stream_context_create($opts))) {
+		$url = "http://api.cosm.com/v2/feeds/".$row["cosmid"]."/datastreams/".$stream.".json?start=".urlencode($start)."&end=".urlencode($end)."&interval=60";
+		if($f = file_get_contents($url, false, stream_context_create($opts))) {
 			$streamjson = json_decode($f, true);
 			echo "Success ".$start."-".$end."<br>".PHP_EOL;
 			foreach($streamjson['datapoints'] as $datapoint) {
