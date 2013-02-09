@@ -30,11 +30,11 @@ foreach ($streams as $stream) {
 	if(!$result) { die('SQL Error'); }
 	$row = pg_fetch_assoc($result);
 	if($row["last_entry_date"] == "") {
-		echo "No entries for ".$stream." yet.<br>";
+		echo "No entries for ".$stream." yet.<br>".PHP_EOL;
 		$start = "2012-11-01T00:00:01";
 		$end   = "2012-11-02T00:00:01";
 	} else {
-		echo "Last entry in ".$stream.": ".$row["last_entry_date"]."<br>";
+		echo "Last entry in ".$stream.": ".$row["last_entry_date"]."<br>".PHP_EOL;
 		$start = $row["last_entry_date"];
 		$end   = date("Y-m-d\TH:i:s", strtotime($row["last_entry_date"])+3600*24); // +1 Tag
 	};
@@ -49,11 +49,11 @@ foreach ($streams as $stream) {
 			echo "Success ".$start."-".$end."<br>".PHP_EOL;
 			foreach($streamjson['datapoints'] as $datapoint) {
 				if(!$insert = @pg_execute($dbconn, $stream.$row['cosmid'], array($datapoint['at'], $datapoint['value']))) {
-					echo "Database error: ".pg_last_error()."<br>";
+					echo "Database error: ".pg_last_error()."<br>".PHP_EOL;
 					flush();
 				} else {
 					echo "Inserted measurement ";
-					echo $datapoint['at'].": ".$datapoint['value']."<br>";
+					echo $datapoint['at'].": ".$datapoint['value']."<br>".PHP_EOL;
 					flush();
 				}
 			}
