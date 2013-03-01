@@ -44,6 +44,8 @@ foreach ($streams as $stream) {
 		// end is always set to 1 day from start
 		if($row1["last_entry_date"] == "") {
 			// if there are no rows in the database, start our data collection at November first
+
+			// continuus data fetching since 2012-11-01
 			echo "No entries for ".$stream." yet.<br>".PHP_EOL;
 			$start = "2012-11-01T00:00:01";
 			$end   = "2012-11-02T00:00:01";
@@ -59,27 +61,47 @@ foreach ($streams as $stream) {
 		if($f = file_get_contents($url, false, stream_context_create($opts))) {
 			$streamjson = json_decode($f, true);
 			echo "JSON Download: <b>".$start."</b> - <b>".$end."</b><br>".PHP_EOL;
+			
 			if(!isset($streamjson['datapoints'])) {
-				print_r($streamjson);
-			} else {
-				print_r($streamjson);
-				foreach($streamjson['datapoints'] as $datapoint) {
-					// use "upsert" technique to INSERT when no duplicate key exists
-					$ins1 = pg_query($dbconn, "UPDATE {$stream} SET {$stream}={$datapoint['value']} WHERE eggid='{$row['cosmid']}' AND time = '{$datapoint['at']}';");
-					$ins2 = pg_query($dbconn, "INSERT INTO {$stream} (eggid, time, {$stream}) 
-								SELECT {$row['cosmid']}, '{$datapoint['at']}', '{$datapoint['value']}'
-								WHERE NOT EXISTS 
-								(SELECT 1 FROM {$stream} WHERE eggid = '{$row['cosmid']}' AND time = '{$datapoint['at']}');");
-					if(!$ins1 || !$ins2) {
-						echo "Database error: ".pg_last_error()."".PHP_EOL;
-						flush();
-					} else {
-						echo "Inserted measurement :";
-						echo $datapoint['at'].": ".$datapoint['value']."<br>".PHP_EOL;
-						flush();
-					}
+				
+				// if there are no datapoints and it's not "today",
+				// then there's likely a data gap = no data from cosm for this day
+
+				// guess where the next data could be by querying every day until today, or until data found
+				$i=0;
+				while(!isset($streamjson2['datapoints'])) {
+					$newstart = date("Y-m-d\TH:i:s", strtotime($start)+(3600*24)*$i);
+					$newend   = date("Y-m-d\TH:i:s", strtotime($newstart)+(3600*24)); // +1 day
+					echo $i.": ".$newstart." - ".$newend."<br>";
+					$i++;
+					flush();
+					if(strtotime($newstart) > time()) break;
+
+					$url = "http://api.cosm.com/v2/feeds/".$row["cosmid"]."/datastreams/".$stream.".json?start=".urlencode($newstart)."&end=".urlencode($newend)."&interval=60";
+					$f = file_get_contents($url, false, stream_context_create($opts));
+					$streamjson2 = json_decode($f, true);
+				}
+				$streamjson = $streamjson2;
+
+			}
+
+			foreach($streamjson['datapoints'] as $datapoint) {
+				// use "upsert" technique to INSERT when no duplicate key exists
+				$ins1 = pg_query($dbconn, "UPDATE {$stream} SET {$stream}={$datapoint['value']} WHERE eggid='{$row['cosmid']}' AND time = '{$datapoint['at']}';");
+				$ins2 = pg_query($dbconn, "INSERT INTO {$stream} (eggid, time, {$stream}) 
+							SELECT {$row['cosmid']}, '{$datapoint['at']}', '{$datapoint['value']}'
+							WHERE NOT EXISTS 
+							(SELECT 1 FROM {$stream} WHERE eggid = '{$row['cosmid']}' AND time = '{$datapoint['at']}');");
+				if(!$ins1 || !$ins2) {
+					echo "Database error: ".pg_last_error()."".PHP_EOL;
+					flush();
+				} else {
+					echo "Inserted measurement :";
+					echo $datapoint['at'].": ".$datapoint['value']."<br>".PHP_EOL;
+					flush();
 				}
 			}
+			
 		} else {
 			echo "Cosm API error.".PHP_EOL;
 		}
