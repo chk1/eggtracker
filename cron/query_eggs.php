@@ -12,30 +12,31 @@ $dbconn = pg_connect("host= ". $conf["db"]["host"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
 
-// create file_get_contents context
-// set GET method and add our API key to request headers
-
-
+// query Cosm API to find all eggs around Münster and insert them into our database
 function new_eggs() {
 	global $dbconn;
+	global $conf;
 	
-	$opts = array(
-		'http'=>array(
-			'method'=>"GET",
-			'header'=>"X-ApiKey: ".$conf["apikey"]
+	stream_context_set_default(
+		array(
+			'http' => array(
+				'method' => 'GET',
+				'header'=>"X-ApiKey: ".$conf["apikey"]
+			)
 		)
 	);
 
 	// query all "münster aqe" eggs
 	// 2 methods available:
-	// search by tags...
+	// search by tags "aqe münster"...
 	$params1 = "?tag=".urlencode("münster")."&tag=aqe"; 
 	// ... or search by spatial radius - we are using this one
-	$params2 = "?lat=51.95&lon=7.63&distance=15.0&distance_units=kms&q=aqe";
+	// find eggs around 51.95N 7.63E with radius 25 kilometers
+	$params2 = "?lat=51.95&lon=7.63&distance=25.0&distance_units=kms&q=aqe";
 
 	$result = pg_prepare($dbconn, 'egginsert', 'INSERT INTO eggs (cosmid, geom) VALUES ($1, ST_GeomFromText($2, 4326))');
 
-	$f = @file_get_contents("http://api.cosm.com/v2/feeds/".$params2, false, stream_context_create($opts));
+	$f = @file_get_contents("http://api.cosm.com/v2/feeds/".$params2);
 	$d = json_decode($f, true);
 	echo "Found ". count($d["results"]) ."<hr>";
 	foreach($d["results"] as $egg) {
@@ -54,14 +55,14 @@ function new_eggs() {
 	file_put_contents("../log/query_eggs.txt", $logtext, FILE_APPEND);*/
 }
 
+// iterate over all eggs in database and 
+// set 404'd eggs inactive
 function old_eggs() {
-	// iterate over all eggs in database and 
-	// set 404'd eggs inactive
 	global $dbconn;
 	global $conf;
 
 	stream_context_set_default(
-	    array(
+		array(
 			'http' => array(
 				'method' => 'HEAD',
 				'header'=>"X-ApiKey: ".$conf["apikey"]
@@ -85,8 +86,6 @@ function old_eggs() {
 
 }
 
-# new_eggs();
+new_eggs();
 old_eggs();
-
-
 ?>

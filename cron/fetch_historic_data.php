@@ -1,4 +1,13 @@
 <?php
+/*
+	Query COSM API for egg data.
+
+	Checks the database for the latest data points, then querys COSM for data after that. 
+	COSM API limits us to query only a certain amount of data per minute and day:
+	 - Each time this script runs, it querys a 1-day period of data with a data resolution of 60sec
+	 - Max. 1000 datapoints per request
+*/
+
 include("../inc/config.inc.php");
 
 // create file_get_contents context
@@ -22,7 +31,7 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 function fetchJsonFromCosm($eggid, $stream, $start = "2012-11-01T00:00:01") {
 	global $opts;
 	$end = date("Y-m-d\TH:i:s", strtotime($start)+(3600*24)); // +1 day
-	$url = "http://api.cosm.com/v2/feeds/".$eggid."/datastreams/".$stream.".json?start=".urlencode($start)."&end=".urlencode($end)."&interval=60";
+	$url = "http://api.cosm.com/v2/feeds/".$eggid."/datastreams/".$stream.".json?start=".urlencode($start)."&end=".urlencode($end)."&interval=60&limit=1000";
 	$f = file_get_contents($url, false, stream_context_create($opts));
 	$json = json_decode($f, true);
 	return $json;
@@ -39,7 +48,7 @@ function insertIntoDatabase($eggid, $stream, $data_value, $data_datetime) {
 	if(!$insert1 || !$insert2) {
 		echo "Database error: ".pg_last_error()."".PHP_EOL;
 	} else {
-		echo "Inserted measurement :";
+		echo "Inserted measurement: ";
 		echo $data_datetime.": ".$data_value."<br>".PHP_EOL;
 		return true;
 	}
