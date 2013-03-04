@@ -13,7 +13,7 @@ $count = strrpos ($content ,"Zeit");
 
 $data = substr ($content , "0" , $count);
  
-#Daten von überflüssigen strings säubern --> xx:30, " ", etc. 
+#Daten von überflüssigen strings säubern --> xx:30, " ", HTML-Tags, etc. 
 $pattern = "/\d\d:30/";
 $data_clean = preg_replace ($pattern , "", $data);
 $data_clean = strip_tags ($data_clean);
@@ -25,7 +25,7 @@ $data_clean = strstr ($data_clean ,"01:00");
 echo $data_clean;
 
 $data_array = preg_split ( "/\d\d:00/" , $data_clean);
-echo $data_array[2];
+
 
 $data_array1 = preg_split ("/ /" , $data_array[1]);
 
