@@ -16,18 +16,31 @@ $data = substr ($content , "0" , $count);
 #Daten von überflüssigen strings säubern --> xx:30, " ", etc. 
 $pattern = "/\d\d:30/";
 $data_clean = preg_replace ($pattern , "", $data);
+$data_clean = strip_tags ($data_clean);
+$data_clean = preg_replace("#(\r|\n)#", '', $data_clean);
+$data_clean = preg_replace('/\s\s+/', ' ', $data_clean);
+$data_clean = str_replace ("&nbsp;" , "" , $data_clean);
 
 $data_clean = strstr ($data_clean ,"01:00");
 echo $data_clean;
 
+$data_array = preg_split ( "/\d\d:00/" , $data_clean);
+echo $data_array[2];
+
+$data_array1 = preg_split ("/ /" , $data_array[1]);
+
+
+
 #Datenbankverbindung
-include("../inc/config.inc.php");
+include("../inc/config.inc.sample.php");
 
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" port=". $conf["db"]["port"] . 
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
+					
+
 
 
 ?>
