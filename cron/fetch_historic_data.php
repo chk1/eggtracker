@@ -76,7 +76,7 @@ foreach ($streams as $stream) {
 		echo "<h3>".$row['cosmid']."</h3>";
 
 		// find the latest insertion for egg and datastream
-		$result1 = pg_query($dbconn, "SELECT MAX(time) as last_entry_date FROM {$stream} WHERE eggid = '{$row['cosmid']}';");
+		$result1 = pg_query($dbconn, "SELECT MAX(time) as last_entry_date FROM {$stream} WHERE eggid = '{$row['eggid']}';");
 		if(!$result1) { die('SQL Error'); }
 		$row1 = pg_fetch_assoc($result1);
 
@@ -119,7 +119,7 @@ foreach ($streams as $stream) {
 			}
 
 			foreach($cosmdata['datapoints'] as $datapoint) {
-				insertIntoDatabase($row['cosmid'], $stream, $datapoint['value'], $datapoint['at']);
+				insertIntoDatabase($row['eggid'], $stream, $datapoint['value'], $datapoint['at']);
 			}
 			
 		} else {

@@ -1,3 +1,4 @@
+DROP TABLE eggs;
 DROP TABLE temperature;
 DROP TABLE humidity;
 DROP TABLE co;
@@ -8,7 +9,7 @@ CREATE TABLE Eggs(
 	CosmID INT NOT NULL UNIQUE,
 	EggID SERIAL,
 	Active BOOLEAN DEFAULT true,
-	PRIMARY KEY (CosmID)
+	PRIMARY KEY (EggID)
 	);
 	
 SELECT AddGeometryColumn('eggs', 'geom', 4326, 'POINT', 2);
