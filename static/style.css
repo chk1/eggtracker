@@ -202,3 +202,17 @@ div.olControlZoom a:hover {
     background: rgba(0, 60, 136, 0.7);
     filter: alpha(opacity=100);
 }
+
+/*
+	OpenLayers
+*/
+.olPopup {
+	border-radius: 15px;
+	text-align: center;
+}
+
+.olPopup p, .olPopup table {
+	margin:0px;
+	padding:0px;
+	width:100%;
+}
