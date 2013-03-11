@@ -20,6 +20,7 @@ create table temperature(
 	time timestamp,
 	temperature numeric,
 	valid boolean,
+	outlier boolean,
 	unique(eggid, time),
 	primary key (tempid),
 	foreign key (eggid) references eggs
@@ -33,6 +34,7 @@ create table humidity(
 	time timestamp,
 	humidity numeric,
 	valid boolean,
+	outlier boolean,
 	unique(eggid, time),
 	primary key (humid),
 	foreign key (eggid) references eggs
@@ -46,6 +48,7 @@ create table co(
 	time timestamp,
 	co numeric,
 	valid boolean,
+	outlier boolean,
 	unique(eggid, time),
 	primary key (coid),
 	foreign key (eggid) references eggs
@@ -59,6 +62,7 @@ create table o3(
 	time timestamp,
 	o3 numeric,
 	valid boolean,
+	outlier boolean,
 	unique(eggid, time),
 	primary key (o3id),
 	foreign key (eggid) references eggs
@@ -73,6 +77,7 @@ create table no2(
 	time timestamp,
 	no2 numeric,
 	valid boolean,
+	outlier boolean,
 	unique(eggid, time),
 	primary key (no2id),
 	foreign key (eggid) references eggs
