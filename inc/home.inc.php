@@ -4,7 +4,7 @@ require_once("inc/config.inc.php");
 
 <div id="map"></div>
 
-<script src="static/openlayers/OpenLayers.mobile.js"></script>
+<script src="static/openlayers/OpenLayers.js"></script>
 <script src="static/mobile.js"></script>
 <script type="text/javascript">
 	// IE9 can't handle position:relative and width/height=100%, therefore use

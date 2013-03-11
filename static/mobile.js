@@ -12,9 +12,21 @@ var fixSize = function() {
 setTimeout(fixSize, 700);
 setTimeout(fixSize, 1500);
 
-function onSelectFeatureFunction(feature) {
-	alert("" + feature.geometry.x + " @ " + feature.geometry.y + ": " + feature.attributes.CO);
+function onSelectFeatureFunction(feature, evt) {
+	var str = "" + feature.geometry.getBounds().getCenterLonLat() + ": ";
+	for(var attr in feature.attributes) {
+		str = str + attr + ": " + feature.attributes[attr] + "<br>";
+	}
+
+	popup = new OpenLayers.Popup(feature.id,
+		feature.geometry.getBounds().getCenterLonLat(),
+		new OpenLayers.Size(200,200),
+		str,
+		true);
+
+	map.addPopup(popup);
 }
+
 function onUnselectFeatureFunction(feature) {
 	return;
 }
