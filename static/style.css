@@ -209,10 +209,28 @@ div.olControlZoom a:hover {
 .olPopup {
 	border-radius: 15px;
 	text-align: center;
+	border:2px solid #000 !important;
+	box-shadow: 5px 5px 5px rgba(100,100,100,0.8);
 }
 
 .olPopup p, .olPopup table {
 	margin:0px;
 	padding:0px;
 	width:100%;
+}
+
+.olPopup table .l {
+	text-align: right;
+	font-weight: bold;
+}
+.olPopup table .r {
+	text-align: left;
+}
+
+.olPopupCloseBox {
+	background-image: url(../img/cross.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	padding-right: 15px;
+	padding-top: 5px;
 }

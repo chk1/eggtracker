@@ -13,14 +13,15 @@ setTimeout(fixSize, 700);
 setTimeout(fixSize, 1500);
 
 function onSelectFeatureFunction(feature, evt) {
-	var str = "" + feature.geometry.getBounds().getCenterLonLat() + ": ";
+	var str = "<br><table>";
 	for(var attr in feature.attributes) {
-		str = str + attr + ": " + feature.attributes[attr] + "<br>";
+		str = str + "<tr><td class='l'>" + attr + "</td><td class='r'>" + feature.attributes[attr] + "</td></tr>";
 	}
+	str = str + "</table>";
 
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(200,200),
+		new OpenLayers.Size(200,150),
 		str,
 		true);
 
