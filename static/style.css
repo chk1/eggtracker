@@ -207,7 +207,7 @@ div.olControlZoom a:hover {
 	OpenLayers
 */
 .olPopup {
-	border-radius: 15px;
+	border-radius: 10px;
 	text-align: center;
 	border:2px solid #000 !important;
 	box-shadow: 5px 5px 5px rgba(100,100,100,0.8);
@@ -223,6 +223,7 @@ div.olControlZoom a:hover {
 	text-align: right;
 	font-weight: bold;
 }
+
 .olPopup table .r {
 	text-align: left;
 }

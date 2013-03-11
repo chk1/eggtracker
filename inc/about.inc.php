@@ -5,4 +5,5 @@
 	<img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo">
 	<img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo">
 	<img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo">
+	[FamFamFam Icons]
 </p>
