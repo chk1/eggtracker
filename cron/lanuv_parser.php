@@ -1,46 +1,88 @@
 <?php
 
+#Alte Daten holen
+$t = 1;
+#for ($t = 120; $t>0; $t--){
+
 #Datum von gestern für den Link abfragen
-$date = date('md', time() - 86400);
+$date = date('md', time() - ($t * 86400));
 
 #Link Lanuv übergeben
-$url = "http://www.lanuv.nrw.de/luft/temes/".$date."/MSGE.htm";
-$contents = file_get_contents($url);
+$url_array[1] = "http://www.lanuv.nrw.de/luft/temes/".$date."/MSGE.htm";
+$url_array[2] = "http://www.lanuv.nrw.de/luft/temes/".$date."/VMS2.htm";
+
+for($q = 1; $q <= count($url_array); $q++){
+
+$contents = file_get_contents($url_array[$q]);
 
 #Daten aus der Website ausschneiden
+#von $content
 $content = strstr ($contents ,"Zeit");
-$count = strrpos ($content ,"Zeit");
 
+#bis $content + Anzahl der zeichen
+$count = strrpos ($content ,"Zeit");
 $data = substr ($content , "0" , $count);
  
-#Daten von überflüssigen strings säubern --> xx:30, " ", HTML-Tags, etc. 
-$pattern = "/\d\d:30/";
-$data_clean = preg_replace ($pattern , "", $data);
-$data_clean = strip_tags ($data_clean);
-$data_clean = preg_replace("#(\r|\n)#", '', $data_clean);
-$data_clean = preg_replace('/\s\s+/', ' ', $data_clean);
-$data_clean = str_replace ("&nbsp;" , "" , $data_clean);
+#Aufteilen der Daten nach <tr> </tr>
+preg_match_all("/<tr( style\=\"font-weight:bold\")?>.<td\sclass\=\"mw_.+<\/tr>/msU", $data, $matches, PREG_SET_ORDER);
+#print_r($matches[1][0]);
 
-$data_clean = strstr ($data_clean ,"01:00");
-echo $data_clean;
+for($w = 0; $w <= 48; $w++){
+	preg_match_all("/<td\sclass\=\"mw_.+<\/td>/U", $matches[$w][0], $matches2[$w], PREG_SET_ORDER);
+}
+#print_r($matches2[30]);
 
-$data_array = preg_split ( "/\d\d:00/" , $data_clean);
+#HTML-Tags entfernen
+$e = 0;
+for ($i = 0; $i <= 47; $i++){
+	$i++;
+	$e++;
+	for ($o = 0; $o <= 10; $o++) {
+		$matches3[$e][$o][0] = trim(strip_tags($matches2[$i][$o][0]));
+	}
+}
+#print_r($matches3);
 
+#O3-Array für Datenbankzugriff
+for ($p = 1; $p <= 24; $p++){
+	$postgreSQl_arrayO3[$p][o3id];
+	$postgreSQl_arrayO3[$p][eggid] = $q;
+	$postgreSQl_arrayO3[$p][time] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
+	$postgreSQl_arrayO3[$p][o3] = $matches3[$p][2][0];
+	$postgreSQl_arrayO3[$p][valid] = "true";
+	$postgreSQl_arrayO3[$p][outlier] = "false";
+}
 
-$data_array1 = preg_split ("/ /" , $data_array[1]);
-
-
+#NO2-Array für Datenbankzugriff
+for ($p = 1; $p <= 24; $p++){
+	$postgreSQl_arrayNO2[$p][no2id];
+	$postgreSQl_arrayNO2[$p][eggid] = $q;
+	$postgreSQl_arrayNO2[$p][time] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
+	$postgreSQl_arrayNO2[$p][no2] = $matches3[$p][4][0];
+	$postgreSQl_arrayNO2[$p][valid] = "true";
+	$postgreSQl_arrayNO2[$p][outlier] = "false";
+}
 
 #Datenbankverbindung
 include("../inc/config.inc.sample.php");
 
+#Übergabe der Verbindungsdaten
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" port=". $conf["db"]["port"] . 
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
-					
+	
+#Einfügen der Ozon Werte in die Datenbank
+for ($i = 1; $i <=24; $i++) {				
+	pg_insert ($dbconn , "o3" , $postgreSQl_arrayO3[$i]);
+}
 
-
+#Einfügen der NO2 Werte in die Datenbank
+for ($i = 1; $i <=24; $i++) {				
+	pg_insert ($dbconn , "no2" , $postgreSQl_arrayNO2[$i]);
+}
+}
+#}
 
 ?>

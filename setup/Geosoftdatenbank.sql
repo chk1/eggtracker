@@ -1,81 +1,86 @@
-DROP TABLE eggs;
-DROP TABLE temperature;
-DROP TABLE humidity;
-DROP TABLE co;
-DROP TABLE o3;
-DROP TABLE no2;
+drop table eggs;
+drop table temperature;
+drop table humidity;
+drop table co;
+drop table o3;
+drop table no2;
 
-CREATE TABLE Eggs(
-	CosmID INT NOT NULL UNIQUE,
-	EggID SERIAL,
-	Active BOOLEAN DEFAULT true,
-	PRIMARY KEY (EggID)
+create table eggs(
+	cosmid int not null unique,
+	eggid serial,
+	active boolean default true,
+	primary key (eggid)
 	);
 	
-SELECT AddGeometryColumn('eggs', 'geom', 4326, 'POINT', 2);
+select addgeometrycolumn('eggs', 'geom', 4326, 'point', 2);
 
-CREATE TABLE Temperature(
-	TempID SERIAL,
-	EggID INT NOT NULL,
-	Time TIMESTAMP,
-	Temperature NUMERIC,
-	Valid BOOLEAN,
-	UNIQUE(EggID, Time),
-	PRIMARY KEY (TempID),
-	FOREIGN KEY (EggID) REFERENCES Eggs
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+create table temperature(
+	tempid serial,
+	eggid int not null,
+	time timestamp,
+	temperature numeric,
+	valid boolean,
+	outlier boolean,
+	unique(eggid, time),
+	primary key (tempid),
+	foreign key (eggid) references eggs
+	on delete cascade
+	on update cascade
 	);
 	
-CREATE TABLE Humidity(
-	HumID SERIAL,
-	EggID INT NOT NULL,
-	Time TIMESTAMP,
-	Humidity NUMERIC,
-	Valid BOOLEAN,
-	UNIQUE(EggID, Time),
-	PRIMARY KEY (HumID),
-	FOREIGN KEY (EggID) REFERENCES Eggs
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+create table humidity(
+	humid serial,
+	eggid int not null,
+	time timestamp,
+	humidity numeric,
+	valid boolean,
+	outlier boolean,
+	unique(eggid, time),
+	primary key (humid),
+	foreign key (eggid) references eggs
+	on delete cascade
+	on update cascade
 	);
 
-CREATE TABLE CO(
-	CoID SERIAL,
-	EggID INT NOT NULL,
-	Time TIMESTAMP,
-	CO NUMERIC,
-	Valid BOOLEAN,
-	UNIQUE(EggID, Time),
-	PRIMARY KEY (CoID),
-	FOREIGN KEY (EggID) REFERENCES Eggs
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+create table co(
+	coid serial,
+	eggid int not null,
+	time timestamp,
+	co numeric,
+	valid boolean,
+	outlier boolean,
+	unique(eggid, time),
+	primary key (coid),
+	foreign key (eggid) references eggs
+	on delete cascade
+	on update cascade
 	);
 
-CREATE TABLE O3(
-	O3ID SERIAL,
-	EggID INT NOT NULL,
-	Time TIMESTAMP,
-	O3 NUMERIC,
-	Valid BOOLEAN,
-	UNIQUE(EggID, Time),
-	PRIMARY KEY (O3ID),
-	FOREIGN KEY (EggID) REFERENCES Eggs
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+create table o3(
+	o3id serial,
+	eggid int not null,
+	time timestamp,
+	o3 numeric,
+	valid boolean,
+	outlier boolean,
+	unique(eggid, time),
+	primary key (o3id),
+	foreign key (eggid) references eggs
+	on delete cascade
+	on update cascade
 	);
 
 
-CREATE TABLE NO2(
-	NO2ID SERIAL,
-	EggID INT NOT NULL,
-	Time TIMESTAMP,
-	NO2 NUMERIC,
-	Valid BOOLEAN,
-	UNIQUE(EggID, Time),
-	PRIMARY KEY (NO2ID),
-	FOREIGN KEY (EggID) REFERENCES Eggs
-	ON DELETE CASCADE
-	ON UPDATE CASCADE
+create table no2(
+	no2id serial,
+	eggid int not null,
+	time timestamp,
+	no2 numeric,
+	valid boolean,
+	outlier boolean,
+	unique(eggid, time),
+	primary key (no2id),
+	foreign key (eggid) references eggs
+	on delete cascade
+	on update cascade
 	);
