@@ -1,11 +1,10 @@
 <?php
 
 #Alte Daten holen
-$t = 1;
 #for ($t = 120; $t>0; $t--){
 
 #Datum von gestern für den Link abfragen
-$date = date('md', time() - ($t * 86400));
+$date = date('md', time() - 86400);
 
 #Link Lanuv übergeben
 $url_array[1] = "http://www.lanuv.nrw.de/luft/temes/".$date."/MSGE.htm";
@@ -83,6 +82,5 @@ for ($i = 1; $i <=24; $i++) {
 	pg_insert ($dbconn , "no2" , $postgreSQl_arrayNO2[$i]);
 }
 }
-#}
 
 ?>
