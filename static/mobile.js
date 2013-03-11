@@ -1,10 +1,4 @@
-/*
-	http://openlayers.org/dev/examples/mobile.html
-*/
-
-// initialize map when page ready
-var map;
-
+// http://openlayers.org/dev/examples/mobile.html
 // Get rid of address bar on iphone/ipod
 var fixSize = function() {
 	window.scrollTo(0,0);
@@ -18,68 +12,60 @@ var fixSize = function() {
 setTimeout(fixSize, 700);
 setTimeout(fixSize, 1500);
 
-function oncl(feature) {
-	alert(feature);
+function onSelectFeatureFunction(feature, evt) {
+	var str = "" + feature.geometry.getBounds().getCenterLonLat() + ": ";
+	for(var attr in feature.attributes) {
+		str = str + attr + ": " + feature.attributes[attr] + "<br>";
+	}
+
+	popup = new OpenLayers.Popup(feature.id,
+		feature.geometry.getBounds().getCenterLonLat(),
+		new OpenLayers.Size(200,200),
+		str,
+		true);
+
+	map.addPopup(popup);
 }
 
-var init = function () {
-	// create map
-	map = new OpenLayers.Map({
-		div: "map",
-		theme: null,
-		controls: [
-			new OpenLayers.Control.Attribution(),
-			new OpenLayers.Control.TouchNavigation({
-				dragPanOptions: {
-					enableKinetic: true
-				}
-			}),
-			new OpenLayers.Control.Zoom()
-		],
-		layers: [
-			new OpenLayers.Layer.OSM("OpenStreetMap", null, {
-				transitionEffect: 'resize'
-			})
-		],
-		center: new OpenLayers.LonLat(848871.118504,6791357.34679),
-		zoom: 12
-	});
-	
-	vectors = new OpenLayers.Layer.Vector(
-		"Vector Layer",
-		{
-			styleMap: new OpenLayers.StyleMap({
-				externalGraphic: './img/eggicon.png',
-				pointRadius: 10
-			})
-		}
-	);
+function onUnselectFeatureFunction(feature) {
+	return;
+}
 
-/*	var selectControl;
-	var selectedFeature;
-
-	function onPopupClose(evt) {
-		selectControl.unselect(selectedFeature);
-	}
-	function onPopupFeatureSelect(feature) {
-		selectedFeature = feature;
-		popup = new OpenLayers.Popup.FramedCloud("chicken",
-			feature.geometry.getBounds().getCenterLonLat(),
-			null, feature.name, null, true, onPopupClose);
-		popup.panMapIfOutOfView = false;
-		feature.popup = popup;
-		map.addPopup(popup);
-	}
-	function onPopupFeatureUnselect(feature) {
-		map.removePopup(feature.popup);
-		feature.popup.destroy();
-		feature.popup = null;
-	}
-	selectControl = new OpenLayers.Control.SelectFeature(vectors,
+var vectors = new OpenLayers.Layer.Vector(
+	"Vector Layer",
 	{
-		onSelect: onPopupFeatureSelect,
-		onUnselect: onPopupFeatureUnselect 
-	});
-	map.addControl(selectControl);
-	selectControl.activate();*/
-};
+		styleMap: new OpenLayers.StyleMap({
+			externalGraphic: './img/eggicon.png',
+			pointRadius: 10
+		})
+	}
+);
+
+var map = new OpenLayers.Map({
+	div: "map",
+	theme: null,
+	controls: [
+		new OpenLayers.Control.Attribution(),
+		new OpenLayers.Control.TouchNavigation({
+			dragPanOptions: {
+				enableKinetic: true
+			}
+		}),
+		new OpenLayers.Control.Geolocate,
+		new OpenLayers.Control.SelectFeature(
+			vectors, {
+				autoActivate: true,
+				onSelect: onSelectFeatureFunction,
+				onUnselect: onUnselectFeatureFunction,
+		}),
+		new OpenLayers.Control.Zoom()
+	],
+	layers: [
+		new OpenLayers.Layer.OSM("OpenStreetMap", null, {
+			transitionEffect: 'resize'
+		}),
+		vectors
+	],
+	center: new OpenLayers.LonLat(848871.118504,6791357.34679),
+	zoom: 12
+});
