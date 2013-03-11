@@ -1,7 +1,11 @@
 <?php
 
+#Alte Daten holen
+$t = 1;
+#for ($t = 120; $t>0; $t--){
+
 #Datum von gestern für den Link abfragen
-$date = date('md', time() - 86400);
+$date = date('md', time() - ($t * 86400));
 
 #Link Lanuv übergeben
 $url_array[1] = "http://www.lanuv.nrw.de/luft/temes/".$date."/MSGE.htm";
@@ -28,7 +32,7 @@ for($w = 0; $w <= 48; $w++){
 }
 #print_r($matches2[30]);
 
-#HTML-Tags/Leerzwichen/leere Datensätze entfernen
+#HTML-Tags entfernen
 $e = 0;
 for ($i = 0; $i <= 47; $i++){
 	$i++;
@@ -46,6 +50,7 @@ for ($p = 1; $p <= 24; $p++){
 	$postgreSQl_arrayO3[$p][time] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
 	$postgreSQl_arrayO3[$p][o3] = $matches3[$p][2][0];
 	$postgreSQl_arrayO3[$p][valid] = "true";
+	$postgreSQl_arrayO3[$p][outlier] = "false";
 }
 
 #NO2-Array für Datenbankzugriff
@@ -55,6 +60,7 @@ for ($p = 1; $p <= 24; $p++){
 	$postgreSQl_arrayNO2[$p][time] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
 	$postgreSQl_arrayNO2[$p][no2] = $matches3[$p][4][0];
 	$postgreSQl_arrayNO2[$p][valid] = "true";
+	$postgreSQl_arrayNO2[$p][outlier] = "false";
 }
 
 #Datenbankverbindung
@@ -77,5 +83,6 @@ for ($i = 1; $i <=24; $i++) {
 	pg_insert ($dbconn , "no2" , $postgreSQl_arrayNO2[$i]);
 }
 }
+#}
 
 ?>
