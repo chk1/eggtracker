@@ -9,6 +9,9 @@ include("config.inc.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="static/style-ie.css" />
+	<![endif]-->
 </head>
 <body>
 

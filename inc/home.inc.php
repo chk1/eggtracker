@@ -6,11 +6,14 @@ require_once("inc/config.inc.php");
 
 <script src="static/openlayers/OpenLayers.js"></script>
 <script src="static/mobile.js"></script>
+
 <script type="text/javascript">
 	// IE9 can't handle position:relative and width/height=100%, therefore use
 	// position:absolute and calculate map height based on window height
-	var mapheight = window.innerHeight-16*7; // 1em = 16px by default
-	document.write('<!--[if IE]><style type="text/css">div#content #map { height:' + mapheight + 'px; width:100%; position:absolute; </style><![endif]-->');
+	if(navigator.appName == "Microsoft Internet Explorer") {
+		var mapheight = window.innerHeight-18*5; // 1em = 16px by default, 5 = header+footer height in em
+		document.getElementById("map").style.height = mapheight + 'px';	
+	}
 </script>
 
 <script type="text/javascript">
