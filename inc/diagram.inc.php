@@ -31,7 +31,15 @@ var data = [];
 		}
 
 	}
+
+	/*
+	todo:
+	Verschachtelung wie bei http://www.flotcharts.org/flot/examples/series-toggle/index.html
+		var datasets = {
+			"usa": {
+				label: "USA",
+				data:
+	*/
 ?>
 $.plot("#placeholder", [ data_temperature_1, data_temperature_2, data_temperature_3 ], { xaxis: { mode: "time" } });
 </script>
-
