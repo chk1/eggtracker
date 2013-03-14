@@ -11,7 +11,12 @@ $menu_entries = array(""=>"Map",
 /*
 	header
 */
-include("inc/header.inc.php");
+if(is_file("inc/header.inc.php")) { 
+	include("inc/header.inc.php");
+} else {
+	die("It appears that you do not have set up your config file yet. Please check the installation manual (INSTALL).");
+}
+
 
 /*
 	content:
