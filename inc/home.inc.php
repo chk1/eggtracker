@@ -1,4 +1,8 @@
 <?php
+/*
+	The "home" page: Map view
+*/
+
 require_once("inc/config.inc.php");
 ?>
 
@@ -36,7 +40,7 @@ require_once("inc/config.inc.php");
 			$attributes = array();
 			$streams = array("CO", "humidity", "NO2", "O3", "temperature");
 			foreach($streams as $stream) {
-				$result_ = pg_query($dbconn, "SELECT time, {$stream} FROM {$stream} ORDER BY time DESC LIMIT 1 ");
+				$result_ = pg_query($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = {$row['eggid']} ORDER BY time DESC LIMIT 1 ");
 				$row_ = pg_fetch_assoc($result_);
 				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
 			}
