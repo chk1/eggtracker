@@ -67,6 +67,5 @@ var map = new OpenLayers.Map({
 		}),
 		vectors
 	],
-	center: new OpenLayers.LonLat(848871.118504,6791357.34679),
-	zoom: 12
+	zoom: 12,
 });

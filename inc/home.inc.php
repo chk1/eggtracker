@@ -21,10 +21,13 @@ require_once("inc/config.inc.php");
 </script>
 
 <script type="text/javascript">
-	//alert("test");
-
 	var wgs84 = new OpenLayers.Projection("EPSG:4326"); // WGS84
 	var osm_sphm = new OpenLayers.Projection("EPSG:3857"); // OSM Spherical Mercator
+
+	var home = new OpenLayers.LonLat(<?= $conf["location"]["lon"] ?>, <?= $conf["location"]["lat"] ?>);
+	home.transform(wgs84, osm_sphm);
+	map.setCenter(home, 13);
+
 <?php 
 		$dbconn = pg_connect("host=". $conf["db"]["host"] .
 							" port=". $conf["db"]["port"] . 

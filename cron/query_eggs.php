@@ -32,7 +32,7 @@ function new_eggs() {
 	$params1 = "?tag=".urlencode("münster")."&tag=aqe"; 
 	// ... or search by spatial radius - we are using this one
 	// find eggs around 51.95N 7.63E with radius 25 kilometers
-	$params2 = "?lat=51.95&lon=7.63&distance=25.0&distance_units=kms&q=aqe";
+	$params2 = "?lat=". $conf["location"]["lat"] ."&lon=". $conf["location"]["lon"] ."&distance=25.0&distance_units=kms&q=aqe";
 
 	$result = pg_prepare($dbconn, 'egginsert', 'INSERT INTO eggs (cosmid, geom) VALUES ($1, ST_GeomFromText($2, 4326))');
 
