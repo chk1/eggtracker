@@ -22,7 +22,7 @@ create table temperature(
 	valid boolean,
 	outlier boolean,
 	unique(eggid, time),
-	primary key (tempid),
+	primary key (id),
 	foreign key (eggid) references eggs
 	on delete cascade
 	on update cascade
@@ -36,7 +36,7 @@ create table humidity(
 	valid boolean,
 	outlier boolean,
 	unique(eggid, time),
-	primary key (humid),
+	primary key (id),
 	foreign key (eggid) references eggs
 	on delete cascade
 	on update cascade
@@ -50,7 +50,7 @@ create table co(
 	valid boolean,
 	outlier boolean,
 	unique(eggid, time),
-	primary key (coid),
+	primary key (id),
 	foreign key (eggid) references eggs
 	on delete cascade
 	on update cascade
@@ -64,7 +64,7 @@ create table o3(
 	valid boolean,
 	outlier boolean,
 	unique(eggid, time),
-	primary key (o3id),
+	primary key (id),
 	foreign key (eggid) references eggs
 	on delete cascade
 	on update cascade
@@ -79,7 +79,7 @@ create table no2(
 	valid boolean,
 	outlier boolean,
 	unique(eggid, time),
-	primary key (no2id),
+	primary key (id),
 	foreign key (eggid) references eggs
 	on delete cascade
 	on update cascade
