@@ -26,6 +26,7 @@ function onSelectFeatureFunction(feature, evt) {
 		true);
 
 	map.addPopup(popup);
+	map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
 }
 
 function onUnselectFeatureFunction(feature) {
@@ -67,5 +68,5 @@ var map = new OpenLayers.Map({
 		}),
 		vectors
 	],
-	zoom: 12,
+	zoom: 12
 });
