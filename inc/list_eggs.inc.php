@@ -1,5 +1,5 @@
 <p>
-<?
+<?php
 require_once("inc/config.inc.php");
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" port=". $conf["db"]["port"] . 
