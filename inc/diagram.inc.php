@@ -16,11 +16,13 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 <script src="static/jquery-1.9.1.min.js"></script>
 <script src="static/flot/jquery.flot.js"></script>
 <script src="static/flot/jquery.flot.time.js"></script>
+<div style="margin:20px;">
 <?php
 	foreach($streams as $stream) {
-		echo '<div id="graph'.$stream.'" style="width:600px;height:300px"></div>'.PHP_EOL;
+		echo '<div class="flotgraph" id="graph'.$stream.'"></div>'.PHP_EOL;
 	}
 ?>
+</div>
 <script type="text/javascript">
 <?php
 	
@@ -32,7 +34,9 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 		foreach($streams as $stream) {
 			// fetch the latest data
 			$values[$stream] = array();
-			$result_ = pg_query($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = {$egg['eggid']} ORDER BY time DESC LIMIT 200");
+
+				// remove time..BETWEEN later, just for demo
+			$result_ = pg_query($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = {$egg['eggid']} AND time BETWEEN '2012-11-29' AND '2012-11-30' ORDER BY time DESC LIMIT 200");
 			while($row_ = pg_fetch_assoc($result_)) {
 				 $values[$stream][] = "[".strtotime($row_["time"]).", ".$row_[strtolower($stream)]."]";
 			}
@@ -48,7 +52,7 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 
 	}
 	foreach($streams as $stream) {
-		echo '$.plot("#graph'.$stream.'", data'.$stream.', { xaxis: { mode: "time" } });'.PHP_EOL;
+		echo '$.plot("#graph'.$stream.'", data'.$stream.', { yaxis: { labelWidth: 50 }, xaxis: { mode: "time", timeformat: "%H:%M" }, grid: { backgroundColor: "#ffffff"} });'.PHP_EOL;
 	}
 ?>
 </script>
