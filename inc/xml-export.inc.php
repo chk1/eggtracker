@@ -1,5 +1,4 @@
 <?php
-
 include("../inc/config.inc.sample.php");
 #Übergabe der Verbindungsdaten
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
@@ -8,10 +7,34 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
 
-$was = "o3id";
-$wo = "o3";
-$von = "'2013-03-10 01:00:00'";
-$bis = "'2013-03-10 23:00:00'";
+#Abfrage der Radiobuttons aus dem Export-Formular
+if($_POST["Parameter"] == 1)
+	$wo .= "o3";
+if($_POST["Parameter"] == 2)
+	$wo .= "no2";
+if($_POST["Parameter"] == 3)
+	$wo .= "co";
+if($_POST["Parameter"] == 4)
+	$wo .= "temperatur";
+if($_POST["Parameter"] == 5)
+	$wo .= "humidity";
+
+#Abfrage der Checkboxen aus dem Export-Formular
+if($_POST["Wert"][id] == 1)
+	$was .= "id, ";
+if($_POST["Wert"][time] == 1)
+	$was .= "time, ";
+if($_POST["Wert"][value] == 1)
+	$was .= "$wo, ";
+if($_POST["Wert"][valid] == 1)
+	$was .= "valid, ";
+if($_POST["Wert"][outlier] == 1)
+	$was .= "outlier, ";
+$was = rtrim ($was, ', ');
+
+#Abfrage der Datumsfelder aus dem Export-Formular
+$von = "'".$_POST['von']."'";
+$bis = "'".$_POST['bis']."'";
 
 $query = "SELECT $was FROM $wo WHERE time BETWEEN timestamp $von AND timestamp $bis";
 $result = pg_query($dbconn, $query);
