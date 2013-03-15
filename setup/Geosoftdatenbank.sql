@@ -6,7 +6,7 @@ drop table o3;
 drop table no2;
 
 create table eggs(
-	cosmid int not null unique,
+	id int not null unique,
 	eggid serial,
 	active boolean default true,
 	primary key (eggid)
@@ -15,7 +15,7 @@ create table eggs(
 select addgeometrycolumn('eggs', 'geom', 4326, 'point', 2);
 
 create table temperature(
-	tempid serial,
+	id serial,
 	eggid int not null,
 	time timestamp,
 	temperature numeric,
@@ -29,7 +29,7 @@ create table temperature(
 	);
 	
 create table humidity(
-	humid serial,
+	id serial,
 	eggid int not null,
 	time timestamp,
 	humidity numeric,
@@ -43,7 +43,7 @@ create table humidity(
 	);
 
 create table co(
-	coid serial,
+	id serial,
 	eggid int not null,
 	time timestamp,
 	co numeric,
@@ -57,7 +57,7 @@ create table co(
 	);
 
 create table o3(
-	o3id serial,
+	id serial,
 	eggid int not null,
 	time timestamp,
 	o3 numeric,
@@ -72,7 +72,7 @@ create table o3(
 
 
 create table no2(
-	no2id serial,
+	id serial,
 	eggid int not null,
 	time timestamp,
 	no2 numeric,
