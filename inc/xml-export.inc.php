@@ -7,6 +7,28 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
 
+#Abfrage des Dropdownmenüs
+$abfrage = "SELECT cosmid FROM eggs";
+$eggs = pg_query($dbconn, $abfrage);
+
+#Prüfung ob cosmID auch wirklich in der Datenbank ist
+$i = 0;
+$res = array();
+
+while ($helper = pg_fetch_assoc($eggs)){
+    $res[$i] = $helper;
+    $i++;
+}
+
+Foreach ($res as $k => $V) {
+	$res2 [$k] = $V ['cosmid'];
+}
+
+
+if (in_array ( $_POST["CosmID"], $res2) == true){
+	$ei = $_POST["CosmID"];
+}
+
 #Abfrage der Radiobuttons aus dem Export-Formular
 if($_POST["Parameter"] == 1)
 	$wo .= "o3";
@@ -15,7 +37,7 @@ if($_POST["Parameter"] == 2)
 if($_POST["Parameter"] == 3)
 	$wo .= "co";
 if($_POST["Parameter"] == 4)
-	$wo .= "temperatur";
+	$wo .= "temperature";
 if($_POST["Parameter"] == 5)
 	$wo .= "humidity";
 
@@ -36,7 +58,7 @@ $was = rtrim ($was, ', ');
 $von = "'".$_POST['von']."'";
 $bis = "'".$_POST['bis']."'";
 
-$query = "SELECT $was FROM $wo WHERE time BETWEEN timestamp $von AND timestamp $bis";
+$query = "SELECT $was FROM $wo natural inner join eggs WHERE cosmid = $ei AND time BETWEEN timestamp $von AND timestamp $bis";
 $result = pg_query($dbconn, $query);
 
 $doc = new DomDocument("1.0");
@@ -56,7 +78,5 @@ while($row = pg_fetch_assoc($result)){
 header("content-type: application/xml");
 echo $doc->saveXML();
 
-
-#$bla = table_to_xml("o3", nulls , tableforest boolean);
-#echo $bla;
 ?>
+
