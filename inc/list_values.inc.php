@@ -44,8 +44,16 @@ if (!$result) {
   echo pg_last_error();
   exit();
 }
+echo "<table border>";
 while ($row = pg_fetch_row($result)) {
-  echo "$row[0] $row[1]	$row[2] $row[3] $row[4]";
-  echo "<br />\n";
+	echo "<tr>";
+  echo "<td>", "$row[0]", "</td>";
+  echo "<td>", "$row[1]", "</td>";
+  echo "<td>", "$row[2]", "</td>";
+  echo "<td>", "$row[3]", "</td>";
+  echo "<td>", "$row[4]", "</td>";
+
+  echo "</tr>";
 }
+echo "</table>";
 ?>
