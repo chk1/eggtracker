@@ -34,7 +34,8 @@ function new_eggs() {
 	// find eggs around 51.95N 7.63E with radius 25 kilometers
 	$params2 = "?lat=". $conf["location"]["lat"] ."&lon=". $conf["location"]["lon"] ."&distance=25.0&distance_units=kms&q=aqe";
 
-	$result = pg_prepare($dbconn, 'egginsert', 'INSERT INTO eggs (cosmid, geom) VALUES ($1, ST_GeomFromText($2, 4326))');
+	if(!$result = pg_prepare($dbconn, 'egginsert', 'INSERT INTO eggs (cosmid, geom) VALUES ($1, ST_GeomFromText($2, 4326))'))
+		echo "Prepared statement failed, please check database structure.<br>";
 
 	$f = @file_get_contents("http://api.cosm.com/v2/feeds/".$params2);
 	$d = json_decode($f, true);
@@ -42,7 +43,8 @@ function new_eggs() {
 	foreach($d["results"] as $egg) {
 		$point = "POINT(".$egg["location"]["lon"]." ".$egg["location"]["lat"].")";
 		if(!$result = @pg_execute($dbconn, 'egginsert', array($egg["id"], $point))) {
-			echo pg_last_error()."<br>";
+			$error = pg_last_error();
+			echo $error."<br>";
 		} else {
 			echo 'Added Egg ID '. $egg["id"] ." with location (";
 			echo $egg["location"]["lon"] ."|";
@@ -56,7 +58,7 @@ function new_eggs() {
 }
 
 // iterate over all eggs in database and 
-// set 404'd eggs inactive
+// set deleted eggs inactive
 function old_eggs() {
 	global $dbconn;
 	global $conf;
@@ -78,7 +80,7 @@ function old_eggs() {
 			if($result = pg_query($dbconn, 'UPDATE eggs SET active = false WHERE eggid = '.$row['eggid'].'')) {
 				echo "Egg cosm#".$row["cosmid"]." was set inactive<br>";
 			} else {
-
+				echo pg_last_error()."<br>";
 			}
 
 		}
