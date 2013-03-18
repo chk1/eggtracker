@@ -18,6 +18,7 @@ if($_POST["Parameter"] == 4)
 	$wo .= "temperature";
 if($_POST["Parameter"] == 5)
 	$wo .= "humidity";
+	$wo = rtrim($wo, ', ');
 
 #Abfrage der Checkboxen aus dem Export-Formular
 if($_POST["Wert"][id] == 1)
@@ -46,14 +47,55 @@ if (!$result) {
 }
 echo "<table border>";
 while ($row = pg_fetch_row($result)) {
-	echo "<tr>";
-  echo "<td>", "$row[0]", "</td>";
-  echo "<td>", "$row[1]", "</td>";
-  echo "<td>", "$row[2]", "</td>";
-  echo "<td>", "$row[3]", "</td>";
-  echo "<td>", "$row[4]", "</td>";
+  echo "<tr>";
+  //echo $was;
+  switch ($was) {
+    case id ;
+    case time;
+    case $wo;
+	case valid;
+    case outlier;
+    	echo "<td>", "$row[0]", "</td>";
+  	    break;
+    
+	case 'id, time';
+	case 'id, valid'; //?
+	case 'id, outlier'; //?
+	case 'id, $wo'; //fehler
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		break;
+	
+	case 'id, time, $wo'; //fehler
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		break;
+		
+	case 'id, time, $wo, valid'; //fehler
+	case 'id, time, $wo, outlier'; //fehler
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		echo "<td>", "$row[3]", "</td>";
+		break;
+	
+	case 'id, time, $wo, valid, outlier'; //fehler		
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		echo "<td>", "$row[3]", "</td>";
+		echo "<td>", "$row[4]", "</td>";
+		break;	
+echo "</tr>";
+  }
+ // echo "<td>", "$row[0]", "</td>";
+ // echo "<td>", "$row[1]", "</td>";
+  //echo "<td>", "$row[2]", "</td>";
+  //echo "<td>", "$row[3]", "</td>";
+  //echo "<td>", "$row[4]", "</td>";
 
-  echo "</tr>";
+
 }
 echo "</table>";
 ?>
