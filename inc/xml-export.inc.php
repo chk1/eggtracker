@@ -15,7 +15,7 @@ if($_POST["Parameter"] == 2)
 if($_POST["Parameter"] == 3)
 	$wo .= "co";
 if($_POST["Parameter"] == 4)
-	$wo .= "temperatur";
+	$wo .= "temperature";
 if($_POST["Parameter"] == 5)
 	$wo .= "humidity";
 
