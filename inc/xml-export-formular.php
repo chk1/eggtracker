@@ -2,7 +2,7 @@
 
 function createDropDown() {
 
-include("../inc/config.inc.sample.php");
+include("inc/config.inc.php");
 #Übergabe der Verbindungsdaten
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" port=". $conf["db"]["port"] . 
@@ -26,8 +26,8 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 }
 $dropped = createDropDown();
 
-print '
-<form method="POST" action="../inc/xml-export.inc.php">
+print '<p>
+<form method="POST" action="?action=xml_export">
 	Von welchem Ei m&oumlchten Sie Daten exportieren?<br>
 	'.$dropped.'<br><br>
 	Was m&oumlchten Sie exportieren?<br>
@@ -50,6 +50,6 @@ print '
 	<br>
 	<input type="submit" value="Button">
 </form>
-</html>'
+</p>'
  
 ?>

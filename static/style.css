@@ -92,6 +92,10 @@ div#content p {
 	margin-left:10px;
 }
 
+div#content form {
+	margin-left:10px;
+}
+
 .smallbold { 
 	font-weight: bold;
 	font-size: 10px; 
