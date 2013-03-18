@@ -33,8 +33,8 @@ function onUnselectFeatureFunction(feature) {
 	return;
 }
 
-var vectors = new OpenLayers.Layer.Vector(
-	"Vector Layer",
+var egg_layer = new OpenLayers.Layer.Vector(
+	"Air Quality Eggs",
 	{
 		styleMap: new OpenLayers.StyleMap({
 			externalGraphic: './img/eggicon.png',
@@ -42,6 +42,17 @@ var vectors = new OpenLayers.Layer.Vector(
 		})
 	}
 );
+
+var lanuv_layer = new OpenLayers.Layer.Vector(
+	"Lanuv Stations",
+	{
+		styleMap: new OpenLayers.StyleMap({
+			externalGraphic: './img/asterisk_orange.png',
+			pointRadius: 10
+		})
+	}
+);
+
 
 var map = new OpenLayers.Map({
 	div: "map",
@@ -55,18 +66,23 @@ var map = new OpenLayers.Map({
 		}),
 		new OpenLayers.Control.Geolocate,
 		new OpenLayers.Control.SelectFeature(
-			vectors, {
-				autoActivate: true,
+			egg_layer, {
 				onSelect: onSelectFeatureFunction,
 				onUnselect: onUnselectFeatureFunction,
-		}),
+			},
+			lanuv_layer, {
+				onSelect: onSelectFeatureFunction,
+				onUnselect: onUnselectFeatureFunction,
+			}
+		),
 		new OpenLayers.Control.Zoom()
 	],
 	layers: [
 		new OpenLayers.Layer.OSM("OpenStreetMap", null, {
 			transitionEffect: 'resize'
 		}),
-		vectors
+		egg_layer,
+		lanuv_layer
 	],
 	zoom: 12
 });

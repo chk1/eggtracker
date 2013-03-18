@@ -48,8 +48,12 @@ require_once("inc/config.inc.php");
 				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
 			}
 			$attributestring = implode(", ", $attributes);
-
-			echo "\t"."vectors.addFeatures([new OpenLayers.Feature.Vector(point, { ".$attributestring." } )]);".PHP_EOL;
+			if($row["cosmid"] >= 1000000) {
+				echo "\t"."lanuv_layer.addFeatures([new OpenLayers.Feature.Vector(point, { ".$attributestring." } )]);".PHP_EOL;
+			} else {
+				echo "\t"."egg_layer.addFeatures([new OpenLayers.Feature.Vector(point, { ".$attributestring." } )]);".PHP_EOL;
+			}
+			
 		}
 
 		pg_close($dbconn);
