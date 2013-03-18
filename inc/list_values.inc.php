@@ -2,7 +2,7 @@
 include("../inc/config.inc.php");
 #Übergabe der Verbindungsdaten
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
-  				" port=". $conf["db"]["port"] . 
+					" port=". $conf["db"]["port"] . 
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
@@ -45,9 +45,7 @@ if (!$result) {
   exit();
 }
 while ($row = pg_fetch_row($result)) {
-  echo "$was: $row[0]  $wo: $row[1]	$row[3]";
+  echo "$row[0] $row[1]	$row[2] $row[3] $row[4]";
   echo "<br />\n";
 }
-
-
 ?>
