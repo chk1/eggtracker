@@ -6,7 +6,7 @@ drop table o3;
 drop table no2;
 
 create table eggs(
-	id int not null unique,
+	cosmid int not null unique,
 	eggid serial,
 	active boolean default true,
 	primary key (eggid)
