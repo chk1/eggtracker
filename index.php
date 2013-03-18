@@ -11,7 +11,7 @@ $menu_entries = array(""=>"Map",
 /*
 	header
 */
-if(is_file("inc/header.inc.php")) { 
+if(is_file("inc/config.inc.php")) { 
 	include("inc/header.inc.php");
 } else {
 	die("It appears that you do not have set up your config file yet. Please check the installation manual (INSTALL).");
@@ -44,6 +44,9 @@ switch($action) {
 		break;
 	case "mobile_home":
 		include("inc/mobile_home.inc.php"); 
+		break;
+	case "xml_export_form":
+		include("inc/xml-export-formular.php"); 
 		break;
 }
 
