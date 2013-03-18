@@ -17,46 +17,48 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 <script src="static/jquery-1.9.1.min.js"></script>
 <script src="static/flot/jquery.flot.js"></script>
 <script src="static/flot/jquery.flot.time.js"></script>
+<script src="static/flot/jquery.flot.selection.js"></script>
 <div style="margin:20px;">
 <?php
 	foreach($streams as $stream) {
-		echo '<div class="flotgraph" id="graph'.$stream.'"></div>'.PHP_EOL;
+		echo '<div class="flotgraph" id="'.$stream.'"></div>'.PHP_EOL;
 	}
 ?>
 </div>
 <script type="text/javascript">
-/*
-	options for all graphs
-*/
+// options for all graphs
 var options = { 
-			yaxis: { 
-				labelWidth: 50 
-			}, 
-			xaxis: { 
-				mode: "time", 
-				timeformat: "%y-%m-%d %H:%M",
-			}, 
-			grid: { 
-				backgroundColor: "#ffffff",
-				hoverable: true
-			}
-		}; 
-
-/*
-	create empty arrays for all possible datastream<->egg combinations
-*/
+		yaxis: { 
+			labelWidth: 50 
+		}, 
+		xaxis: { 
+			mode: "time", 
+			timeformat: "%y-%m-%d %H:%M",
+		}, 
+		grid: { 
+			backgroundColor: "#ffffff",
+			hoverable: true
+		}, 
+		selection: {
+			mode: "x"
+		}
+	}; 
+var data = [];
 <?php
+	// create empty arrays for all possible datastreams
 	foreach($streams as $stream) {
 		echo "var data".$stream." = [];".PHP_EOL;
+		echo 'data["'.$stream.'"] = [];'.PHP_EOL;
 	}
 
+	// fill each datastream array with data identified by eggid & datastream
 	while($egg = pg_fetch_assoc($eggs)) { // for each egg do...
 		foreach($streams as $stream) {
 			// fetch the latest data
 			$values[$stream] = array();
 
 			// remove time..BETWEEN later, just for demo
-			$result_ = pg_query($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = {$egg['eggid']} AND time BETWEEN '2012-11-29' AND '2012-11-30' ORDER BY time DESC LIMIT 200");
+			$result_ = pg_query($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = {$egg['eggid']} AND time BETWEEN '2012-11-29' AND '2012-11-30' ORDER BY time DESC LIMIT 250");
 			while($row_ = pg_fetch_assoc($result_)) {
 				 $values[$stream][] = "[". strtotime($row_["time"])*1000 .", ".$row_[strtolower($stream)]."]";
 			}
@@ -71,12 +73,25 @@ var options = {
 			echo "};".PHP_EOL;
 
 			// ... and merge it into a dataset per datastream for display
-			echo 'data'.$stream.'.push(dataset["egg'.$egg['eggid'].''.$stream .'"]);'.PHP_EOL;
+			echo 'data["'.$stream.'"].push(dataset["egg'.$egg['eggid'].''.$stream .'"]);'.PHP_EOL;
 		}
 
 	}
+
+	// make one graph per datastream
 	foreach($streams as $stream) {
-		echo '$.plot("#graph'.$stream.'", data'.$stream.', options);'.PHP_EOL;
+		echo '$.plot("#'.$stream.'", data["'.$stream.'"], options);'.PHP_EOL;
 	}
 ?>
+
+
+$(".flotgraph").bind("plotselected", function (event, ranges) {
+	var datastream = $(this).attr("id");
+	$.plot($(this), data[datastream], $.extend(true, {}, options, {
+		xaxis: {
+			min: ranges.xaxis.from,
+			max: ranges.xaxis.to
+		}
+	}));
+});
 </script>
