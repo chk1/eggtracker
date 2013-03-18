@@ -21,6 +21,7 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 <div style="margin:20px;">
 <?php
 	foreach($streams as $stream) {
+		echo '<h2>'.$stream.'</h2>'.PHP_EOL;
 		echo '<div class="flotgraph" id="'.$stream.'"></div>'.PHP_EOL;
 	}
 ?>
