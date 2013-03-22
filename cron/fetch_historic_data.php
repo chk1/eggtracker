@@ -40,11 +40,12 @@ function fetchJsonFromCosm($eggid, $stream, $start = "2012-11-01T00:00:01") {
 function insertIntoDatabase($eggid, $stream, $data_value, $data_datetime) {
 	global $dbconn;
 	// use "upsert" technique to INSERT only when no duplicate key exists and thereby eliminating script errors
-	$insert1 = pg_query($dbconn, "UPDATE {$stream} SET {$stream}={$data_value} WHERE eggid='{$eggid}' AND time = '{$data_datetime}';");
-	$insert2 = pg_query($dbconn, "INSERT INTO {$stream} (eggid, time, {$stream}) 
-				SELECT {$eggid}, '{$data_datetime}', '{$data_value}'
+	$query_params = array($data_value, $eggid, $data_datetime);
+	$insert1 = pg_query_params($dbconn, "UPDATE {$stream} SET {$stream}=$1 WHERE eggid=$2 AND time=$3;", $query_params);
+	$insert2 = pg_query_params($dbconn, "INSERT INTO {$stream} (eggid, time, {$stream}) 
+				SELECT $2, $3, $1
 				WHERE NOT EXISTS 
-				(SELECT 1 FROM {$stream} WHERE eggid = '{$eggid}' AND time = '{$data_datetime}');");
+				(SELECT 1 FROM {$stream} WHERE eggid = $2 AND time=$3);", $query_params);
 	if(!$insert1 || !$insert2) {
 		echo "Database error: ".pg_last_error()."".PHP_EOL;
 	} else {
@@ -68,7 +69,7 @@ foreach ($streams as $stream) {
 	echo "<h2>".$stream."</h2>";
 
 	// query eggs
-	$result = pg_query($dbconn, 'SELECT cosmid, eggid FROM eggs WHERE active = true;');
+	$result = pg_query($dbconn, 'SELECT cosmid, eggid FROM eggs WHERE active = true AND cosmid < 1000000;');
 	if(!$result) { die('SQL Error'); }
 
 	// iterate eggs
@@ -76,7 +77,8 @@ foreach ($streams as $stream) {
 		echo "<h3>".$row['cosmid']."</h3>";
 
 		// find the latest insertion for egg and datastream
-		$result1 = pg_query($dbconn, "SELECT MAX(time) as last_entry_date FROM {$stream} WHERE eggid = '{$row['eggid']}';");
+		$query_params = array($row['eggid']);
+		$result1 = pg_query($dbconn, "SELECT MAX(time) as last_entry_date FROM {$stream} WHERE eggid=$1;", $query_params);
 		if(!$result1) { die('SQL Error'); }
 		$row1 = pg_fetch_assoc($result1);
 

@@ -59,7 +59,8 @@ var data = [];
 			$values[$stream] = array();
 
 			// remove time..BETWEEN later, just for demo
-			$result_ = pg_query($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = {$egg['eggid']} AND time BETWEEN '2012-11-29' AND '2012-11-30' ORDER BY time DESC LIMIT 250");
+			$query_params = array($egg['eggid']);
+			$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 AND time BETWEEN '2012-11-29' AND '2012-11-30' ORDER BY time DESC LIMIT 250", $query_params);
 			while($row_ = pg_fetch_assoc($result_)) {
 				 $values[$stream][] = "[". strtotime($row_["time"])*1000 .", ".$row_[strtolower($stream)]."]";
 			}
@@ -68,7 +69,12 @@ var data = [];
 			// for each egg<->datastream combination, create a dataset...
 			echo "var dataset = {";
 				echo '"egg'.$egg['eggid'].''.$stream .'": { '.PHP_EOL;
-					echo "\t".'label: "Egg '.$egg['eggid'].' '.$stream.'", '.PHP_EOL;
+					if($egg['cosmid'] >= 1000000) {
+						echo "\t".'label: "LANUV '.$egg['eggid'].' '.$stream.'", '.PHP_EOL;
+					} else {
+						echo "\t".'label: "Egg '.$egg['eggid'].' '.$stream.'", '.PHP_EOL;
+					}
+					
 					echo "\t"."data: [". $datastring ."],".PHP_EOL;
 				echo "}";
 			echo "};".PHP_EOL;

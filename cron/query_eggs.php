@@ -32,7 +32,7 @@ function new_eggs() {
 	$params1 = "?tag=".urlencode("münster")."&tag=aqe"; 
 	// ... or search by spatial radius - we are using this one
 	// find eggs around 51.95N 7.63E with radius 25 kilometers
-	$params2 = "?lat=". $conf["location"]["lat"] ."&lon=". $conf["location"]["lon"] ."&distance=25.0&distance_units=kms&q=aqe";
+	$params2 = "?lat=". urlencode($conf["location"]["lat"]) ."&lon=". urlencode($conf["location"]["lon"]) ."&distance=25.0&distance_units=kms&q=aqe";
 
 	if(!$result = pg_prepare($dbconn, 'egginsert', 'INSERT INTO eggs (cosmid, geom) VALUES ($1, ST_GeomFromText($2, 4326))'))
 		echo "Prepared statement failed, please check database structure.<br>";
@@ -41,14 +41,23 @@ function new_eggs() {
 	$d = json_decode($f, true);
 	echo "Found ". count($d["results"]) ."<hr>";
 	foreach($d["results"] as $egg) {
-		$point = "POINT(".$egg["location"]["lon"]." ".$egg["location"]["lat"].")";
-		if(!$result = @pg_execute($dbconn, 'egginsert', array($egg["id"], $point))) {
-			$error = pg_last_error();
-			echo $error."<br>";
+		// duplicate check
+		$duplicate_result = pg_query_params($dbconn, 'SELECT eggid FROM eggs WHERE cosmid=$1', array($egg["id"]));
+		if(pg_num_rows($duplicate_result) >= 1) {
+			echo "Cosm id ".$egg["id"]." ignored, already in database<br>";
 		} else {
-			echo 'Added Egg ID '. $egg["id"] ." with location (";
-			echo $egg["location"]["lon"] ."|";
-			echo $egg["location"]["lat"] .")<br>";
+
+			// insert new eggs into database
+			$point = "POINT(".$egg["location"]["lon"]." ".$egg["location"]["lat"].")";
+			if(!$result = @pg_execute($dbconn, 'egginsert', array($egg["id"], $point))) {
+				$error = pg_last_error();
+				echo $error."<br>";
+			} else {
+				echo 'Added Egg ID '. $egg["id"] ." with location (";
+				echo $egg["location"]["lon"] ."|";
+				echo $egg["location"]["lat"] .")<br>";
+			}
+
 		}
 	}
 
@@ -57,8 +66,7 @@ function new_eggs() {
 	file_put_contents("../log/query_eggs.txt", $logtext, FILE_APPEND);*/
 }
 
-// iterate over all eggs in database and 
-// set deleted eggs inactive
+// iterate over all eggs in database and set deleted eggs inactive
 function old_eggs() {
 	global $dbconn;
 	global $conf;
@@ -72,13 +80,14 @@ function old_eggs() {
 		)
 	);
 
-	$result = pg_query($dbconn, 'SELECT eggid, cosmid FROM eggs');
+	$result = pg_query($dbconn, 'SELECT eggid, cosmid FROM eggs WHERE cosmid < 1000000');
 	if(!$result) { die('SQL Error'); }
 	while($row = pg_fetch_assoc($result)) {
-		$f = @get_headers("http://api.cosm.com/v2/feeds/".$row['cosmid']);
+		$f = @get_headers("http://api.cosm.com/v2/feeds/".urlencode($row['cosmid']));
 		if($f[0] == "HTTP/1.1 404 Not Found") {
-			if($result = pg_query($dbconn, 'UPDATE eggs SET active = false WHERE eggid = '.$row['eggid'].'')) {
-				echo "Egg cosm#".$row["cosmid"]." was set inactive<br>";
+			$query_params = array($row['eggid']);
+			if($result = pg_query_params($dbconn, 'UPDATE eggs SET active = false WHERE eggid=$1', $query_params)) {
+				echo "Cosm id ".$row["cosmid"]." was set inactive for being deleted<br>";
 			} else {
 				echo pg_last_error()."<br>";
 			}
