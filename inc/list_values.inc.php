@@ -45,7 +45,7 @@ if (!$result) {
   echo pg_last_error();
   exit();
 }
-echo "<table border>";
+echo "<table border = 1";
 while ($row = pg_fetch_row($result)) {
   echo "<tr>";
   //echo $was;
@@ -61,26 +61,26 @@ while ($row = pg_fetch_row($result)) {
 	case 'id, time';
 	case 'id, valid'; //?
 	case 'id, outlier'; //?
-	case 'id, $wo'; //fehler
+	case "id, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		break;
 	
-	case 'id, time, $wo'; //fehler
+	case "id, time, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		break;
 		
-	case 'id, time, $wo, valid'; //fehler
-	case 'id, time, $wo, outlier'; //fehler
+	case "id, time, $wo, valid"; 
+	case "id, time, $wo, outlier"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		echo "<td>", "$row[3]", "</td>";
 		break;
 	
-	case 'id, time, $wo, valid, outlier'; //fehler		
+	case "id, time, $wo, valid, outlier"; 		
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
