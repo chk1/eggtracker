@@ -234,7 +234,7 @@ div.olControlZoom a:hover {
 }
 
 .olPopupCloseBox {
-	background-image: url(../img/cross.png);
+	background-image: url(../../img/cross.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	padding-right: 15px;

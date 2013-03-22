@@ -8,7 +8,7 @@ require_once("inc/config.inc.php");
 
 <div id="map"></div>
 
-<script src="static/openlayers/OpenLayers.js"></script>
+<script src="static/openlayers/OpenLayers.debug.js"></script>
 <script src="static/map.js"></script>
 
 <script type="text/javascript">
@@ -53,8 +53,7 @@ require_once("inc/config.inc.php");
 				echo "\t"."lanuv_layer.addFeatures([new OpenLayers.Feature.Vector(point, { ".$attributestring." } )]);".PHP_EOL;
 			} else {
 				echo "\t"."egg_layer.addFeatures([new OpenLayers.Feature.Vector(point, { ".$attributestring." } )]);".PHP_EOL;
-			}
-			
+			}		
 		}
 
 		pg_close($dbconn);

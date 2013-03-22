@@ -53,7 +53,6 @@ var lanuv_layer = new OpenLayers.Layer.Vector(
 	}
 );
 
-
 var map = new OpenLayers.Map({
 	div: "map",
 	theme: null,
@@ -65,22 +64,35 @@ var map = new OpenLayers.Map({
 			}
 		}),
 		new OpenLayers.Control.Geolocate,
-		new OpenLayers.Control.SelectFeature(
-			{
-				onSelect: onSelectFeatureFunction,
-				onUnselect: onUnselectFeatureFunction,
-			},
-			lanuv_layer,
-			egg_layer
-		),
-		new OpenLayers.Control.Zoom()
+		// new OpenLayers.Control.SelectFeature(
+		// 	egg_layer, {
+		// 		autoActivate: true,
+		// 		onSelect: onSelectFeatureFunction,
+		// 		onUnselect: onUnselectFeatureFunction
+		// 	}
+		// ),
+		new OpenLayers.Control.Zoom(),
+		new OpenLayers.Control.LayerSwitcher()
 	],
 	layers: [
 		new OpenLayers.Layer.OSM("OpenStreetMap", null, {
 			transitionEffect: 'resize'
 		}),
-		egg_layer,
-		lanuv_layer
+		lanuv_layer,
+		egg_layer
 	],
 	zoom: 12
+});
+
+
+var selectControl = new OpenLayers.Control.SelectFeature([egg_layer, lanuv_layer]);
+map.addControl(selectControl);
+selectControl.activate();
+egg_layer.events.on({
+	"featureselected": function(e) { onSelectFeatureFunction(e.feature) },
+	"featureunselected": function(e) { onUnselectFeatureFunction(e.feature) }
+});
+lanuv_layer.events.on({
+	"featureselected": function(e) { onSelectFeatureFunction(e.feature) },
+	"featureunselected": function(e) { onUnselectFeatureFunction(e.feature) }
 });
