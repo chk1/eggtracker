@@ -48,6 +48,9 @@ switch($action) {
 	case "xml_export_form":
 		include("inc/xml-export-formular.php"); 
 		break;
+	case "list_values_form":
+		include("inc/list_values_formular.php"); 
+		break;
 }
 
 /*
