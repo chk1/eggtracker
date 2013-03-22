@@ -94,6 +94,14 @@ if($_POST["format"] == "xml") {
 		}
 		echo PHP_EOL;
 	}
+} elseif($_POST["format"] == "json") {
+	header("Content-type: text/plain");
+	$data = array();
+	
+	while($row = pg_fetch_assoc($result)){
+		$data[] = $row;
+	}
+	echo json_encode($data);
 }
 
 ?>

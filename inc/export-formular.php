@@ -41,15 +41,26 @@ print '<p>
 		<input type="checkbox" name="Wert[outlier]" value="1"> Ausrei&szliger?<br>
 	<br>
 	Aus welchem Zeitraum m&oumlchten Sie Daten erhalten?<br>
-		<input type="text" name="von" value="Von (YYYY-MM-TT)"><br>
-		<input type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
+		<input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
+		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
 	<br>
 	Datenformat<br>
 		<input type="radio" name="format" value="xml"> XML<br>
 		<input type="radio" name="format" value="csv"> CSV<br>
+		<input type="radio" name="format" value="json"> JSON<br>
 	<br>
 	<input type="submit" value="Button">
 </form>
 </p>';
  
 ?>
+
+<link rel="stylesheet" type="text/css" href="static/css/jquery-ui-1.10.2.custom.min.css">
+<script src="static/jquery/jquery-1.9.1.min.js"></script>
+<script src="static/jquery/jquery-ui-1.10.2.custom.min.js"></script> <!-- custom = Core + Datepicker + Slider -->
+<script src="static/jquery/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript">
+var options = { dateFormat: "yy-mm-dd", timeFormat: "hh:mm" };
+$('#datumvon').datetimepicker(options);
+$('#datumbis').datetimepicker(options);
+</script>
