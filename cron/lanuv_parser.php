@@ -44,22 +44,22 @@ for ($i = 0; $i <= 47; $i++){
 
 #O3-Array für Datenbankzugriff
 for ($p = 1; $p <= 24; $p++){
-	$postgreSQl_arrayO3[$p][id];
-	$postgreSQl_arrayO3[$p][eggid] = $q + 100000;
-	$postgreSQl_arrayO3[$p][time] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
-	$postgreSQl_arrayO3[$p][o3] = $matches3[$p][2][0];
-	$postgreSQl_arrayO3[$p][valid] = "true";
-	$postgreSQl_arrayO3[$p][outlier] = "false";
+	$postgreSQl_arrayO3[$p]["id"];
+	$postgreSQl_arrayO3[$p]["eggid"] = $q + 100000;
+	$postgreSQl_arrayO3[$p]["time"] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
+	$postgreSQl_arrayO3[$p]["o3"] = $matches3[$p][2][0];
+	$postgreSQl_arrayO3[$p]["valid"] = "true";
+	$postgreSQl_arrayO3[$p]["outlier"] = "false";
 }
 
 #NO2-Array für Datenbankzugriff
 for ($p = 1; $p <= 24; $p++){
-	$postgreSQl_arrayNO2[$p][id];
-	$postgreSQl_arrayNO2[$p][eggid] = $q + 100000;
-	$postgreSQl_arrayNO2[$p][time] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
-	$postgreSQl_arrayNO2[$p][no2] = $matches3[$p][4][0];
-	$postgreSQl_arrayNO2[$p][valid] = "true";
-	$postgreSQl_arrayNO2[$p][outlier] = "false";
+	$postgreSQl_arrayNO2[$p]["id"];
+	$postgreSQl_arrayNO2[$p]["eggid"] = $q + 100000;
+	$postgreSQl_arrayNO2[$p]["time"] = date("Y-m-d", time()-86400)." ".$matches3[$p][0][0]; 
+	$postgreSQl_arrayNO2[$p]["no2"] = $matches3[$p][4][0];
+	$postgreSQl_arrayNO2[$p]["valid"] = "true";
+	$postgreSQl_arrayNO2[$p]["outlier"] = "false";
 }
 
 #Datenbankverbindung
