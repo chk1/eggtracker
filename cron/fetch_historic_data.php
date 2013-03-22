@@ -78,7 +78,7 @@ foreach ($streams as $stream) {
 
 		// find the latest insertion for egg and datastream
 		$query_params = array($row['eggid']);
-		$result1 = pg_query($dbconn, "SELECT MAX(time) as last_entry_date FROM {$stream} WHERE eggid=$1;", $query_params);
+		$result1 = pg_query_params($dbconn, "SELECT MAX(time) as last_entry_date FROM {$stream} WHERE eggid=$1;", $query_params);
 		if(!$result1) { die('SQL Error'); }
 		$row1 = pg_fetch_assoc($result1);
 
