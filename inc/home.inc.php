@@ -44,7 +44,7 @@ require_once("inc/config.inc.php");
 			$streams = array("CO", "humidity", "NO2", "O3", "temperature");
 			foreach($streams as $stream) {
 				$query_params = array($row['eggid']);
-				$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 ORDER BY time DESC LIMIT 1 ", $params);
+				$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 ORDER BY time DESC LIMIT 1 ", $query_params);
 				$row_ = pg_fetch_assoc($result_);
 				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
 			}
