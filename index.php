@@ -17,7 +17,7 @@ if(is_file("inc/config.inc.php")) {
 	die("It appears that you do not have set up your config file yet. Please check the installation manual (INSTALL).");
 }
 
-
+//test
 /*
 	content:
 
@@ -45,8 +45,8 @@ switch($action) {
 	case "mobile_home":
 		include("inc/mobile_home.inc.php"); 
 		break;
-	case "xml_export_form":
-		include("inc/xml-export-formular.php"); 
+	case "export_form":
+		include("inc/export-formular.php"); 
 		break;
 }
 

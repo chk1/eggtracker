@@ -1,3 +1,3 @@
 <p>
-	<a href="?action=xml_export_form">XML data download</a>
+	<a href="?action=export_form">XML data download</a>
 </p>
