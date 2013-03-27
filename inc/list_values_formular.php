@@ -1,29 +1,25 @@
 <?php
-
 function createDropDown() {
+	#Übergabe der Verbindungsdaten
+	include("../inc/config.inc.php");
+	$dbconn = pg_connect("host=". $conf["db"]["host"] .
+						" port=". $conf["db"]["port"] . 
+						" dbname=". $conf["db"]["db"] .
+						" user=". $conf["db"]["user"] .
+						" password=". $conf["db"]["pass"]);
+	$query = 'SELECT cosmid	FROM eggs';
+	$result = pg_query($dbconn, $query);
 
-include("inc/config.inc.php");
-#Übergabe der Verbindungsdaten
-$dbconn = pg_connect("host=". $conf["db"]["host"] .
-  				" port=". $conf["db"]["port"] . 
-					" dbname=". $conf["db"]["db"] .
-					" user=". $conf["db"]["user"] .
-					" password=". $conf["db"]["pass"]);
-
-    $query = 'SELECT cosmid
-            FROM eggs';
-    $result = pg_query($dbconn, $query);
-    $dropdown = '<select name="CosmID">
-  <option value="">Select...</option>';
-    
-    
+	$dropdown = '<select name="CosmID">
+	<option value="">Select...</option>';
 	while ($result2 = pg_fetch_assoc($result)) {
-  		$dropdown .= '<option value="'.$result2['cosmid'].'">'."Cosm.com ID: ".$result2['cosmid'].'</option>'; 
-	}
-		
+			$dropdown .= '<option value="'.$result2['cosmid'].'">'."Cosm.com ID: ".$result2['cosmid'].'</option>'; 
+	}		
 	$dropdown .= '</select>';
+
 	return $dropdown;
 }
+
 $dropped = createDropDown();
 
 print '<p>
