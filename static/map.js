@@ -15,16 +15,16 @@ setTimeout(fixSize, 1500);
 function onSelectFeatureFunction(feature, evt) {
 	var str = "<br><table>";
 	for(var attr in feature.attributes) {
-		str = str + "<tr><td class='l'>" + attr + "</td><td class='r'>" + feature.attributes[attr] + "</td></tr>";
+		if(attr != "eggid"){
+			str = str + "<tr><td class='l'>" + attr + "</td><td class='r'>" + feature.attributes[attr] + "</td></tr>";
+		}
 	}
 	str = str + "</table>";
-
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
 		new OpenLayers.Size(200,150),
 		str,
 		true);
-
 	map.addPopup(popup);
 	map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
 }
@@ -53,6 +53,13 @@ var lanuv_layer = new OpenLayers.Layer.Vector(
 	}
 );
 
+/*
+	Create a map object with the following properties:
+		- allow for mobile/touch navigation
+		- OSM base map
+		- lanuv_layer + egg_layer predefined
+		- no home coordinate (done on map page)
+*/
 var map = new OpenLayers.Map({
 	div: "map",
 	theme: null,
@@ -76,6 +83,21 @@ var map = new OpenLayers.Map({
 	],
 	zoom: 12
 });
+
+/*
+	Query both egg_layer and lanuv_layer for eggid attribute, then zoom
+*/
+function zoomToEggId(id) {
+	var features = egg_layer.getFeaturesByAttribute("eggid", id); // returns an array
+	if(features[0] == null) {
+		var features = lanuv_layer.getFeaturesByAttribute("eggid", id);
+		if(features[0] == null) {
+			return;
+		}
+	}
+	onSelectFeatureFunction(features[0], null);
+	map.setCenter(null, 15);
+}
 
 /*
 	Replace OpenLayers.SelectionControl in map object with the following lines,

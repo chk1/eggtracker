@@ -25,7 +25,7 @@ while($row = pg_fetch_assoc($result)) {
 				<a href="https://cosm.com/feeds/'.$row["cosmid"].'">'.$row['cosmid'].'</a>
 			</td>
 			<td align="center" valign="middle">
-				<a href="?action=&lon='.$row['y'].'&lat='.$row['x'].'">'.$row['y'].' '.$row['x'].'</a>
+				<a href="?id='.$row['eggid'].'">'.$row['y'].' '.$row['x'].'</a>
 			</td>
 		</tr>';
 }
@@ -58,7 +58,7 @@ while($row = pg_fetch_assoc($result)) {
 			<a href="'.$Messstationen_array[$o][1].'">'.$Messstationen_array[$o][2].'</a>
 		</td>
 		<td align="center" valign="middle">
-			<a href="?action=&lon='.$row['y'].'&lat='.$row['x'].'">'.$row['y'].' '.$row['x'].'</a>
+			<a href="?id='.$row['eggid'].'">'.$row['y'].' '.$row['x'].'</a>
 		</td>
 	</tr>';
 	$o++;

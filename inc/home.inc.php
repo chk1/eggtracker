@@ -7,17 +7,9 @@ require_once("inc/config.inc.php");
 
 /*
 	initial map center point is either the config value
-	or, when set and valid, URL parameters like ?lat=123&lon=456
+	or, when set and valid, the eggid's coordinates
 */
-$lat = $conf["location"]["lat"];
-$lon = $conf["location"]["lon"];
-$zoomlevel = 13;
-if(isset($_GET["lat"]) && is_numeric($_GET["lat"])
-	&& isset($_GET["lon"]) && is_numeric($_GET["lon"])) {
-	$lat = $_GET["lat"]; $lat = $_GET["lon"];
-	$zoomlevel = 15; // zoom into specified place more, because that's that the user chose
-}
-	
+if(isset($_GET["id"]) && is_numeric($_GET["id"])) $id = $_GET["id"];
 ?>
 
 <div id="map"></div>
@@ -38,10 +30,9 @@ if(isset($_GET["lat"]) && is_numeric($_GET["lat"])
 	var wgs84 = new OpenLayers.Projection("EPSG:4326"); // WGS84
 	var osm_sphm = new OpenLayers.Projection("EPSG:3857"); // OSM Spherical Mercator
 
-	var home = new OpenLayers.LonLat(<?= $lon ?>, <?= $lat ?>);
+	var home = new OpenLayers.LonLat(<?= $conf["location"]["lon"] ?>, <?= $conf["location"]["lat"] ?>);
 	home.transform(wgs84, osm_sphm);
-	map.setCenter(home, <?= $zoomlevel ?>);
-	alert(home.lon + ", " + home.lat);
+	map.setCenter(home, 13);
 
 <?php 
 		$dbconn = pg_connect("host=". $conf["db"]["host"] .
@@ -63,6 +54,8 @@ if(isset($_GET["lat"]) && is_numeric($_GET["lat"])
 				$row_ = pg_fetch_assoc($result_);
 				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
 			}
+			$attributes[] .= 'eggid: '. $row["eggid"] .'';
+
 			$attributestring = implode(", ", $attributes);
 			if($row["cosmid"] >= 1000000) {
 				echo "\t"."lanuv_layer.addFeatures([new OpenLayers.Feature.Vector(point, { ".$attributestring." } )]);".PHP_EOL;
@@ -70,8 +63,8 @@ if(isset($_GET["lat"]) && is_numeric($_GET["lat"])
 				echo "\t"."egg_layer.addFeatures([new OpenLayers.Feature.Vector(point, { ".$attributestring." } )]);".PHP_EOL;
 			}		
 		}
-
 		pg_close($dbconn);
 ?>
-
+	
+	<?php if(isset($id)): ?> zoomToEggId(<?= $id ?>); <?php endif; ?>
 </script>
