@@ -74,7 +74,7 @@ $leer = pg_num_rows($result);
 	echo $leer;
  }
  else{
-	 echo "<strong>keine Werte für $wo in der Datenbank vorhanden!</strong>";
+	 echo "<strong>No values for $wo from EggID $ei</strong>";
  exit();
  }
 
