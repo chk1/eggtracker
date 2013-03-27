@@ -1,4 +1,5 @@
-INSTALL.md
+Installation
+==========
 
 Requirements:
 * Webserver (Apache2, Nginx, ...)
