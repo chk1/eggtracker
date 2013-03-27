@@ -1,11 +1,35 @@
 <?php
-include("../inc/config.inc.php");
+include("inc/config.inc.php");
 #Übergabe der Verbindungsdaten
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" port=". $conf["db"]["port"] . 
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
+
+#Abfrage des Dropdownmenüs
+$abfrage = "SELECT cosmid FROM eggs";
+$eggs = pg_query($dbconn, $abfrage);
+
+#Prüfung ob cosmID auch wirklich in der Datenbank ist
+$i = 0;
+$res = array();
+
+while ($helper = pg_fetch_assoc($eggs)){
+	$res[$i] = $helper;
+	$i++;
+}
+
+Foreach ($res as $k => $V) {
+	$res2 [$k] = $V ['cosmid'];
+}
+
+
+if (in_array ( $_POST["CosmID"], $res2) == true){
+	$ei = $_POST["CosmID"];
+}
+
+$wo = "";
 
 #Abfrage der Radiobuttons aus dem Export-Formular
 if($_POST["Parameter"] == 1)
@@ -37,8 +61,9 @@ $was = rtrim ($was, ', ');
 $von = "'".$_POST['von']."'";
 $bis = "'".$_POST['bis']."'";
 
-$query = "SELECT $was FROM $wo WHERE time BETWEEN $von AND $bis";
-$result = pg_query($dbconn, $query);
+$query_params = array($ei, $von, $bis);
+$query = "SELECT $was FROM $wo NATURAL INNER JOIN eggs WHERE cosmid = $1 AND time BETWEEN $2 AND $3";
+$result = pg_query_params($dbconn, $query, $query_params);
 
 if (!$result) {
   echo "Fehler " . $query . "<br />";
@@ -50,37 +75,37 @@ while ($row = pg_fetch_row($result)) {
   echo "<tr>";
   //echo $was;
   switch ($was) {
-    case id ;
-    case time;
-    case $wo;
-	case valid;
-    case outlier;
+    case "$1, id" ;
+    case "$1, time";
+    case "$1, $wo";
+	case "$1, valid";
+    case "$1, outlier";
     	echo "<td>", "$row[0]", "</td>";
   	    break;
     
-	case 'id, time';
-	case 'id, valid'; //?
-	case 'id, outlier'; //?
-	case "id, $wo"; 
+	case "$1, id, time";
+	case "$1, id, valid"; //?
+	case "$1, id, outlier"; //?
+	case "$1, id, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		break;
 	
-	case "id, time, $wo"; 
+	case "$1, id, time, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		break;
 		
-	case "id, time, $wo, valid"; 
-	case "id, time, $wo, outlier"; 
+	case "$1, id, time, $wo, valid"; 
+	case "$1, id, time, $wo, outlier"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		echo "<td>", "$row[3]", "</td>";
 		break;
 	
-	case "id, time, $wo, valid, outlier"; 		
+	case "$1, id, time, $wo, valid, outlier"; 		
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
