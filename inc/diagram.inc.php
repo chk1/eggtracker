@@ -14,7 +14,7 @@ if(!$eggs) { die('SQL Error'); }
 $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 ?>
 
-<script src="static/jquery-1.9.1.min.js"></script>
+<script src="static/jquery/jquery-1.9.1.min.js"></script>
 <script src="static/flot/jquery.flot.js"></script>
 <script src="static/flot/jquery.flot.time.js"></script>
 <script src="static/flot/jquery.flot.selection.js"></script>
