@@ -68,7 +68,17 @@ if (!$result) {
   echo pg_last_error();
   exit();
 }
+#Abfrage ob die Tabelle leer ist
+$leer = pg_num_rows($result);
+ if ($leer >0){
+	echo "<strong>$leer total values for $wo from EggID $ei</strong>";
+ }
+ else{
+	 echo "<strong>No values for $wo from EggID $ei</strong>";
+ exit();
+ }
 
+#Erstellung einer Tabelle mit den Ausgewählten Werten
 echo "<table border>";
 while ($row = pg_fetch_row($result)) {
   echo "<tr>";
@@ -114,5 +124,6 @@ while ($row = pg_fetch_row($result)) {
 echo "</tr>";
   }
 }
+//echo "Keine weiteren Werte";
 echo "</table>";
 ?>
