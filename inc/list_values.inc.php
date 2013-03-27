@@ -75,37 +75,37 @@ while ($row = pg_fetch_row($result)) {
   echo "<tr>";
   //echo $was;
   switch ($was) {
-    case "$1, id" ;
-    case "$1, time";
-    case "$1, $wo";
-	case "$1, valid";
-    case "$1, outlier";
-    	echo "<td>", "$row[0]", "</td>";
+    case "$ei, id" ;
+    case "$ei, time";
+    case "$ei, $wo";
+	case "$ei, valid";
+    case "$ei, outlier";
+    	echo "<td>", "$row[1]", "</td>";
   	    break;
     
-	case "$1, id, time";
-	case "$1, id, valid"; //?
-	case "$1, id, outlier"; //?
-	case "$1, id, $wo"; 
+	case "$ei, id, time";
+	case "$ei, id, valid"; //?
+	case "$ei, id, outlier"; //?
+	case "$ei, id, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		break;
 	
-	case "$1, id, time, $wo"; 
+	case "$ei, id, time, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		break;
 		
-	case "$1, id, time, $wo, valid"; 
-	case "$1, id, time, $wo, outlier"; 
+	case "$ei, id, time, $wo, valid"; 
+	case "$ei, id, time, $wo, outlier"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		echo "<td>", "$row[3]", "</td>";
 		break;
 	
-	case "$1, id, time, $wo, valid, outlier"; 		
+	case "$ei, id, time, $wo, valid, outlier"; 		
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
