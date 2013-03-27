@@ -1,7 +1,7 @@
 <?php
 function createDropDown() {
 	#Übergabe der Verbindungsdaten
-	include("../inc/config.inc.php");
+	include("inc/config.inc.php");
 	$dbconn = pg_connect("host=". $conf["db"]["host"] .
 						" port=". $conf["db"]["port"] . 
 						" dbname=". $conf["db"]["db"] .
