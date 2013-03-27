@@ -30,7 +30,6 @@ if (in_array ( $_POST["CosmID"], $res2) == true){
 }
 
 $wo = "";
-
 #Abfrage der Radiobuttons aus dem Export-Formular
 if($_POST["Parameter"] == 1)
 	$wo .= "o3";
@@ -42,18 +41,18 @@ if($_POST["Parameter"] == 4)
 	$wo .= "temperature";
 if($_POST["Parameter"] == 5)
 	$wo .= "humidity";
-	$wo = rtrim($wo, ', ');
 
+$was = "";
 #Abfrage der Checkboxen aus dem Export-Formular
-if($_POST["Wert"][id] == 1)
+if(isset($_POST["Wert"]["id"]) && $_POST["Wert"]["id"] == 1)
 	$was .= "id, ";
-if($_POST["Wert"][time] == 1)
+if(isset($_POST["Wert"]["time"]) && $_POST["Wert"]["time"] == 1)
 	$was .= "time, ";
-if($_POST["Wert"][value] == 1)
+if(isset($_POST["Wert"]["value"]) && $_POST["Wert"]["value"] == 1)
 	$was .= "$wo, ";
-if($_POST["Wert"][valid] == 1)
+if(isset($_POST["Wert"]["valid"]) && $_POST["Wert"]["valid"] == 1)
 	$was .= "valid, ";
-if($_POST["Wert"][outlier] == 1)
+if(isset($_POST["Wert"]["outlier"]) && $_POST["Wert"]["outlier"] == 1)
 	$was .= "outlier, ";
 $was = rtrim ($was, ', ');
 
@@ -61,51 +60,51 @@ $was = rtrim ($was, ', ');
 $von = "'".$_POST['von']."'";
 $bis = "'".$_POST['bis']."'";
 
-$query_params = array($ei, $von, $bis);
-$query = "SELECT $was FROM $wo NATURAL INNER JOIN eggs WHERE cosmid = $1 AND time BETWEEN $2 AND $3";
-$result = pg_query_params($dbconn, $query, $query_params);
+$query = "SELECT $was FROM $wo NATURAL INNER JOIN eggs WHERE cosmid = $ei AND time between $von AND $bis";
+$result = pg_query($dbconn, $query);
 
 if (!$result) {
   echo "Fehler " . $query . "<br />";
   echo pg_last_error();
   exit();
 }
-echo "<table border = 1";
+
+echo "<table border>";
 while ($row = pg_fetch_row($result)) {
   echo "<tr>";
-  //echo $was;
+ // echo $was;
   switch ($was) {
-    case "$ei, id" ;
-    case "$ei, time";
-    case "$ei, $wo";
-	case "$ei, valid";
-    case "$ei, outlier";
-    	echo "<td>", "$row[1]", "</td>";
-  	    break;
+    case "id";
+    case "time";
+    case "$wo";
+	case "valid";
+    case "outlier";
+    	echo "<td>", "$row[0]", "</td>";
+	break;
     
-	case "$ei, id, time";
-	case "$ei, id, valid"; //?
-	case "$ei, id, outlier"; //?
-	case "$ei, id, $wo"; 
+	case "id, time";
+	case "id, valid"; //?
+	case "id, outlier"; //?
+	case "id, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		break;
 	
-	case "$ei, id, time, $wo"; 
+	case "id, time, $wo"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		break;
 		
-	case "$ei, id, time, $wo, valid"; 
-	case "$ei, id, time, $wo, outlier"; 
+	case "id, time, $wo, valid"; 
+	case "id, time, $wo, outlier"; 
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		echo "<td>", "$row[3]", "</td>";
 		break;
 	
-	case "$ei, id, time, $wo, valid, outlier"; 		
+	case "id, time, $wo, valid, outlier"; 		
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
