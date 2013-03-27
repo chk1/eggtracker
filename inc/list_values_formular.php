@@ -23,7 +23,7 @@ function createDropDown() {
 $dropped = createDropDown();
 
 print '<p>
-<form method="POST" action="?action=list_values">
+<form method="POST" action="inc/list_values.inc.php">
 	Von welchem Ei m&oumlchten Sie die Daten sehen?<br>
 	'.$dropped.'<br><br>
   Was m&oumlchten Sie sehen?<br>
