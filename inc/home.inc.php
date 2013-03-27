@@ -4,6 +4,20 @@
 */
 
 require_once("inc/config.inc.php");
+
+/*
+	initial map center point is either the config value
+	or, when set and valid, URL parameters like ?lat=123&lon=456
+*/
+$lat = $conf["location"]["lat"];
+$lon = $conf["location"]["lon"];
+$zoomlevel = 13;
+if(isset($_GET["lat"]) && is_numeric($_GET["lat"])
+	&& isset($_GET["lon"]) && is_numeric($_GET["lon"])) {
+	$lat = $_GET["lat"]; $lat = $_GET["lon"];
+	$zoomlevel = 15; // zoom into specified place more, because that's that the user chose
+}
+	
 ?>
 
 <div id="map"></div>
@@ -24,9 +38,10 @@ require_once("inc/config.inc.php");
 	var wgs84 = new OpenLayers.Projection("EPSG:4326"); // WGS84
 	var osm_sphm = new OpenLayers.Projection("EPSG:3857"); // OSM Spherical Mercator
 
-	var home = new OpenLayers.LonLat(<?= $conf["location"]["lon"] ?>, <?= $conf["location"]["lat"] ?>);
+	var home = new OpenLayers.LonLat(<?= $lon ?>, <?= $lat ?>);
 	home.transform(wgs84, osm_sphm);
-	map.setCenter(home, 13);
+	map.setCenter(home, <?= $zoomlevel ?>);
+	alert(home.lon + ", " + home.lat);
 
 <?php 
 		$dbconn = pg_connect("host=". $conf["db"]["host"] .

@@ -64,13 +64,6 @@ var map = new OpenLayers.Map({
 			}
 		}),
 		new OpenLayers.Control.Geolocate,
-		// new OpenLayers.Control.SelectFeature(
-		// 	egg_layer, {
-		// 		autoActivate: true,
-		// 		onSelect: onSelectFeatureFunction,
-		// 		onUnselect: onUnselectFeatureFunction
-		// 	}
-		// ),
 		new OpenLayers.Control.Zoom(),
 		new OpenLayers.Control.LayerSwitcher()
 	],
@@ -84,14 +77,19 @@ var map = new OpenLayers.Map({
 	zoom: 12
 });
 
-
+/*
+	Replace OpenLayers.SelectionControl in map object with the following lines,
+	because it doesn't work with multiple layers
+*/
 var selectControl = new OpenLayers.Control.SelectFeature([egg_layer, lanuv_layer]);
 map.addControl(selectControl);
 selectControl.activate();
+
 egg_layer.events.on({
 	"featureselected": function(e) { onSelectFeatureFunction(e.feature) },
 	"featureunselected": function(e) { onUnselectFeatureFunction(e.feature) }
 });
+
 lanuv_layer.events.on({
 	"featureselected": function(e) { onSelectFeatureFunction(e.feature) },
 	"featureunselected": function(e) { onUnselectFeatureFunction(e.feature) }
