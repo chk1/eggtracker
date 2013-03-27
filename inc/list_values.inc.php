@@ -1,51 +1,119 @@
 <?php
-function createDropDown() {
-	#Übergabe der Verbindungsdaten
-	include("inc/config.inc.php");
-	$dbconn = pg_connect("host=". $conf["db"]["host"] .
-						" port=". $conf["db"]["port"] . 
-						" dbname=". $conf["db"]["db"] .
-						" user=". $conf["db"]["user"] .
-						" password=". $conf["db"]["pass"]);
-	$query = 'SELECT cosmid	FROM eggs';
-	$result = pg_query($dbconn, $query);
+include("../inc/config.inc.php");
+#Übergabe der Verbindungsdaten
+$dbconn = pg_connect("host=". $conf["db"]["host"] .
+					" port=". $conf["db"]["port"] . 
+					" dbname=". $conf["db"]["db"] .
+					" user=". $conf["db"]["user"] .
+					" password=". $conf["db"]["pass"]);
 
-	$dropdown = '<select name="CosmID">
-	<option value="">Select...</option>';
-	while ($result2 = pg_fetch_assoc($result)) {
-			$dropdown .= '<option value="'.$result2['cosmid'].'">'."Cosm.com ID: ".$result2['cosmid'].'</option>'; 
-	}		
-	$dropdown .= '</select>';
+#Abfrage des Dropdownmenüs
+$abfrage = "SELECT cosmid FROM eggs";
+$eggs = pg_query($dbconn, $abfrage);
 
-	return $dropdown;
+#Prüfung ob cosmID auch wirklich in der Datenbank ist
+$i = 0;
+$res = array();
+
+while ($helper = pg_fetch_assoc($eggs)){
+	$res[$i] = $helper;
+	$i++;
 }
 
-$dropped = createDropDown();
+Foreach ($res as $k => $V) {
+	$res2 [$k] = $V ['cosmid'];
+}
 
-print '<p>
-<form method="POST" action="?action=list_values">
-	Von welchem Ei m&oumlchten Sie die Daten sehen?<br>
-	'.$dropped.'<br><br>
-  Was m&oumlchten Sie sehen?<br>
-    <input type="radio" name="Parameter" value="1"> Ozon<br>
-    <input type="radio" name="Parameter" value="2"> Stickstoffdioxid<br>
-    <input type="radio" name="Parameter" value="3"> Kohlenstoffmonoxid<br>
-    <input type="radio" name="Parameter" value="4"> Temperatur<br>
-    <input type="radio" name="Parameter" value="5"> Luftfeuchtigkeit<br>
-    <br>
-    Welche Parameter m&oumlchten Sie anzeigen lassen?<br>
-	<input type="checkbox" name="Wert[id]" value="1"> Werte ID<br>
-    <input type="checkbox" name="Wert[time]" value="1"> Zeitstempel<br>
-    <input type="checkbox" name="Wert[value]" value="1"> Wert<br>
-    <input type="checkbox" name="Wert[valid]" value="1"> Validiert?<br>
-    <input type="checkbox" name="Wert[outlier]" value="1"> Ausrei&szliger?<br>
-   	<br>
-   	Aus welchem Zeitraum m&oumlchten Sie Daten erhalten?<br>
-   	<input type="text" name="von" value="Von (YYYY-MM-TT)"><br>
-	<input type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
-	<br>
-	<input type="submit" value="Button">
-</form>
-</p>'
- 
+
+if (in_array ( $_POST["CosmID"], $res2) == true){
+	$ei = $_POST["CosmID"];
+}
+
+$wo = "";
+
+#Abfrage der Radiobuttons aus dem Export-Formular
+if($_POST["Parameter"] == 1)
+	$wo .= "o3";
+if($_POST["Parameter"] == 2)
+	$wo .= "no2";
+if($_POST["Parameter"] == 3)
+	$wo .= "co";
+if($_POST["Parameter"] == 4)
+	$wo .= "temperature";
+if($_POST["Parameter"] == 5)
+	$wo .= "humidity";
+	$wo = rtrim($wo, ', ');
+
+#Abfrage der Checkboxen aus dem Export-Formular
+if($_POST["Wert"][id] == 1)
+	$was .= "id, ";
+if($_POST["Wert"][time] == 1)
+	$was .= "time, ";
+if($_POST["Wert"][value] == 1)
+	$was .= "$wo, ";
+if($_POST["Wert"][valid] == 1)
+	$was .= "valid, ";
+if($_POST["Wert"][outlier] == 1)
+	$was .= "outlier, ";
+$was = rtrim ($was, ', ');
+
+#Abfrage der Datumsfelder aus dem Export-Formular
+$von = "'".$_POST['von']."'";
+$bis = "'".$_POST['bis']."'";
+
+$query_params = array($ei, $von, $bis);
+$query = "SELECT $was FROM $wo NATURAL INNER JOIN eggs WHERE cosmid = $1 AND time BETWEEN $2 AND $3";
+$result = pg_query_params($dbconn, $query, $query_params);
+
+if (!$result) {
+  echo "Fehler " . $query . "<br />";
+  echo pg_last_error();
+  exit();
+}
+echo "<table border = 1";
+while ($row = pg_fetch_row($result)) {
+  echo "<tr>";
+  //echo $was;
+  switch ($was) {
+    case "$1, id" ;
+    case "$1, time";
+    case "$1, $wo";
+	case "$1, valid";
+    case "$1, outlier";
+    	echo "<td>", "$row[0]", "</td>";
+  	    break;
+    
+	case "$1, id, time";
+	case "$1, id, valid"; //?
+	case "$1, id, outlier"; //?
+	case "$1, id, $wo"; 
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		break;
+	
+	case "$1, id, time, $wo"; 
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		break;
+		
+	case "$1, id, time, $wo, valid"; 
+	case "$1, id, time, $wo, outlier"; 
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		echo "<td>", "$row[3]", "</td>";
+		break;
+	
+	case "$1, id, time, $wo, valid, outlier"; 		
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		echo "<td>", "$row[3]", "</td>";
+		echo "<td>", "$row[4]", "</td>";
+		break;	
+echo "</tr>";
+  }
+}
+echo "</table>";
 ?>
