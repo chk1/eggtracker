@@ -71,7 +71,7 @@ if (!$result) {
 #Abfrage ob die Tabelle leer ist
 $leer = pg_num_rows($result);
  if ($leer >0){
-	echo $leer;
+	echo "<strong>$leer total values for $wo from EggID $ei</strong>";
  }
  else{
 	 echo "<strong>No values for $wo from EggID $ei</strong>";
