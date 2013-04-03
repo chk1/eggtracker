@@ -13,10 +13,10 @@ Where to store the website on Apache
 *	/var/www
 
 Edit php
-change the php.ini in the PHP-installation folder:
-```short_open_tag = Off``` 
+*change the php.ini in the PHP-installation folder:
+*```short_open_tag = Off``` 
 to
-```short_open_tag = On```
+*```short_open_tag = On```
 
 Setup procedure:
 * Create a spatial database and run Geosoftdatenbank.sql to create database structure
