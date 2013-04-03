@@ -33,7 +33,7 @@ if(empty($_POST['name'])){
     
     if(empty($_POST['helper']) OR empty($_POST['Mail']) OR empty($_POST['Eintrag']) OR (filter_var($_POST['Mail'], FILTER_VALIDATE_EMAIL)) == false ) {
       print "<font color=red>Sie haben eines der Felder nicht oder falsch ausgef&uumlllt. Pr&uumlfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</font>";
-      print "</br>Sie haben volgende Daten angegeben: </br>
+      print "</br>Sie haben folgende Daten angegeben: </br>
       Name: ".$_POST['helper']."</br>
       Email: ".$_POST['Mail']."</br>
       Nachricht: ".$_POST['Eintrag'];
