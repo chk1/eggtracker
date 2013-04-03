@@ -14,9 +14,9 @@ Where to store the website on Apache
 
 Edit php
 change the php.ini in the PHP-installation folder:
-	```*/3 * * * * short_open_tag = Off```
+```short_open_tag = Off``` 
 to
-	```*/3 * * * * short_open_tag = On```
+```short_open_tag = On```
 
 Setup procedure:
 * Create a spatial database and run Geosoftdatenbank.sql to create database structure
