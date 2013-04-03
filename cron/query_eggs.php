@@ -13,7 +13,7 @@ $dbconn = pg_connect("host= ". $conf["db"]["host"] .
 					" password=". $conf["db"]["pass"]);
 
 // query Cosm API to find all eggs around Münster and insert them into our database
-function new_eggs() {
+function newEggs() {
 	global $dbconn;
 	global $conf;
 	
@@ -67,7 +67,7 @@ function new_eggs() {
 }
 
 // iterate over all eggs in database and set deleted eggs inactive
-function old_eggs() {
+function oldEggs() {
 	global $dbconn;
 	global $conf;
 
@@ -97,6 +97,6 @@ function old_eggs() {
 
 }
 
-new_eggs();
-old_eggs();
+newEggs();
+oldEggs();
 ?>

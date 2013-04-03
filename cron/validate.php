@@ -6,15 +6,23 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
 
-$stream = "co";
+$streams = array("co", "humidity", "no2", "o3", "temperature");
+
+/*
+	Validation type 1:
+	validate each egg's stream individually
+*/
 
 $result = pg_query($dbconn, "SELECT * FROM eggs;");
 if(!$result) { die('SQL Error'); }
 while($row = pg_fetch_assoc($result)) {
-	validatefifty($stream, $row['eggid']);
+	foreach($streams as $stream) {
+		validateFifty($stream, $row['eggid']);
+		flush();
+	}
 };
 
-function validatefifty($stream, $eggid, $offset = 0) {
+function validateFifty($stream, $eggid, $offset = 0) {
 	global $dbconn;
 	if(!is_int($offset)) { return false; }
 
