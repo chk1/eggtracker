@@ -6,16 +6,24 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
 
-function validatefifty($stream, $offset = 0) {
+$stream = "co";
+
+$result = pg_query($dbconn, "SELECT * FROM eggs;");
+if(!$result) { die('SQL Error'); }
+while($row = pg_fetch_assoc($result)) {
+	validatefifty($stream, $row['eggid']);
+};
+
+function validatefifty($stream, $eggid, $offset = 0) {
 	global $dbconn;
 	if(!is_int($offset)) { return false; }
 
 	$n = 50; // number of measurements to consider
 
 	if($offset != 0) {
-		$query = 'SELECT * FROM '.$stream.' WHERE id BETWEEN \''. $offset .'\' AND \''. ($offset+50) .'\' LIMIT '.$n;
+		$query = 'SELECT * FROM '.$stream.' WHERE eggid = '.$eggid.' AND validated = \'false\' AND id BETWEEN \''. $offset .'\' AND \''. ($offset+50) .'\' LIMIT '.$n;
 	} else {
-		$query = 'SELECT * FROM '.$stream.' LIMIT '.$n;
+		$query = 'SELECT * FROM '.$stream.' WHERE eggid = '.$eggid.' AND validated = \'false\' LIMIT '.$n;
 	}
 	$result = pg_query($dbconn, $query);
 	if(!$result) { die('SQL Error'); }
@@ -26,7 +34,7 @@ function validatefifty($stream, $offset = 0) {
 	$x = array(); // temp array to store values
 	while($row = pg_fetch_assoc($result)) {
 		$total += $row[$stream];
-		$x[] = $row[$stream];
+		$x[$row['id']] = $row[$stream];
 		$last = $row['id'];
 	}
 
@@ -56,15 +64,18 @@ function validatefifty($stream, $offset = 0) {
 	echo "Average - 3x Std. Dev.: ".$limit_down;
 
 	echo "<br>";
-	foreach($x as $val) {
+	foreach($x as $id => $val) {
 		if($val < $limit_down or $val > $limit_up) {
 			echo "<b>".$val."</b> outlier<br>";
+			$query = 'UPDATE '.$stream.' SET outlier = true AND validated = true WHERE id = '.$id;
 		} else {
 			echo "".$val."<br>";
+			$query = 'UPDATE '.$stream.' SET outlier = false AND validated = true WHERE id = '.$id;
 		}
+		$result = pg_query($dbconn, $query);
 	}
 	return $last;
 }
-$stream = "co";
-echo validatefifty($stream);
+
+
 ?>
