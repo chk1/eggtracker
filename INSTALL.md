@@ -6,6 +6,18 @@ Requirements:
 * PHP 5 with pgsql module enabled
 * PostgreSQL 9.1 with Postgis 2.0
 
+Linux Introduction:
+* http://www.sumedh.info/articles/install-apache-php-postgres-linux.html
+
+Where to store the website on Apache
+*	/var/www
+
+Edit php
+change the php.ini. In the PHP-installation folder:
+	short_open_tag = Off 
+to
+	short_open_tag = On
+
 Setup procedure:
 * Create a spatial database and run Geosoftdatenbank.sql to create database structure
 * Copy config.inc.sample.php to config.inc.php and add your Cosm api key (it's free!) and database credentials
