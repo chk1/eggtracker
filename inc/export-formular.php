@@ -38,7 +38,7 @@ print '<p>
 		<input type="checkbox" name="Wert[id]" value="1"> Werte ID<br>
 		<input type="checkbox" name="Wert[time]" value="1"> Zeitstempel<br>
 		<input type="checkbox" name="Wert[value]" value="1"> Wert<br>
-		<input type="checkbox" name="Wert[valid]" value="1"> Validiert?<br>
+		<input type="checkbox" name="Wert[validated]" value="1"> Validiert?<br>
 		<input type="checkbox" name="Wert[outlier]" value="1"> Ausrei&szliger?<br>
 	<br>
 	Aus welchem Zeitraum m&oumlchten Sie Daten erhalten?<br>
