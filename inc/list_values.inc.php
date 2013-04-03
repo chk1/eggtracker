@@ -50,8 +50,8 @@ if(isset($_POST["Wert"]["time"]) && $_POST["Wert"]["time"] == 1)
 	$was .= "time, ";
 if(isset($_POST["Wert"]["value"]) && $_POST["Wert"]["value"] == 1)
 	$was .= "$wo, ";
-if(isset($_POST["Wert"]["valid"]) && $_POST["Wert"]["valid"] == 1)
-	$was .= "valid, ";
+if(isset($_POST["Wert"]["validatedated"]) && $_POST["Wert"]["validated"] == 1)
+	$was .= "validatedated, ";
 if(isset($_POST["Wert"]["outlier"]) && $_POST["Wert"]["outlier"] == 1)
 	$was .= "outlier, ";
 $was = rtrim ($was, ', ');
@@ -89,51 +89,51 @@ while ($row = pg_fetch_row($result)) {
     case "id";
     case "time";
     case "$wo";
-	case "valid";
+	case "validated";
     case "outlier";
     	echo "<td>", "$row[0]", "</td>";
 	break;
     
 	case "id, time";
-	case "id, valid";
+	case "id, validated";
 	case "id, outlier";
 	case "id, $wo"; 
 	case "time, $wo";
-	case "time, valid";
+	case "time, validated";
 	case "time, outlier";
 	case "$wo, outlier";
-	case "$wo, valid";
+	case "$wo, validated";
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		break;
 	
 	case "id, time, $wo";
-	case "id, time, valid";
+	case "id, time, validated";
 	case "id, time, outlier";
-	case "id, $wo, valid";
+	case "id, $wo, validated";
 	case "id, $wo, outlier";
-	case "id, valid, outlier";	
-	case "time, $wo, valid";
+	case "id, validated, outlier";	
+	case "time, $wo, validated";
 	case "time, $wo, outlier";
-	case "id, $wo, valid";
+	case "id, $wo, validated";
 	case "id, $wo, outlier";
-	case "$wo, valid, outlier";  
+	case "$wo, validated, outlier";  
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		break;
 		
-	case "id, time, $wo, valid"; 
+	case "id, time, $wo, validated"; 
 	case "id, time, $wo, outlier";
-	case "id, $wo, valid, outlier";
-	case "time, $wo, valid, outlier"; 	
+	case "id, $wo, validated, outlier";
+	case "time, $wo, validated, outlier"; 	
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		echo "<td>", "$row[3]", "</td>";
 		break;
 	
-	case "id, time, $wo, valid, outlier"; 		
+	case "id, time, $wo, validated, outlier"; 		
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
