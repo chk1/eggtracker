@@ -9,8 +9,7 @@ function createDropDown() {
 						" password=". $conf["db"]["pass"]);
 	$query = 'SELECT cosmid	FROM eggs';
 	$result = pg_query($dbconn, $query);
-	
-#Dropdown menu fuer die Eier
+
 	$dropdown = '<select name="CosmID">
 	<option value="">Select...</option>';
 	while ($result2 = pg_fetch_assoc($result)) {
@@ -38,7 +37,7 @@ print '<p>
 	<input type="checkbox" name="Wert[id]" value="1"> Werte ID<br>
     <input type="checkbox" name="Wert[time]" value="1"> Zeitstempel<br>
     <input type="checkbox" name="Wert[value]" value="1"> Wert<br>
-    <input type="checkbox" name="Wert[valid]" value="1"> Validiert?<br>
+    <input type="checkbox" name="Wert[validated]" value="1"> Validiert?<br>
     <input type="checkbox" name="Wert[outlier]" value="1"> Ausrei&szliger?<br>
    	<br>
    	Aus welchem Zeitraum m&oumlchten Sie Daten erhalten?<br>
