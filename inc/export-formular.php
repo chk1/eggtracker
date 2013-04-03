@@ -9,7 +9,8 @@ function createDropDown() {
 						" password=". $conf["db"]["pass"]);
 	$query = 'SELECT cosmid	FROM eggs';
 	$result = pg_query($dbconn, $query);
-
+	
+#dropdown menu fuer die Auswahl der Eier
 	$dropdown = '<select name="CosmID">
 	<option value="">Select...</option>';
 	while ($result2 = pg_fetch_assoc($result)) {
