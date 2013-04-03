@@ -29,52 +29,56 @@ function validatefifty($stream, $eggid, $offset = 0) {
 	if(!$result) { die('SQL Error'); }
 	$num = pg_num_rows($result); // should be 50 like $n, but database might give less results depending on parameters
 
-	$last = 0;
-	$total = 0;
-	$x = array(); // temp array to store values
-	while($row = pg_fetch_assoc($result)) {
-		$total += $row[$stream];
-		$x[$row['id']] = $row[$stream];
-		$last = $row['id'];
-	}
-
-	$average = $total/$num;
-	echo "Average: ". $average;
-
-	$numerator = 0;
-	foreach($x as $val) {
-		$numerator += pow(($average-$val), 2);
-	}
-
-	// variance v^2
-	$var = $numerator/$num;
-	// standard deviation
-	$sd = sqrt($var);
-	// limit = average ± 3 * standard deviation
-	$limit_up = $average+3*$sd;
-	$limit_down = $average-3*$sd;
-
-	echo "<br>";
-	echo "Varianz: ".$var;
-	echo "<br>";
-	echo "Std. Dev.: ".$sd;
-	echo "<br>";
-	echo "Average + 3x Std. Dev.: ".$limit_up;
-	echo "<br>";
-	echo "Average - 3x Std. Dev.: ".$limit_down;
-
-	echo "<br>";
-	foreach($x as $id => $val) {
-		if($val < $limit_down or $val > $limit_up) {
-			echo "<b>".$val."</b> outlier<br>";
-			$query = 'UPDATE '.$stream.' SET outlier = true AND validated = true WHERE id = '.$id;
-		} else {
-			echo "".$val."<br>";
-			$query = 'UPDATE '.$stream.' SET outlier = false AND validated = true WHERE id = '.$id;
+	if($num != 0) {
+		$last = 0;
+		$total = 0;
+		$x = array(); // temp array to store values
+		while($row = pg_fetch_assoc($result)) {
+			$total += $row[$stream];
+			$x[$row['id']] = $row[$stream];
+			$last = $row['id'];
 		}
-		$result = pg_query($dbconn, $query);
+
+		$average = $total/$num;
+		echo "Average: ". $average;
+
+		$numerator = 0;
+		foreach($x as $val) {
+			$numerator += pow(($average-$val), 2);
+		}
+
+		// variance v^2
+		$var = $numerator/$num;
+		// standard deviation
+		$sd = sqrt($var);
+		// limit = average ± 3 * standard deviation
+		$limit_up = $average+3*$sd;
+		$limit_down = $average-3*$sd;
+
+		echo "<br>";
+		echo "Varianz: ".$var;
+		echo "<br>";
+		echo "Std. Dev.: ".$sd;
+		echo "<br>";
+		echo "Average + 3x Std. Dev.: ".$limit_up;
+		echo "<br>";
+		echo "Average - 3x Std. Dev.: ".$limit_down;
+
+		echo "<br>";
+		foreach($x as $id => $val) {
+			if($val < $limit_down or $val > $limit_up) {
+				echo "<b>".$val."</b> outlier<br>";
+				$query = 'UPDATE '.$stream.' SET outlier = true AND validated = true WHERE id = '.$id;
+			} else {
+				echo "".$val."<br>";
+				$query = 'UPDATE '.$stream.' SET outlier = false AND validated = true WHERE id = '.$id;
+			}
+			$result = pg_query($dbconn, $query);
+		}
+		return $last;
 	}
-	return $last;
+	echo "0 rows for stream ".$stream.", egg ".$eggid."<br>";
+	return false;
 }
 
 
