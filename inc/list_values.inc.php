@@ -50,8 +50,8 @@ if(isset($_POST["Wert"]["time"]) && $_POST["Wert"]["time"] == 1)
 	$was .= "time, ";
 if(isset($_POST["Wert"]["value"]) && $_POST["Wert"]["value"] == 1)
 	$was .= "$wo, ";
-if(isset($_POST["Wert"]["validatedated"]) && $_POST["Wert"]["validated"] == 1)
-	$was .= "validatedated, ";
+if(isset($_POST["Wert"]["validated"]) && $_POST["Wert"]["validated"] == 1)
+	$was .= "validated, ";
 if(isset($_POST["Wert"]["outlier"]) && $_POST["Wert"]["outlier"] == 1)
 	$was .= "outlier, ";
 $was = rtrim ($was, ', ');
