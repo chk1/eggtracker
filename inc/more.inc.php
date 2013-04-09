@@ -1,5 +1,8 @@
 <br>
-<div class="tabledownload" ><table>
+<div class="tabledownload" >
+<h2>Rohdatenzugriff</h2>
+</br>
+<table>
   <tr>
     <th><a href="?action=export_form "><img src="/eggtracker/img/daten_export.png"/></a></th>
     <td>Hier können Sie sich die gesammelten Daten in folgenden Formaten Downloaden und weiterverwenden: XML, CSV, Json<br></td>

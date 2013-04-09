@@ -1,4 +1,5 @@
 <div class= "abouttext">
+<h2>Das Egg Tracker Projekt</h2>
 <p align="justify">Das Egg Tracker Projekt wurde im Rahmen des Kurses Geosoftware am Institut für Geoinformatik an der Universität Münster entwickelt.</p>
 
 <p align="justify">Es soll in Zukunft dazu dienen Luftdaten für normale Bürger zugänglich zu machen.

@@ -7,7 +7,7 @@ $Mail = "test@eggtracker.de"; //Hier die eigene E-Mail Adresse einfügen.
 
 Bei Fragen und Anregungen benutzen Sie bitte das Kontaktformular unten. </br>
 Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden. </br></br>
-Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollst&aumlndig aus:</br>
+Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollst&aumlndig aus:</br></br>
 
 <form action="<?php print $_SERVER['PHP_SELF']; ?>?action=contact" method="POST"> 
 <table style="width:400px;"> 
