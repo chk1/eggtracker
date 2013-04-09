@@ -48,10 +48,10 @@ print '<p>
 	<input type="submit" value="Button">
 </form>
 </p>'
- 
+
+#Datapicker 
 ?>
 
-#Datumauswahl
 <link rel="stylesheet" type="text/css" href="static/css/jquery-ui-1.10.2.custom.min.css">
 <script src="static/jquery/jquery-1.9.1.min.js"></script>
 <script src="static/jquery/jquery-ui-1.10.2.custom.min.js"></script> <!-- custom = Core + Datepicker + Slider -->

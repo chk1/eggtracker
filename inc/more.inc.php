@@ -1,19 +1,16 @@
 <br>
-<div class="tabledownload" > <table width="500" border="1">
+<div class="tabledownload" ><table>
   <tr>
-    <td><a href="?action=export_form">Daten Download</a></td>
-  </tr>
+    <th><a href="?action=export_form "><img src="../img/daten_export.png"/></a></th>
+    <td>Hier können Sie sich die gesammelten Daten in folgenden formaten Downloaden und weiterverwenden: 
+      XML,
+      CSV,
+      Json</td>
+    </tr>
   <tr>
-    <td>Hier können Sie sich die gesammelten Daten in folgenden formaten Downloaden und weiterverwenden:<br>
-XML<br>
-CSV<br>
-Json</td>
-  </tr>
-  <tr>
-    <td><a href="?action=list_values">Daten Anzeigen</a></td>
-  </tr>
-  <tr>
+    <td><a href="?action=list_values"><img src="../img/tabellen_ansicht.png" /></a></td>
     <td>Es können alle gesammelten Umweltdatendaten für einen von Ihnen ausgewähltem Zeitraum, in einer Tabelle angezeigt werden.</td>
-  </tr>
+    </tr>
 </table>
+
 </div>

@@ -2,11 +2,12 @@
 $action = ""; 
 if(isset($_GET["action"])) $action = $_GET["action"];
 
-$menu_entries = array(""=>"Map", 
-	"list" => "List Eggs",
-	"diagram" => "Diagram",
-	"more" => "More",
-	"about" => "About");
+$menu_entries = array(""=>"Karte", 
+	"list" => "Egg Liste",
+	"diagram" => "Diagramm",
+	"more" => "Mehr",
+	"about" => "Info",
+	"contact" => "Kontakt");
 
 /*
 	header
@@ -50,6 +51,9 @@ switch($action) {
 		break;
 	case "list_values":
 		include("inc/list_values_formular.php"); 
+		break;
+	case "contact":
+		include("inc/contact.inc.php");
 		break;
 }
 
