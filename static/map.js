@@ -34,7 +34,7 @@ function onUnselectFeatureFunction(feature) {
 }
 
 var egg_layer = new OpenLayers.Layer.Vector(
-	"Air Quality Eggs",
+	"<img src='./img/eggicon.png' class='legendicon'> Air Quality Eggs",
 	{
 		styleMap: new OpenLayers.StyleMap({
 			externalGraphic: './img/eggicon.png',
@@ -44,10 +44,10 @@ var egg_layer = new OpenLayers.Layer.Vector(
 );
 
 var lanuv_layer = new OpenLayers.Layer.Vector(
-	"Lanuv Stations",
+	"<img src='./img/lanuvstation.png' class='legendicon'> Lanuv Stations",
 	{
 		styleMap: new OpenLayers.StyleMap({
-			externalGraphic: './img/asterisk_orange.png',
+			externalGraphic: './img/lanuvstation.png',
 			pointRadius: 10
 		})
 	}
@@ -71,8 +71,8 @@ var map = new OpenLayers.Map({
 			}
 		}),
 		new OpenLayers.Control.Geolocate,
-		new OpenLayers.Control.Zoom(),
-		new OpenLayers.Control.LayerSwitcher()
+		new OpenLayers.Control.Zoom()
+		// new OpenLayers.Control.LayerSwitcher()
 	],
 	layers: [
 		new OpenLayers.Layer.OSM("OpenStreetMap", null, {
@@ -83,6 +83,10 @@ var map = new OpenLayers.Map({
 	],
 	zoom: 12
 });
+
+var switcherControl = new OpenLayers.Control.LayerSwitcher();
+map.addControl(switcherControl);
+switcherControl.maximizeControl();
 
 /*
 	Query both egg_layer and lanuv_layer for eggid attribute, then zoom
