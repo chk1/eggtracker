@@ -2,13 +2,6 @@
 // Grundlegende Einstellungen: 
 $Mail = "test@eggtracker.de"; //Hier die eigene E-Mail Adresse einfügen. 
 ?> 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-  "http://www.w3.org/TR/html4/loose.dtd"> 
-<html> 
-<head>  
-  <title>Eggtracker Kontakt</title> 
-</head> 
-<body> 
 <div class="contactform">
 <h2>Eggtracker Kontakt</h2> 
 
@@ -16,7 +9,7 @@ Bei Fragen und Anregungen benutzen Sie bitte das Kontaktformular unten. </br>
 Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden. </br></br>
 Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollst&aumlndig aus:</br>
 
-<form action="<?php print $_SERVER['PHP_SELF']; ?>" method="POST"> 
+<form action="<?php print $_SERVER['PHP_SELF']; ?>?action=contact" method="POST"> 
 <table style="width:400px;"> 
 <tr><td>Name:</td><td><input type="text" name="helper"></td> <td style=display:none>Name:</td><td style=display:none><input type="text" name="Name"</td></tr>
 
@@ -25,7 +18,7 @@ Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder volls
 <tr><td><input type="submit" value="abschicken" name="abschicken"></td><td><input type="reset" value="zur&uuml;cksetzen" name="reset"></td></tr> 
 </table> 
 </form></p> 
-</div>
+
 <?php
 
 if(empty($_POST['name'])){
@@ -74,8 +67,7 @@ if(empty($_POST['name'])){
   } 
   }
 else{
-	 echo "stfu";
+	 echo "stfu"; // botspam
 	};
 ?> 
-</body> 
-</html> 
+</div>
