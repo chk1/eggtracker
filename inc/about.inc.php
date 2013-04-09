@@ -1,6 +1,5 @@
-<?php
-
-$text = '<div class= "abouttext"> <p align="justify">Das Egg Tracker Projekt wurde im Rahmen des Kurses Geosoftware am Institut für Geoinformatik an der Universität Münster entwickelt.</p>
+<div class= "abouttext">
+<p align="justify">Das Egg Tracker Projekt wurde im Rahmen des Kurses Geosoftware am Institut für Geoinformatik an der Universität Münster entwickelt.</p>
 
 <p align="justify">Es soll in Zukunft dazu dienen Luftdaten für normale Bürger zugänglich zu machen.
 Die Luftdaten werden dabei von Air Quality Eggs(<a href="http://airqualityegg.com/">AQE</a>
@@ -13,48 +12,12 @@ Die Luftdaten werden dabei von Air Quality Eggs(<a href="http://airqualityegg.co
 
 <p align="justify">Alle verarbeiteten Daten können mit dem Egg Tracker System in einer <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=">Kartenansicht</a>, in einer <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=list_values">Tabelle</a> oder einem <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=diagram">Diagramm</a> angezeigt werden.
 Alle verarbeiteten <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=list">Datenquellen</a> werden in einer zentralen Tabelle angezeigt.
-Ein <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=export_form">Datenexport</a> ist als XML, CSV oder JSON möglich.</p></div>';
+Ein <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=export_form">Datenexport</a> ist als XML, CSV oder JSON möglich.</p>
 
-$text = str_replace ("ä", "&auml;", $text);
-$text = str_replace ("Ä", "&uml;", $text);
-$text = str_replace ("ö", "&ouml;", $text);
-$text = str_replace ("Ö", "&Ouml;", $text);
-$text = str_replace ("ü", "&uuml;", $text);
-$text = str_replace ("Ü", "&Uuml;", $text);
-$text = str_replace ("ß", "&szlig;", $text);
+<img src="img/logo_ifgi.png" alt="ifgi" class="poweredby logo">
+<img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo">
+<img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo">
+<img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo">
+<img src="img/logo_fff.png" alt="FamFamFam" class="poweredby logo">
 
-echo $text;
-
-echo '<p>
-	<img src="img/logo_ifgi.png" alt="ifgi" class="poweredby logo">
-	<img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo">
-	<img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo">
-	<img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo">
-	[FamFamFam Icons]
-</p>';
-
-?>
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>

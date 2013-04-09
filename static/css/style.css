@@ -102,8 +102,9 @@ div#content form {
 }
 
 div.abouttext {
-	padding-left: 50px;
-	padding-right: 50px;
+	width:60%;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 img.legendicon {
@@ -267,11 +268,10 @@ div.olControlZoom a:hover {
 	margin-bottom: 20px;
 }
 
-
-
 #OpenLayers_Control_MaximizeDiv, #OpenLayers_Control_MinimizeDiv {
 	display:none;
 }
+
 /*
 	jquery timepicker
 */
