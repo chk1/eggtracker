@@ -1,5 +1,4 @@
-<br>
-<div class="tabledownload" > <table width="500" border="1">
+<table width="500" border="1">
   <tr>
     <td><a href="?action=export_form">Daten Download</a></td>
   </tr>
@@ -16,4 +15,3 @@ Json</td>
     <td>Es können alle gesammelten Umweltdatendaten für einen von Ihnen ausgewähltem Zeitraum, in einer Tabelle angezeigt werden.</td>
   </tr>
 </table>
-</div>
