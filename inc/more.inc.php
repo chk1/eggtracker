@@ -1,5 +1,5 @@
 <br>
-<div class = "tabledownload" > <table width="500" border="1">
+<div class="tabledownload" > <table width="500" border="1">
   <tr>
     <td><a href="?action=export_form">Daten Download</a></td>
   </tr>
