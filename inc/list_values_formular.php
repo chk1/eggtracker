@@ -27,25 +27,42 @@ print '<p>
 <form method="POST" action="inc/list_values.inc.php">
 	Von welchem Ei m&oumlchten Sie die Daten sehen?<br>
 	'.$dropped.'<br><br>
-  Was m&oumlchten Sie sehen?<br>
-    <input type="radio" name="Parameter" value="1"> Ozon<br>
-    <input type="radio" name="Parameter" value="2"> Stickstoffdioxid<br>
-    <input type="radio" name="Parameter" value="3"> Kohlenstoffmonoxid<br>
-    <input type="radio" name="Parameter" value="4"> Temperatur<br>
-    <input type="radio" name="Parameter" value="5"> Luftfeuchtigkeit<br>
-    <br>
-    Welche Parameter m&oumlchten Sie anzeigen lassen?<br>
-	<input type="checkbox" name="Wert[id]" value="1"> Werte ID<br>
-    <input type="checkbox" name="Wert[time]" value="1"> Zeitstempel<br>
-    <input type="checkbox" name="Wert[value]" value="1"> Wert<br>
-    <input type="checkbox" name="Wert[validated]" value="1"> Validiert?<br>
-    <input type="checkbox" name="Wert[outlier]" value="1"> Ausrei&szliger?<br>
-   	<br>
-   	Aus welchem Zeitraum m&oumlchten Sie Daten erhalten?<br>
-   	<input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
-	<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) ">
-	<br>
-	<input type="submit" value="Button">
+   <div class="tabledownload"> <table>
+    <tr>
+      <th>Was m&amp;oumlchten Sie sehen?<br/>
+        <input type="radio" name="Parameter" value="1" />
+        Ozon<br />
+  <input type="radio" name="Parameter" value="2" />
+        Stickstoffdioxid<br />
+  <input type="radio" name="Parameter" value="3" />
+        Kohlenstoffmonoxid<br />
+  <input type="radio" name="Parameter" value="4" />
+        Temperatur<br />
+  <input type="radio" name="Parameter" value="5" />
+      Luftfeuchtigkeit</th>
+      <th>Welche Parameter m&amp;oumlchten Sie anzeigen lassen?<br />
+        <input type="checkbox" name="Wert[id]" value="1" />
+        Werte ID<br />
+  <input type="checkbox" name="Wert[time]" value="1" />
+        Zeitstempel<br />
+  <input type="checkbox" name="Wert[value]" value="1" />
+        Wert<br />
+  <input type="checkbox" name="Wert[valid]" value="1" />
+        Validiert?<br />
+  <input type="checkbox" name="Wert[outlier]" value="1" />
+      Ausrei&amp;szliger?</th>
+    </tr>
+    <tr>
+      <td>Aus welchem Zeitraum m&amp;oumlchten Sie Daten erhalten?</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><input type="text" name="von" value="Von (YYYY-MM-TT)" />
+        <br />
+      <input type="text" name="bis" value="Bis (YYYY-MM-TT) " /></td>
+      <td><input type="submit" value="Abrufen" /></td>
+    </tr>
+  </table></div>
 </form>
 </p>'
 
