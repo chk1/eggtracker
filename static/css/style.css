@@ -101,6 +101,16 @@ div#content form {
 	font-size: 10px; 
 }
 
+div.abouttext {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+img.legendicon {
+	width: 16px;
+	height: 16px;
+}
+
 /*
 	footer
 */
@@ -192,8 +202,10 @@ div.olControlZoom a {
     width: 32px;
     line-height: 28px;
     text-shadow: 0 0 3px rgba(0,0,0,0.8);
-    background: #130085; /* fallback for IE - IE6 requires background shorthand*/
-    background: rgba(0, 60, 136, 0.5);
+    background: #c7c7c7; /* fallback for IE - IE6 requires background shorthand*/
+    /* background: #130085; */
+    background: rgba(174, 174, 174, 1);
+    /* background: rgba(0, 60, 136, 0.5);*/
     filter: alpha(opacity=80);
 }
 a.olControlZoomIn {
@@ -206,6 +218,14 @@ div.olControlZoom a:hover {
     background: #130085; /* fallback for IE */
     background: rgba(0, 60, 136, 0.7);
     filter: alpha(opacity=100);
+}
+
+.olControlLayerSwitcher {
+    background: rgba(174, 174, 174, 1);
+    position:absolute;
+    top:0px;
+    right:0px;
+    padding:10px;
 }
 
 /*
@@ -247,6 +267,11 @@ div.olControlZoom a:hover {
 	margin-bottom: 20px;
 }
 
+
+
+#OpenLayers_Control_MaximizeDiv, #OpenLayers_Control_MinimizeDiv {
+	display:none;
+}
 /*
 	jquery timepicker
 */
