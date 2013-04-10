@@ -29,13 +29,13 @@ print '<p>
     Von welchem Ei möchen Sie die Daten exportieren?<br>
         '.$dropped.'<br />
         <br>
-    <table width="650">
+    <table>
           <tr>
             <th><div align="left">Was möchten Sie exportieren?</div></th>
             <th><div align="left">Welche Parameter möchten Sie exportieren?</div></th>
           </tr>
           <tr>
-            <th width="260"><div align="left">
+            <th><div align="left">
               <input type="radio" name="Parameter" value="1" />
               Ozon<br />
               <input type="radio" name="Parameter" value="2" />
@@ -46,7 +46,7 @@ print '<p>
               Temperatur<br />
               <input type="radio" name="Parameter" value="5" />
             Luftfeuchtigkeit</div></th>
-            <th width="378"><div align="left">
+            <th><div align="left">
               <input type="checkbox" name="Wert[id]" value="1" />
               Werte ID<br />
               <input type="checkbox" name="Wert[time]" value="1" />
@@ -59,16 +59,16 @@ print '<p>
             Ausreißer?</div></th>
           </tr>
           <tr>
-            <td><p>Wählen Sie den Zeitraum aus.</p></td>
-            <td>            Datenformat</td>
+            <td>Wählen Sie den Zeitraum aus.</td>
+            <td>Datenformat</td>
           </tr>
           <tr>
-            <td><p>
+            <td>
               <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)">
               <br>
               <input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) ">
               <br />
-            </p></td>
+            </td>
             <td><div align="left">
               <input type="radio" name="format" value="xml" />
 XML<br />
