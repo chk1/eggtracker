@@ -98,7 +98,7 @@ if($_POST["format"] == "xml") {
 	}
 } elseif($_POST["format"] == "json") {
 	header("Content-type: text/plain");
-	header('Content-Disposition: attachment; filename="Egg-Values.xml"');
+	header('Content-Disposition: attachment; filename="Egg-Values.json"');
 	$data = array();
 	
 	while($row = pg_fetch_assoc($result)){

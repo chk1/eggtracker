@@ -8,6 +8,8 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" password=". $conf["db"]["pass"]);
 
 $tabelle = "<table border=\"0\">
+	<td>
+<table border=\"1\">
 	<tr>
 		<th>Eggtracker ID</th>
 		<th>Cosm.com ID</th>
@@ -25,15 +27,21 @@ while($row = pg_fetch_assoc($result)) {
 				<a href="https://cosm.com/feeds/'.$row["cosmid"].'">'.$row['cosmid'].'</a>
 			</td>
 			<td align="center" valign="middle">
-				<a href="?id='.$row['eggid'].'">'.$row['y'].' '.$row['x'].'</a>
+				<a href="?id='.$row['eggid'].'">'.number_format($row['y'],6).' '.number_format($row['x'],6).'</a>
 			</td>
 		</tr>';
 }
-$tabelle.= "</table>";
-echo "Air Quality Eggs:";
+$tabelle.= "</table><td> In dieser Tabelle werden alle Air Quality Eggs,</br>
+						 die in einem Radius von 25km um das Stadtzentrum</br>
+						 von Münster liegen und Luftdaten sammeln. Diese</br>
+						 Daten werden dann von unserem System verarbeitet</table>";
+echo "<h3>Air Quality Eggs:</h3>";
 echo $tabelle;
 
 $tabelle = "<table border=\"0\">
+	<td>
+	
+	<table border=\"1\">
 	<tr>
 		<th>Eggtracker ID</th>
 		<th>LANUV-Referenz</th>
@@ -63,12 +71,15 @@ while($row = pg_fetch_assoc($result)) {
 	</tr>';
 	$o++;
 }
-$tabelle.= "</table>";
+$tabelle.= "</table><td>In dieser Tabelle werden alle benutzten LANUV-Stationen</br>
+						gelistet, die in unserem System zu Datenvalidierung</br>
+						verwendet werden. Diese Stationen liegen genau wie die</br>
+						Air Quality Eggs im Stadtgebiet von Münster</table>";
 
 echo "</br>";
 echo "</br>";
 echo "</br>";
-echo "LANUV Messstationen:";
+echo "<h3>LANUV Messstationen:</h3>";
 echo $tabelle;
 
 
