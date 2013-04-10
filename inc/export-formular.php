@@ -59,12 +59,19 @@ print '<p>
             Ausreißer?</div></th>
           </tr>
           <tr>
-            <td>Wählen Sie den Zeitraum aus.</td>
-            <td>Datenformat</td>
+            <td><p><br />
+            Wählen Sie den Zeitraum aus.</p></td>
+            <td><br />
+            Datenformat</td>
           </tr>
           <tr>
-            <td><input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
-		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "></td>
+            <td><p>
+              <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)">
+              <br>
+              <input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) ">
+              </p>
+              <p><br />
+            </p></td>
             <td><div align="left">
               <input type="radio" name="format" value="xml" />
 XML<br />
@@ -74,8 +81,7 @@ CSV<br />
 JSON</div>              </p></td>
           </tr>
     </table>
-        <br />
-        <input type="submit" value="Speichern"/>
+    <input type="submit" value="Speichern"/>
   </div>
 </form>
 </p>';
