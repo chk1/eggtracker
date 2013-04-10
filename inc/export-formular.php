@@ -25,32 +25,56 @@ $dropped = createDropDown();
 
 print '<p>
 <form method="POST" action="export.php">
-	Von welchem Ei m&ouml;chten Sie Daten exportieren?<br>
-	'.$dropped.'<br><br>
-	Was m&ouml;chten Sie exportieren?<br>
-		<input type="radio" name="Parameter" value="1"> Ozon<br>
-		<input type="radio" name="Parameter" value="2"> Stickstoffdioxid<br>
-		<input type="radio" name="Parameter" value="3"> Kohlenstoffmonoxid<br>
-		<input type="radio" name="Parameter" value="4"> Temperatur<br>
-		<input type="radio" name="Parameter" value="5"> Luftfeuchtigkeit<br>
-	<br>
-	Welche Parameter m&ouml;chten Sie exportieren?<br>
-		<input type="checkbox" name="Wert[id]" value="1"> Werte ID<br>
-		<input type="checkbox" name="Wert[time]" value="1"> Zeitstempel<br>
-		<input type="checkbox" name="Wert[value]" value="1"> Wert<br>
-		<input type="checkbox" name="Wert[validated]" value="1"> Validiert?<br>
-		<input type="checkbox" name="Wert[outlier]" value="1"> Ausrei&szliger?<br>
-	<br>
-	Aus welchem Zeitraum m&oumlchten Sie Daten erhalten?<br>
-		<input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
-		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
-	<br>
-	Datenformat<br>
-		<input type="radio" name="format" value="xml"> XML<br>
-		<input type="radio" name="format" value="csv"> CSV<br>
-		<input type="radio" name="format" value="json"> JSON<br>
-	<br>
-	<input type="submit" value="Button">
+  <div class="tabledownload" align="left"><h2>Datendownload</h2>
+    Von welchem Ei möchen Sie die Daten exportieren?<br>
+        '.$dropped.'<br />
+        <br>
+    <table width="650">
+          <tr>
+            <th><div align="left">Was möchten Sie exportieren?</div></th>
+            <th><div align="left">Welche Parameter möchten Sie exportieren?</div></th>
+          </tr>
+          <tr>
+            <th width="260"><div align="left">
+              <input type="radio" name="Parameter" value="1" />
+              Ozon<br />
+              <input type="radio" name="Parameter" value="2" />
+              Stickstoffdioxid<br />
+              <input type="radio" name="Parameter" value="3" />
+              Kohlenstoffmonoxid<br />
+              <input type="radio" name="Parameter" value="4" />
+              Temperatur<br />
+              <input type="radio" name="Parameter" value="5" />
+            Luftfeuchtigkeit</div></th>
+            <th width="378"><div align="left">
+              <input type="checkbox" name="Wert[id]" value="1" />
+              Werte ID<br />
+              <input type="checkbox" name="Wert[time]" value="1" />
+              Zeitstempel<br />
+              <input type="checkbox" name="Wert[value]" value="1" />
+              Wert<br />
+              <input type="checkbox" name="Wert[valid]" value="1" />
+              Validiert?<br />
+              <input type="checkbox" name="Wert[outlier]" value="1" />
+            Ausreißer?</div></th>
+          </tr>
+          <tr>
+            <td>Aus welchem Zeitraum möchten sie die Daten erhalten.<br />
+              <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
+		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "></td>
+            <td><div align="left"><br />
+              Datenformat<br />
+              <input type="radio" name="format" value="xml" />
+XML<br />
+<input type="radio" name="format" value="csv" />
+CSV<br />
+<input type="radio" name="format" value="json" />
+JSON</div>              </p></td>
+          </tr>
+    </table>
+        <br />
+        <input type="submit" value="Speichern"/>
+  </div>
 </form>
 </p>';
  
