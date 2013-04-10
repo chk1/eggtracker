@@ -86,11 +86,11 @@ $tabelle.= "</table><td><p align=\"justify\" >In dieser Tabelle werden alle benu
 echo "</br>";
 echo "</br>";
 echo "</br>";
-<<<<<<< HEAD
+
 echo "<h3>LANUV Messstationen:</h3>".$tabelle."<div>";
-=======
+
 echo "<div class=\"listeggs\"><h3>LANUV Messstationen:</h3>".$tabelle."<div>";
->>>>>>> 0d16b8d2693060be9500c0bef3a486fbc3f9b8b6
+
 
 pg_close($dbconn);
 ?>
