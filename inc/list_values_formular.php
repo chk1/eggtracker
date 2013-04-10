@@ -25,11 +25,11 @@ $dropped = createDropDown();
 
 print '<p>
 <form method="POST" action="inc/list_values.inc.php">
-	Von welchem Ei m&oumlchten Sie die Daten sehen?<br>
+	Von welchem Ei möchten Sie die Daten sehen?<br>
 	'.$dropped.'<br><br>
    <div class="tabledownload"> <table>
     <tr>
-      <th>Was m&amp;oumlchten Sie sehen?<br/>
+      <th>Was möchten Sie sehen?<br/>
         <input type="radio" name="Parameter" value="1" />
         Ozon<br />
   <input type="radio" name="Parameter" value="2" />
@@ -40,7 +40,7 @@ print '<p>
         Temperatur<br />
   <input type="radio" name="Parameter" value="5" />
       Luftfeuchtigkeit</th>
-      <th>Welche Parameter m&amp;oumlchten Sie anzeigen lassen?<br />
+      <th>Welche Parameter möchten Sie anzeigen lassen?<br />
         <input type="checkbox" name="Wert[id]" value="1" />
         Werte ID<br />
   <input type="checkbox" name="Wert[time]" value="1" />
@@ -50,10 +50,10 @@ print '<p>
   <input type="checkbox" name="Wert[valid]" value="1" />
         Validiert?<br />
   <input type="checkbox" name="Wert[outlier]" value="1" />
-      Ausrei&amp;szliger?</th>
+      Ausreißer?</th>
     </tr>
     <tr>
-      <td>Aus welchem Zeitraum m&amp;oumlchten Sie Daten erhalten?</td>
+      <td>Aus welchem Zeitraum möchten Sie Daten erhalten?</td>
       <td>&nbsp;</td>
     </tr>
     <tr>

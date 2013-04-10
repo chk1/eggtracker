@@ -80,9 +80,11 @@ if($_POST["format"] == "xml") {
 		}
 	}
 	header("Content-type: application/xml");
+	header('Content-Disposition: attachment; filename="Egg-Values.xml"');
 	echo $doc->saveXML();
 } elseif($_POST["format"] == "csv") {
 	header("Content-type: text/plain");
+	header('Content-Disposition: attachment; filename="Egg-Values.csv"');
 	echo $was.PHP_EOL;
 	
 	while($row = pg_fetch_assoc($result)){
@@ -96,6 +98,7 @@ if($_POST["format"] == "xml") {
 	}
 } elseif($_POST["format"] == "json") {
 	header("Content-type: text/plain");
+	header('Content-Disposition: attachment; filename="Egg-Values.xml"');
 	$data = array();
 	
 	while($row = pg_fetch_assoc($result)){
