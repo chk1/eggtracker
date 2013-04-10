@@ -39,7 +39,7 @@ $tabelle.= "</table><td> <p align=\"justify\" >In dieser Tabelle werden alle Air
 						 die in einem Radius von 25km um das Stadtzentrum
 						 von Münster liegen und Luftdaten sammeln. Diese
 						 Daten werden dann von unserem System verarbeitet</table>";
-echo "<div class=\"listeggs\"><h3>Air Quality Eggs:</h3>".$tabelle."<div>";
+echo "<div class=\"listeggs\"><h3>Air Quality Eggs:</h3>".$tabelle;
 
 $tabelle = "<table border=\"0\">
 	<colgroup>
@@ -86,7 +86,11 @@ $tabelle.= "</table><td><p align=\"justify\" >In dieser Tabelle werden alle benu
 echo "</br>";
 echo "</br>";
 echo "</br>";
+<<<<<<< HEAD
+echo "<h3>LANUV Messstationen:</h3>".$tabelle."<div>";
+=======
 echo "<div class=\"listeggs\"><h3>LANUV Messstationen:</h3>".$tabelle."<div>";
+>>>>>>> 0d16b8d2693060be9500c0bef3a486fbc3f9b8b6
 
 pg_close($dbconn);
 ?>
