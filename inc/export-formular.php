@@ -59,7 +59,7 @@ print '<p>
             Ausreißer?</div></th>
           </tr>
           <tr>
-            <td>Aus welchem Zeitraum möchten sie die Daten erhalten.</td>
+            <td>Wählen Sie den Zeitraum aus.</td>
             <td>Datenformat</td>
           </tr>
           <tr>
