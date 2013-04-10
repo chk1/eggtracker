@@ -25,44 +25,51 @@ $dropped = createDropDown();
 
 print '<p>
 <form method="POST" action="inc/list_values.inc.php">
-	Von welchem Ei möchten Sie die Daten sehen?<br>
-	'.$dropped.'<br><br>
-   <div class="tabledownload"> <table>
-    <tr>
-      <th>Was möchten Sie sehen?<br/>
-        <input type="radio" name="Parameter" value="1" />
-        Ozon<br />
-  <input type="radio" name="Parameter" value="2" />
-        Stickstoffdioxid<br />
-  <input type="radio" name="Parameter" value="3" />
-        Kohlenstoffmonoxid<br />
-  <input type="radio" name="Parameter" value="4" />
-        Temperatur<br />
-  <input type="radio" name="Parameter" value="5" />
-      Luftfeuchtigkeit</th>
-      <th>Welche Parameter möchten Sie anzeigen lassen?<br />
-        <input type="checkbox" name="Wert[id]" value="1" />
-        Werte ID<br />
-  <input type="checkbox" name="Wert[time]" value="1" />
-        Zeitstempel<br />
-  <input type="checkbox" name="Wert[value]" value="1" />
-        Wert<br />
-  <input type="checkbox" name="Wert[valid]" value="1" />
-        Validiert?<br />
-  <input type="checkbox" name="Wert[outlier]" value="1" />
-      Ausreißer?</th>
-    </tr>
-    <tr>
-      <td>Aus welchem Zeitraum möchten Sie Daten erhalten?</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td><input type="text" name="von" value="Von (YYYY-MM-TT)" />
+  <div class="tabledownload" align="left"><h2>Tabellenansicht</h2>
+    Von welchem Ei möchen Sie die Daten sehen?<br>
+        '.$dropped.'<br />
+        <br>
+    <table width="650">
+          <tr>
+            <th><div align="left">Was möchtenchten Sie sehen?</div></th>
+            <th><div align="left">Welche Parameter möchten Sie anzeigen lassen?</div></th>
+          </tr>
+          <tr>
+            <th width="260"><div align="left">
+              <input type="radio" name="Parameter" value="1" />
+              Ozon<br />
+              <input type="radio" name="Parameter" value="2" />
+              Stickstoffdioxid<br />
+              <input type="radio" name="Parameter" value="3" />
+              Kohlenstoffmonoxid<br />
+              <input type="radio" name="Parameter" value="4" />
+              Temperatur<br />
+              <input type="radio" name="Parameter" value="5" />
+            Luftfeuchtigkeit</div></th>
+            <th width="378"><div align="left">
+              <input type="checkbox" name="Wert[id]" value="1" />
+              Werte ID<br />
+              <input type="checkbox" name="Wert[time]" value="1" />
+              Zeitstempel<br />
+              <input type="checkbox" name="Wert[value]" value="1" />
+              Wert<br />
+              <input type="checkbox" name="Wert[valid]" value="1" />
+              Validiert?<br />
+              <input type="checkbox" name="Wert[outlier]" value="1" />
+            Ausreißer?</div></th>
+          </tr>
+          <tr>
+            <td><br />
+              Wählen Sie den Zeitraum.<br />
+              <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
+		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
+		</td>
+            <td>&nbsp;</td>
+          </tr>
+    </table>
         <br />
-      <input type="text" name="bis" value="Bis (YYYY-MM-TT) " /></td>
-      <td><input type="submit" value="Abrufen" /></td>
-    </tr>
-  </table></div>
+        <input type="submit" value="Abrufen" target="_blank" />
+  </div>
 </form>
 </p>'
 
