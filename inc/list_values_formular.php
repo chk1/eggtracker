@@ -63,7 +63,7 @@ print '<p>
           </tr>
           <tr>
             <td><br />
-              Wählen Sie den Zeitraum.<br />
+              Wählen Sie den Zeitraum aus.<br />
               <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
 		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
 		</td>
