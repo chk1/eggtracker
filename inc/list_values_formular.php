@@ -31,7 +31,7 @@ print '<p>
         <br>
     <table width="650">
           <tr>
-            <th><div align="left">Was möchtenchten Sie sehen?</div></th>
+            <th><div align="left">Was möchten Sie sehen?</div></th>
             <th><div align="left">Welche Parameter möchten Sie anzeigen lassen?</div></th>
           </tr>
           <tr>
