@@ -59,18 +59,15 @@ print '<p>
             Ausreißer?</div></th>
           </tr>
           <tr>
-            <td><p><br />
-            Wählen Sie den Zeitraum aus.</p></td>
-            <td><br />
-            Datenformat</td>
+            <td><p>Wählen Sie den Zeitraum aus.</p></td>
+            <td>            Datenformat</td>
           </tr>
           <tr>
             <td><p>
               <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)">
               <br>
               <input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) ">
-              </p>
-              <p><br />
+              <br />
             </p></td>
             <td><div align="left">
               <input type="radio" name="format" value="xml" />
