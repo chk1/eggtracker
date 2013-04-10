@@ -290,6 +290,11 @@ div.baseLbl, div.baseLayersDiv, div.dataLbl {
 	display:none;
 }
 
+/* layerswitcher layer name text */
+.labelSpan.olButton {
+	color:white;
+}
+
 /*
 	jquery timepicker
 */
