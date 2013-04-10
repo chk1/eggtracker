@@ -8,6 +8,10 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" password=". $conf["db"]["pass"]);
 
 $tabelle = "<table border=\"0\">
+	<colgroup>
+    <col width=\"400\">
+    <col width=\"250\">
+    </colgroup>
 	<td>
 <table border=\"1\">
 	<tr>
@@ -31,14 +35,17 @@ while($row = pg_fetch_assoc($result)) {
 			</td>
 		</tr>';
 }
-$tabelle.= "</table><td> In dieser Tabelle werden alle Air Quality Eggs,</br>
-						 die in einem Radius von 25km um das Stadtzentrum</br>
-						 von Münster liegen und Luftdaten sammeln. Diese</br>
+$tabelle.= "</table><td> <p align=\"justify\" >In dieser Tabelle werden alle Air Quality Eggs,
+						 die in einem Radius von 25km um das Stadtzentrum
+						 von Münster liegen und Luftdaten sammeln. Diese
 						 Daten werden dann von unserem System verarbeitet</table>";
-echo "<h3>Air Quality Eggs:</h3>";
-echo $tabelle;
+echo "<div class=\"listeggs\"><h3>Air Quality Eggs:</h3>".$tabelle."<div>";
 
 $tabelle = "<table border=\"0\">
+	<colgroup>
+    <col width=\"400\">
+    <col width=\"250\">
+    </colgroup>
 	<td>
 	
 	<table border=\"1\">
@@ -71,17 +78,15 @@ while($row = pg_fetch_assoc($result)) {
 	</tr>';
 	$o++;
 }
-$tabelle.= "</table><td>In dieser Tabelle werden alle benutzten LANUV-Stationen</br>
-						gelistet, die in unserem System zu Datenvalidierung</br>
-						verwendet werden. Diese Stationen liegen genau wie die</br>
-						Air Quality Eggs im Stadtgebiet von Münster</table>";
+$tabelle.= "</table><td><p align=\"justify\" >In dieser Tabelle werden alle benutzten LANUV-Stationen
+						gelistet, die in unserem System zu Datenvalidierung
+						verwendet werden. Diese Stationen liegen genau wie die
+						Air Quality Eggs im Stadtgebiet von Münster</p></table>";
 
 echo "</br>";
 echo "</br>";
 echo "</br>";
-echo "<h3>LANUV Messstationen:</h3>";
-echo $tabelle;
-
+echo "div class=\"listeggs\"><h3>LANUV Messstationen:</h3>".$tabelle."<div>";
 
 pg_close($dbconn);
 ?>
