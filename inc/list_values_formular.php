@@ -71,17 +71,11 @@ print '<p>
           </tr>
     </table>
         <br />
-        <input type="submit" value="Abrufen" target="_blank" onclick="return popup(this.href);" />
+        <input type="submit" value="Abrufen"/>
   </div>
 </form>
 
-<script type="text/javascript">
-function popup (url) {
- fenster = window.open(url, "Popupfenster", "width=400,height=300,resizable=yes");
- fenster.focus();
- return false;
-}
-</script>
+
 </p>'
 
 #Datapicker 
