@@ -88,10 +88,6 @@ echo "</br>";
 echo "</br>";
 
 echo "<h3>LANUV Messstationen:</h3>".$tabelle."<div>";
-
-echo "<div class=\"listeggs\"><h3>LANUV Messstationen:</h3>".$tabelle."<div>";
-
-
 pg_close($dbconn);
 ?>
 </p>
