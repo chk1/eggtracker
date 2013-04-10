@@ -59,11 +59,13 @@ print '<p>
             Ausreißer?</div></th>
           </tr>
           <tr>
-            <td>Aus welchem Zeitraum möchten sie die Daten erhalten.<br />
-              <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
+            <td>Aus welchem Zeitraum möchten sie die Daten erhalten.</td>
+            <td>Datenformat</td>
+          </tr>
+          <tr>
+            <td><input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
 		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "></td>
-            <td><div align="left"><br />
-              Datenformat<br />
+            <td><div align="left">
               <input type="radio" name="format" value="xml" />
 XML<br />
 <input type="radio" name="format" value="csv" />
