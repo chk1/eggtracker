@@ -24,7 +24,14 @@ function createDropDown() {
 $dropped = createDropDown();
 
 print '<p>
-<form method="POST" action="inc/list_values.inc.php" target="_blank">
+<script type="text/javascript">
+function popup (url) {
+ fenster = window.open(url, "Popupfenster", "width=400,height=300,resizable=yes");
+ fenster.focus();
+ return false;
+}</script>
+
+<form method="POST" action="inc/list_values.inc.php" target="_blank" onclick="return popup(this.href);">
   <div class="tabledownload" align="left"><h2>Tabellenansicht</h2>
     Von welchem Ei möchen Sie die Daten sehen?<br>
         '.$dropped.'<br />
