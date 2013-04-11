@@ -34,7 +34,7 @@ function onUnselectFeatureFunction(feature) {
 }
 
 var egg_layer = new OpenLayers.Layer.Vector(
-	"<img src='./img/eggicon.png' class='legendicon'> Air Quality Eggs",
+	"<img src='./img/eggicon.png' class='legendicon'> Air Quality Egg",
 	{
 		styleMap: new OpenLayers.StyleMap({
 			externalGraphic: './img/eggicon.png',
@@ -44,7 +44,7 @@ var egg_layer = new OpenLayers.Layer.Vector(
 );
 
 var lanuv_layer = new OpenLayers.Layer.Vector(
-	"<img src='./img/lanuvstation.png' class='legendicon'> Lanuv Stations",
+	"<img src='./img/lanuvstation.png' class='legendicon'> Lanuv Station",
 	{
 		styleMap: new OpenLayers.StyleMap({
 			externalGraphic: './img/lanuvstation.png',
