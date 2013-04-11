@@ -5,20 +5,22 @@ $Mail = "test@eggtracker.de"; //Hier die eigene E-Mail Adresse einfügen.
 <div class="contactform">
 <h2>Eggtracker Kontakt</h2> 
 
-<p>Bei Fragen und Anregungen benutzen Sie bitte das Kontaktformular unten.<br>
-Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden.</p>
-<p>Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollständig aus:</p>
+<p align="justify">Bei Fragen und Anregungen benutzen Sie bitte das Kontaktformular unten.<br>
+Wir werden uns dann so schnell wie möglich bei Ihnen melden.</p>
+<p align="justify">Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollständig aus:</p>
 
 <form action="<?php print $_SERVER['PHP_SELF']; ?>?action=contact" method="POST"> 
-<table style="width:400px;"> 
-<tr><td>Name:</td><td><input type="text" name="helper"></td> <td style=display:none>Name:</td><td style=display:none><input type="text" name="Name"</td></tr>
 
-<tr><td>E-Mail:</td><td><input type="text" name="Mail"></td></tr> 
-<tr><td>Ihre Nachricht:</td><td colspan="3"><textarea name="Eintrag" cols="70" rows="20"></textarea></td></tr> 
-<tr><td><input type="submit" value="abschicken" name="abschicken"></td><td><input type="reset" value="zurücksetzen" name="reset"></td></tr> 
-</table> 
-</form></p> 
+Name: <input type="text" name="helper">
+<span style=display:none>Name:</span> <span style=display:none>input type="text" name="Name"</span><br>
 
+E-Mail:<input type="text" name="Mail"><br><br>
+Ihre Nachricht:<br>
+<textarea name="Eintrag" cols="40" rows="20"></textarea><br>
+<input type="submit" value="abschicken" name="abschicken">
+<input type="reset" value="zurücksetzen" name="reset"><br>
+</form>
+</p>
 <?php
 
 if(empty($_POST['name'])){
@@ -31,7 +33,7 @@ if(empty($_POST['name'])){
 	
     
     if(empty($helper) OR empty($mail) OR empty($eintrag) OR (filter_var($mail, FILTER_VALIDATE_EMAIL)) == false ) {
-      print "<font color=red>Sie haben eines der Felder nicht oder falsch ausgefüllt. Prüfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</font>";
+      print "<span style=color:red; align=\"justify\">Sie haben eines der Felder nicht oder falsch ausgefüllt. Prüfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</span>";
       print "</br></br>Sie haben folgende Daten angegeben: </br>
       Name: ".$helper."</br>
       Email: ".$mail."</br>
@@ -67,7 +69,7 @@ if(empty($_POST['name'])){
   } 
    
   else{ //Der abschicken button wurde noch nicht gedrückt 
-    print "Um Ihre Nachricht zu senden dr&uumlcken Sie bitte den \"abschicken\" Button"; 
+    print "Um Ihre Nachricht zu senden dr&uumlcken Sie bitte den \"abschicken\" Button<br>"; 
   } 
   }
 else{
