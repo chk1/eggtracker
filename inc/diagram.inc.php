@@ -18,6 +18,7 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 <script src="static/flot/jquery.flot.js"></script>
 <script src="static/flot/jquery.flot.time.js"></script>
 <script src="static/flot/jquery.flot.selection.js"></script>
+
 <div style="margin:20px;">
 <?php
 	foreach($streams as $stream) {
@@ -27,24 +28,24 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 ?>
 </div>
 <script type="text/javascript">
-// options for all graphs
-var options = { 
-		yaxis: { 
-			labelWidth: 50 
-		}, 
-		xaxis: { 
-			mode: "time", 
-			timeformat: "%y-%m-%d %H:%M",
-		}, 
-		grid: { 
-			backgroundColor: "#ffffff",
-			hoverable: true
-		}, 
-		selection: {
-			mode: "x"
-		}
-	}; 
-var data = [];
+	// options for all graphs
+	var options = { 
+			yaxis: { 
+				labelWidth: 50 
+			}, 
+			xaxis: { 
+				mode: "time", 
+				timeformat: "%y-%m-%d %H:%M",
+			}, 
+			grid: { 
+				backgroundColor: "#ffffff",
+				hoverable: true
+			}, 
+			selection: {
+				mode: "x"
+			}
+		}; 
+	var data = [];
 <?php
 	// create empty arrays for all possible datastreams
 	foreach($streams as $stream) {
@@ -60,7 +61,7 @@ var data = [];
 
 			// remove time..BETWEEN later, just for demo
 			$query_params = array($egg['eggid']);
-			$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 AND time BETWEEN '2012-11-01' AND '2012-11-02' ORDER BY time DESC LIMIT 250", $query_params);
+			$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 AND time BETWEEN '2012-11-05' AND '2012-11-07' ORDER BY time DESC LIMIT 500", $query_params);
 			while($row_ = pg_fetch_assoc($result_)) {
 				 $values[$stream][] = "[". strtotime($row_["time"])*1000 .", ".$row_[strtolower($stream)]."]";
 			}
@@ -92,13 +93,13 @@ var data = [];
 ?>
 
 
-$(".flotgraph").bind("plotselected", function (event, ranges) {
-	var datastream = $(this).attr("id");
-	$.plot($(this), data[datastream], $.extend(true, {}, options, {
-		xaxis: {
-			min: ranges.xaxis.from,
-			max: ranges.xaxis.to
-		}
-	}));
-});
+	$(".flotgraph").bind("plotselected", function (event, ranges) {
+		var datastream = $(this).attr("id");
+		$.plot($(this), data[datastream], $.extend(true, {}, options, {
+			xaxis: {
+				min: ranges.xaxis.from,
+				max: ranges.xaxis.to
+			}
+		}));
+	});
 </script>

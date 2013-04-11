@@ -16,7 +16,8 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
 
-$streams = array("co", "no2", "o3");
+$streams = array("no2", "o3");
+$chemical_weights = array("no2" => 46.01, "o3" => 48);
 
 foreach($lanuvstations as $cosmid => $identifier) {
 	$query_params = array($cosmid);
@@ -54,6 +55,7 @@ foreach($lanuvstations as $cosmid => $identifier) {
 	$cosmid: 	 unique database id for that station
 */
 function getDataSince($timestamp, $eggid, $identifier) {
+	global $chemical_weights;
 	// database date format: Y-m-d\TH:i:s
 	// http://www.lanuv.nrw.de/luft/temes/0326/VMS2.htm
 	// http://www.lanuv.nrw.de/luft/temes/0326/MSGE.htm
@@ -77,10 +79,10 @@ function getDataSince($timestamp, $eggid, $identifier) {
 			$datetime = date("Y-m-d", $timestamp)." ".$time;
 
 			$ozon = trim(utf8_decode($cols->item(3)->nodeValue));
-			if($ozon != "") { insertIntoDatabase($eggid, "o3", $ozon, $datetime); }
+			if($ozon != "") { insertIntoDatabase($eggid, "o3", microgramPerMeterToPPB($ozon, $chemical_weights["o3"]), $datetime); }
 
 			$no2 = trim(utf8_decode($cols->item(4)->nodeValue));
-			if($no2 != "") { insertIntoDatabase($eggid, "no2", $no2, $datetime); }
+			if($no2 != "") { insertIntoDatabase($eggid, "no2", microgramPerMeterToPPB($no2, $chemical_weights["no2"]), $datetime); }
 
 			echo $datetime." ".$ozon." ".$no2."<br>";
 		}
@@ -105,5 +107,11 @@ function insertIntoDatabase($eggid, $stream, $data_value, $data_datetime) {
 		return true;
 	}
 	return false;
+}
+
+function microgramPerMeterToPPB($value, $chemical_weight) {
+	$ppm = 24.25 * $value / $chemical_weight;
+	$ppb = $ppm * 1000;
+	return $ppb;
 }
 ?>
