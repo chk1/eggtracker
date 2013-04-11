@@ -21,14 +21,14 @@ Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden.</p>
 
 <?php
 
-$helper = strip_tags($_POST['helper']);
-$mail = strip_tags($_POST['helper']);
-$eintrag = strip_tags($_POST['Eintrag']);
-$name = strip_tags($_POST['name']);
-
 if(empty($_POST['name'])){
    
   if(isset($_POST['abschicken'])){ // Der abschicken button wurde gedrückt. 
+    
+    $helper = strip_tags($_POST['helper']);
+	$mail = strip_tags($_POST['helper']);
+	$eintrag = strip_tags($_POST['Eintrag']);
+	$name = strip_tags($_POST['name']);
     
     if(empty($helper) OR empty($mail) OR empty($eintrag) OR (filter_var($mail, FILTER_VALIDATE_EMAIL)) == false ) {
       print "<font color=red>Sie haben eines der Felder nicht oder falsch ausgefüllt. Prüfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</font>";
