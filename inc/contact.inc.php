@@ -5,9 +5,9 @@ $Mail = "test@eggtracker.de"; //Hier die eigene E-Mail Adresse einfügen.
 <div class="contactform">
 <h2>Eggtracker Kontakt</h2> 
 
-Bei Fragen und Anregungen benutzen Sie bitte das Kontaktformular unten. </br>
-Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden. </br></br>
-Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollst&aumlndig aus:</br></br>
+<p>Bei Fragen und Anregungen benutzen Sie bitte das Kontaktformular unten.<br>
+Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden.</p>
+<p>Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollständig aus:</p>
 
 <form action="<?php print $_SERVER['PHP_SELF']; ?>?action=contact" method="POST"> 
 <table style="width:400px;"> 
@@ -20,6 +20,11 @@ Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder volls
 </form></p> 
 
 <?php
+
+$_POST['helper'] = strip_tags($_POST['helper']);
+$_POST['Mail'] = strip_tags($_POST['helper']);
+$_POST['Eintrag'] = strip_tags($_POST['Eintrag']);
+$_POST['name'] = strip_tags($_POST['name']);
 
 if(empty($_POST['name'])){
    
@@ -34,7 +39,7 @@ if(empty($_POST['name'])){
     } 
 
     else{ 
-      $Abs_Mail = strip_tags($_POST['Mail']);  
+      $Abs_Mail = strip_tags($_POST['Mail']);
       $Abs_Name = strip_tags($_POST['Name']); 
       $Abs_Nachricht = strip_tags($_POST['Eintrag']); 
       $Betreff = $_POST['helper'].", Helpdesk ID: ".md5(uniqid(rand(), TRUE));
