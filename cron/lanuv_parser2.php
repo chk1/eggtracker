@@ -33,7 +33,7 @@ foreach($lanuvstations as $cosmid => $identifier) {
 			// if there are no rows in the database, start our data collection at November first
 			// continuus data fetching since 2012-11-01
 			echo "No entries for ".$stream." yet.<br>".PHP_EOL;
-			$day = strtotime("2011-11-01");
+			$day = strtotime("2012-11-01");
 		} else {
 			echo "Last entry in ".$stream.": ".$row_["last_entry_date"]."<br>".PHP_EOL;
 			$tmp_day = strtotime($row_["last_entry_date"]);
