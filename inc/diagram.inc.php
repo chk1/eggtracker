@@ -61,7 +61,7 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 
 			// remove time..BETWEEN later, just for demo
 			$query_params = array($egg['eggid']);
-			$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 AND time BETWEEN '2012-11-05' AND '2012-11-07' ORDER BY time DESC LIMIT 500", $query_params);
+			$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 AND validated = 'true' AND outlier = 'false' ORDER BY TIME DESC", $query_params);// AND time BETWEEN '2012-11-05' AND '2012-11-07' ORDER BY time DESC", $query_params);
 			while($row_ = pg_fetch_assoc($result_)) {
 				 $values[$stream][] = "[". strtotime($row_["time"])*1000 .", ".$row_[strtolower($stream)]."]";
 			}

@@ -22,17 +22,17 @@ while($row = pg_fetch_assoc($result)) {
 	}
 };
 
-function validateFifty($stream, $eggid, $offset = 0) {
+function validateFifty($stream, $eggid) {
 	global $dbconn;
-	if(!is_int($offset)) { return false; }
+	#if(!is_int($offset)) { return false; }
 
 	$n = 50; // number of measurements to consider
 
-	if($offset != 0) {
-		$query = 'SELECT * FROM '.$stream.' WHERE eggid = '.$eggid.' AND validated = \'false\' AND id BETWEEN \''. $offset .'\' AND \''. ($offset+50) .'\' LIMIT '.$n;
-	} else {
+#	if($offset != 0) {
+#		$query = 'SELECT * FROM '.$stream.' WHERE eggid = '.$eggid.' AND validated = \'false\' AND id BETWEEN \''. $offset .'\' AND \''. ($offset+50) .'\' LIMIT '.$n;
+#	} else {
 		$query = 'SELECT * FROM '.$stream.' WHERE eggid = '.$eggid.' AND validated = \'false\' LIMIT '.$n;
-	}
+#	}
 	$result = pg_query($dbconn, $query);
 	if(!$result) { die('SQL Error'); }
 	$num = pg_num_rows($result); // should be 50 like $n, but database might give less results depending on parameters
@@ -76,10 +76,10 @@ function validateFifty($stream, $eggid, $offset = 0) {
 		foreach($x as $id => $val) {
 			if($val < $limit_down or $val > $limit_up) {
 				echo "<b>".$val."</b> outlier<br>";
-				$query = 'UPDATE '.$stream.' SET outlier = true AND validated = true WHERE id = '.$id;
+				$query = 'UPDATE '.$stream.' SET outlier = \'true\', validated = \'true\' WHERE id = '.$id;
 			} else {
 				echo "".$val."<br>";
-				$query = 'UPDATE '.$stream.' SET outlier = false AND validated = true WHERE id = '.$id;
+				$query = 'UPDATE '.$stream.' SET outlier = \'false\', validated = \'true\' WHERE id = '.$id;
 			}
 			$result = pg_query($dbconn, $query);
 		}

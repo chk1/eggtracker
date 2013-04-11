@@ -110,6 +110,7 @@ function insertIntoDatabase($eggid, $stream, $data_value, $data_datetime) {
 }
 
 function microgramPerMeterToPPB($value, $chemical_weight) {
+	// more information: http://www.smarte.org/smarte/dynamic/resource/sn-units-of-measure.xml.pdf
 	$ppm = 24.25 * $value / $chemical_weight;
 	$ppb = $ppm * 1000;
 	return $ppb;
