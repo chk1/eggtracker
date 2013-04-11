@@ -21,18 +21,18 @@ Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden.</p>
 
 <?php
 
-$helper = strip_tags($_POST['helper']);
-$mail = strip_tags($_POST['helper']);
-$eintrag = strip_tags($_POST['Eintrag']);
-$name = strip_tags($_POST['name']);
-
 if(empty($_POST['name'])){
    
   if(isset($_POST['abschicken'])){ // Der abschicken button wurde gedrückt. 
     
+    $helper = strip_tags($_POST['helper']);
+	$mail = strip_tags($_POST['Mail']);
+	$eintrag = strip_tags($_POST['Eintrag']);
+	
+    
     if(empty($helper) OR empty($mail) OR empty($eintrag) OR (filter_var($mail, FILTER_VALIDATE_EMAIL)) == false ) {
       print "<font color=red>Sie haben eines der Felder nicht oder falsch ausgefüllt. Prüfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</font>";
-      print "</br>Sie haben folgende Daten angegeben: </br>
+      print "</br></br>Sie haben folgende Daten angegeben: </br>
       Name: ".$helper."</br>
       Email: ".$mail."</br>
       Nachricht: ".$eintrag;
@@ -51,7 +51,7 @@ if(empty($_POST['name'])){
      if($senden){ // Wenn die Mail versandt wurde, dann diesen Text ausgeben: 
         print "Ihre Mail wurde <b>erfolgreich</b> an das Eggtracker-Team versandt. </br></br>
         Der Vorgang wird unter folgendem Betreff bearbeitet: \"".$Betreff."\"</br>
-        Bitte speichern Sie diese ID f&uumlr zuk&uumlnftigen Kontakt in Bezug auf diese Email.</br>
+        Bitte speichern Sie diese ID für zukünftigen Kontakt in Bezug auf diese Email.</br>
         </br>
         
 		VIELEN DANK!
@@ -60,8 +60,7 @@ if(empty($_POST['name'])){
   
       else { //Sonst diesen : 
         print "Ihre Mail konnte leider nicht an das Eggtracker-Team versandt werden. 
- Probieren Sie es sp&auml;ter noch einmal
-"; 
+			 Probieren Sie es später noch einmal"; 
       } 
        
     } 
