@@ -1,5 +1,6 @@
 <p>
-<a href="./?action=">Back to Map view</a><br><br>
-<a href="./?action=diagram">Diagrams</a><br><br>
-<a href="./?action=about">About this page</a><br><br>
+<a href="./?action=">Zurück zur Karte</a><br><br>
+<a href="./?action=diagram">Diagramme</a><br><br>
+<a href="./?action=list">Ei Liste</a><br><br>
+<a href="./?action=about">Über diese Seite</a><br><br>
 </p>

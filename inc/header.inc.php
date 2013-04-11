@@ -21,7 +21,7 @@ include("config.inc.php");
 <div id="header">
 	
 	<a href="./"><img src="img/logo_neu.png" alt="Egg Tracker Logo" title="Egg Tracker" id="logo"></a>
-	<?php if($action == ""): ?><a href="?action=mobile_home" id="mobmore">&nbsp;&nbsp;&rarr; Menü</a> <?php endif; ?>
+	<a href="?action=mobile_home" id="mobmore">&nbsp;&nbsp;&rarr; Menü</a>
 	<div id="menu">
 	<ul id="menulist">
 	<?php
