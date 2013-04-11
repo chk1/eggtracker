@@ -135,6 +135,7 @@ div#footer p {
 	position:absolute;
 	right: 10px;
 	font-size: 0.75em;
+	text-shadow: 2px 2px 2px #888; 
 }
 
 /*
