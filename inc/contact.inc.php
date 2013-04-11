@@ -14,35 +14,35 @@ Wir werden uns dann so schnell wie m&oumlglich bei Ihnen melden.</p>
 <tr><td>Name:</td><td><input type="text" name="helper"></td> <td style=display:none>Name:</td><td style=display:none><input type="text" name="Name"</td></tr>
 
 <tr><td>E-Mail:</td><td><input type="text" name="Mail"></td></tr> 
-<tr><td >Ihre Nachricht:</td><td colspan="3"><textarea name="Eintrag" cols="70" rows="20"></textarea></td></tr> 
-<tr><td><input type="submit" value="abschicken" name="abschicken"></td><td><input type="reset" value="zur&uuml;cksetzen" name="reset"></td></tr> 
+<tr><td>Ihre Nachricht:</td><td colspan="3"><textarea name="Eintrag" cols="70" rows="20"></textarea></td></tr> 
+<tr><td><input type="submit" value="abschicken" name="abschicken"></td><td><input type="reset" value="zurücksetzen" name="reset"></td></tr> 
 </table> 
 </form></p> 
 
 <?php
 
-$_POST['helper'] = strip_tags($_POST['helper']);
-$_POST['Mail'] = strip_tags($_POST['helper']);
-$_POST['Eintrag'] = strip_tags($_POST['Eintrag']);
-$_POST['name'] = strip_tags($_POST['name']);
+$helper = strip_tags($_POST['helper']);
+$mail = strip_tags($_POST['helper']);
+$eintrag = strip_tags($_POST['Eintrag']);
+$name = strip_tags($_POST['name']);
 
 if(empty($_POST['name'])){
    
   if(isset($_POST['abschicken'])){ // Der abschicken button wurde gedrückt. 
     
-    if(empty($_POST['helper']) OR empty($_POST['Mail']) OR empty($_POST['Eintrag']) OR (filter_var($_POST['Mail'], FILTER_VALIDATE_EMAIL)) == false ) {
-      print "<font color=red>Sie haben eines der Felder nicht oder falsch ausgef&uumlllt. Pr&uumlfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</font>";
+    if(empty($helper) OR empty($mail) OR empty($eintrag) OR (filter_var($mail, FILTER_VALIDATE_EMAIL)) == false ) {
+      print "<font color=red>Sie haben eines der Felder nicht oder falsch ausgefüllt. Prüfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</font>";
       print "</br>Sie haben folgende Daten angegeben: </br>
-      Name: ".$_POST['helper']."</br>
-      Email: ".$_POST['Mail']."</br>
-      Nachricht: ".$_POST['Eintrag'];
+      Name: ".$helper."</br>
+      Email: ".$mail."</br>
+      Nachricht: ".$eintrag;
     } 
 
     else{ 
-      $Abs_Mail = strip_tags($_POST['Mail']);
-      $Abs_Name = strip_tags($_POST['Name']); 
-      $Abs_Nachricht = strip_tags($_POST['Eintrag']); 
-      $Betreff = $_POST['helper'].", Helpdesk ID: ".md5(uniqid(rand(), TRUE));
+      $Abs_Mail = $mail;
+      $Abs_Name = $name; 
+      $Abs_Nachricht = $eintrag; 
+      $Betreff = $helper.", Helpdesk ID: ".md5(uniqid(rand(), TRUE));
       $Nachricht = "Neue Nachricht aus dem Eggtrackerformular\n\n Absender: $Abs_Name \n Email: $Abs_Mail\n _______\n$Abs_Nachricht\n_______\n"; 
   
       //Nun kommt die Mail funktion: 
