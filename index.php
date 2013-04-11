@@ -18,7 +18,6 @@ if(is_file("inc/config.inc.php")) {
 	die("It appears that you do not have set up your config file yet. Please check the installation manual (INSTALL).");
 }
 
-//test
 /*
 	content:
 

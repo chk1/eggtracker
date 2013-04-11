@@ -56,6 +56,7 @@ div#header #menu ul li {
 	display:inline-block;
 	padding-left: 25px;
 	padding-right: 25px;
+	text-shadow: 2px 2px 2px #888; 
 }
 
 div#header #menu a { 
