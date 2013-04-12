@@ -13,6 +13,14 @@ include("config.inc.php");
 	<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="static/css/style-ie.css" />
 	<![endif]-->
+	<script type="text/javascript">
+	// hide address bar on some mobile browsers
+	window.addEventListener("load",function() {
+		setTimeout(function(){
+			window.scrollTo(0, 1);
+		}, 0);
+	});
+	</script>
 </head>
 <body>
 

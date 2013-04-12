@@ -185,6 +185,7 @@ div#footer p {
 	}
 	div#header #mobmore {
 		color: #fff;
+		text-decoration: none;
 	}
 	div#header #menu {
 		display: none;

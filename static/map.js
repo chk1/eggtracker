@@ -1,17 +1,3 @@
-// http://openlayers.org/dev/examples/mobile.html
-// Get rid of address bar on iphone/ipod
-var fixSize = function() {
-	window.scrollTo(0,0);
-	document.body.style.height = '100%';
-	if (!(/(iphone|ipod)/.test(navigator.userAgent.toLowerCase()))) {
-		if (document.body.parentNode) {
-			document.body.parentNode.style.height = '100%';
-		}
-	}
-};
-setTimeout(fixSize, 700);
-setTimeout(fixSize, 1500);
-
 function onSelectFeatureFunction(feature, evt) {
 	var str = "<br><table>";
 	if(feature.attributes['cosmid'] < 1000000){
