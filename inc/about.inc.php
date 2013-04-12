@@ -16,11 +16,11 @@ Ein <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=export_form
 <table style="width:100%">
 <tr>
 <td style="text-align:center">
-<img src="img/logo_ifgi.png" alt="ifgi" class="poweredby logo">
-<img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo">
-<img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo">
-<img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo">
-<img src="img/logo_fff.png" alt="FamFamFam" class="poweredby logo">
+<a href="https://ifgi.uni-muenster.de/"><img src="img/logo_ifgi.png" alt="ifgi" class="poweredby logo">
+<a href="http://www.airqualityegg.com"><img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo">
+<a href="http://www.cosm.com"><img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo">
+<a href="http://www.openlayers.org/"><img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo">
+<a href="http://www.famfamfam.com/"><img src="img/logo_fff.png" alt="FamFamFam" class="poweredby logo">
 </td>
 </tr>
 </table>
