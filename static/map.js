@@ -1,79 +1,123 @@
-<?php
-// Grundlegende Einstellungen: 
-$Mail = "test@eggtracker.de"; //Hier die eigene E-Mail Adresse einfügen. 
-?> 
-<div class="contactform">
-<h2>Eggtracker Kontakt</h2> 
+// http://openlayers.org/dev/examples/mobile.html
+// Get rid of address bar on iphone/ipod
+var fixSize = function() {
+	window.scrollTo(0,0);
+	document.body.style.height = '100%';
+	if (!(/(iphone|ipod)/.test(navigator.userAgent.toLowerCase()))) {
+		if (document.body.parentNode) {
+			document.body.parentNode.style.height = '100%';
+		}
+	}
+};
+setTimeout(fixSize, 700);
+setTimeout(fixSize, 1500);
 
-<p align="justify">Bei Fragen und Anregungen benutzen Sie bitte das Kontaktformular unten.<br>
-Wir werden uns dann so schnell wie möglich bei Ihnen melden.</p>
-<p align="justify">Damit der Kontakt hergestellt werden kann f&uumlllen Sie bitte alle Felder vollständig aus:</p>
+function onSelectFeatureFunction(feature, evt) {
+	var str = "<br><table>";
+	var str = str + "<tr><td class='l'>Cosm ID</td><td class='r'>"+ feature.attributes["cosmid"] +"</td></tr>";
+	for(var attr in feature.attributes) {
+		if(attr != "eggid"){
+			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + feature.attributes[attr] + "</td></tr>";
+		}
+	}
+	str = str + "</table>";
+	popup = new OpenLayers.Popup(feature.id,
+		feature.geometry.getBounds().getCenterLonLat(),
+		new OpenLayers.Size(200,160),
+		str,
+		true);
+	map.addPopup(popup);
+	map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
+}
 
-<form action="<?php print $_SERVER['PHP_SELF']; ?>?action=contact" method="POST"> 
+function onUnselectFeatureFunction(feature) {
+	return;
+}
 
-Name: <input type="text" name="helper">
-<span style=display:none>Name:</span> <span style=display:none>input type="text" name="Name"</span><br>
+var egg_layer = new OpenLayers.Layer.Vector(
+	"<img src='./img/eggicon.png' class='legendicon'> Air Quality Eggs",
+	{
+		styleMap: new OpenLayers.StyleMap({
+			externalGraphic: './img/eggicon.png',
+			pointRadius: 10
+		})
+	}
+);
 
-E-Mail:<input type="text" name="Mail"><br><br>
-Ihre Nachricht:<br>
-<textarea name="Eintrag" cols="40" rows="20"></textarea><br>
-<input type="submit" value="abschicken" name="abschicken">
-<input type="reset" value="zurücksetzen" name="reset"><br>
-</form>
-</p>
-<?php
+var lanuv_layer = new OpenLayers.Layer.Vector(
+	"<img src='./img/lanuvstation.png' class='legendicon'> Lanuv Stations",
+	{
+		styleMap: new OpenLayers.StyleMap({
+			externalGraphic: './img/lanuvstation.png',
+			pointRadius: 10
+		})
+	}
+);
 
-if(empty($_POST['name'])){
-   
-  if(isset($_POST['abschicken'])){ // Der abschicken button wurde gedrückt. 
-    
-    $helper = strip_tags($_POST['helper']);
-	$mail = strip_tags($_POST['Mail']);
-	$eintrag = strip_tags($_POST['Eintrag']);
-	
-    
-    if(empty($helper) OR empty($mail) OR empty($eintrag) OR (filter_var($mail, FILTER_VALIDATE_EMAIL)) == false ) {
-      print "<span style=color:red; align=\"justify\">Sie haben eines der Felder nicht oder falsch ausgefüllt. Prüfen Sie beispielsweise, ob sie Ihre Emailadresse korrekt eingegeben haben.\n</span>";
-      print "</br></br>Sie haben folgende Daten angegeben: </br>
-      Name: ".$helper."</br>
-      Email: ".$mail."</br>
-      Nachricht: ".$eintrag;
-    } 
+/*
+	Create a map object with the following properties:
+		- allow for mobile/touch navigation
+		- OSM base map
+		- lanuv_layer + egg_layer predefined
+		- no home coordinate (done on map page)
+*/
+var map = new OpenLayers.Map({
+	div: "map",
+	theme: null,
+	controls: [
+		new OpenLayers.Control.Attribution(),
+		new OpenLayers.Control.TouchNavigation({
+			dragPanOptions: {
+				enableKinetic: true
+			}
+		}),
+		new OpenLayers.Control.Geolocate,
+		new OpenLayers.Control.Zoom()
+		// new OpenLayers.Control.LayerSwitcher()
+	],
+	layers: [
+		new OpenLayers.Layer.OSM("OpenStreetMap", null, {
+			transitionEffect: 'resize'
+		}),
+		lanuv_layer,
+		egg_layer
+	],
+	zoom: 12
+});
 
-    else{ 
-      $Abs_Mail = $mail;
-      $Abs_Name = $name; 
-      $Abs_Nachricht = $eintrag; 
-      $Betreff = $helper.", Helpdesk ID: ".md5(uniqid(rand(), TRUE));
-      $Nachricht = "Neue Nachricht aus dem Eggtrackerformular\n\n Absender: $Abs_Name \n Email: $Abs_Mail\n _______\n$Abs_Nachricht\n_______\n"; 
-  
-      //Nun kommt die Mail funktion: 
-      $senden = mail($Mail, $Betreff, $Nachricht,"From: $Abs_Mail"); 
-  
-     if($senden){ // Wenn die Mail versandt wurde, dann diesen Text ausgeben: 
-        print "Ihre Mail wurde <b>erfolgreich</b> an das Eggtracker-Team versandt. </br></br>
-        Der Vorgang wird unter folgendem Betreff bearbeitet: \"".$Betreff."\"</br>
-        Bitte speichern Sie diese ID für zukünftigen Kontakt in Bezug auf diese Email.</br>
-        </br>
-        
-		VIELEN DANK!
-"; 
-      } 
-  
-      else { //Sonst diesen : 
-        print "Ihre Mail konnte leider nicht an das Eggtracker-Team versandt werden. 
-			 Probieren Sie es später noch einmal"; 
-      } 
-       
-    } 
-  } 
-   
-  else{ //Der abschicken button wurde noch nicht gedrückt 
-    print "Um Ihre Nachricht zu senden dr&uumlcken Sie bitte den \"abschicken\" Button<br>"; 
-  } 
-  }
-else{
-	 echo "stfu"; // botspam
-	};
-?> 
-</div>
+var switcherControl = new OpenLayers.Control.LayerSwitcher();
+map.addControl(switcherControl);
+switcherControl.maximizeControl();
+
+/*
+	Query both egg_layer and lanuv_layer for eggid attribute, then zoom
+*/
+function zoomToEggId(id) {
+	var features = egg_layer.getFeaturesByAttribute("eggid", id); // returns an array
+	if(features[0] == null) {
+		var features = lanuv_layer.getFeaturesByAttribute("eggid", id);
+		if(features[0] == null) {
+			return;
+		}
+	}
+	onSelectFeatureFunction(features[0], null);
+	map.setCenter(null, 15);
+}
+
+/*
+	Replace OpenLayers.SelectionControl in map object with the following lines,
+	because it doesn't work with multiple layers
+*/
+var selectControl = new OpenLayers.Control.SelectFeature([egg_layer, lanuv_layer]);
+map.addControl(selectControl);
+selectControl.activate();
+
+egg_layer.events.on({
+	"featureselected": function(e) { onSelectFeatureFunction(e.feature) },
+	"featureunselected": function(e) { onUnselectFeatureFunction(e.feature) }
+});
+
+lanuv_layer.events.on({
+	"featureselected": function(e) { onSelectFeatureFunction(e.feature) },
+	"featureunselected": function(e) { onUnselectFeatureFunction(e.feature) }
+});
