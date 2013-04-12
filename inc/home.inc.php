@@ -55,6 +55,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"])) $id = $_GET["id"];
 				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
 			}
 			$attributes[] .= 'eggid: '. $row["eggid"] .'';
+			$attributes[] .= 'cosmid: '. $row["cosmid"] .'';
 
 			$attributestring = implode(", ", $attributes);
 			if($row["cosmid"] >= 1000000) {
