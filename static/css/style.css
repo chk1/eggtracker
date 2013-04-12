@@ -117,6 +117,25 @@ img.legendicon {
 	height: 16px;
 }
 
+div.contactform form label {
+	float: left;
+	width: 150px;
+	clear:both;
+}
+
+div.contactform form input {
+	width: 250px;
+}
+
+div.contactform form input#submit {
+	width: 150px;
+}
+
+div.contactform form textarea {
+	width: 250px;
+	height: 300px;
+}
+
 /*
 	footer
 */
