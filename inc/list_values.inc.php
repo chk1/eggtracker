@@ -66,8 +66,7 @@ $result = pg_query($dbconn, $query);
 
 #Fehlerhafte Abfrage
 if (!$result) {
-  echo "Fehler " . $query . "<br />";
-  echo pg_last_error();
+ echo "Fehler!!! Keine Daten zur Auswahl angegeben";
   exit();
 }
 #Abfrage ob die Tabelle leer ist
@@ -84,7 +83,6 @@ $leer = pg_num_rows($result);
 echo "<table border>";
 while ($row = pg_fetch_row($result)) {
   echo "<tr>";
- // echo $was;
   switch ($was) {
     case "id";
     case "time";
