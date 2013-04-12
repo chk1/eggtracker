@@ -182,6 +182,7 @@ div#footer p {
 	}
 	div#header a {
 		font-size: 1.5em;
+		text-decoration: none;
 	}
 	div#header #mobmore {
 		color: #fff;
