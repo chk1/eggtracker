@@ -64,9 +64,11 @@ $tabelle.= '</table><td><p style="listtext" >In dieser Tabelle werden alle benut
 
 echo "</br>";
 echo "</br>";
-echo "</br>";
 
-echo "<h3>LANUV Messstationen:</h3>".$tabelle."</div>";
+echo "<h3>LANUV Messstationen:</h3>".$tabelle;
+
+echo "Wenn Sie Daten zu den einzelnen Messstationen herunterladen möchten,
+nutzen Sie bitte unser <a href=\"http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=export_form\">Downloadformular</a>.</div>";
 pg_close($dbconn);
 ?>
 </p>
