@@ -3,7 +3,7 @@ $action = "";
 if(isset($_GET["action"])) $action = $_GET["action"];
 
 $menu_entries = array(""=>"Karte", 
-	"list" => "Egg Liste",
+	"list" => "Ei Liste",
 	"diagram" => "Diagramm",
 	"more" => "Mehr",
 	"about" => "Info",
