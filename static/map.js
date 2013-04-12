@@ -16,14 +16,14 @@ function onSelectFeatureFunction(feature, evt) {
 	var str = "<br><table>";
 	var str = str + "<tr><td class='l'>Cosm ID</td><td class='r'>"+ feature.attributes["cosmid"] +"</td></tr>";
 	for(var attr in feature.attributes) {
-		if(attr != "eggid"){
+		if(attr != "eggid" && attr != "cosmid"){
 			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + feature.attributes[attr] + "</td></tr>";
 		}
 	}
 	str = str + "</table>";
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(200,160),
+		new OpenLayers.Size(200,180),
 		str,
 		true);
 	map.addPopup(popup);
