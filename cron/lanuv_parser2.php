@@ -22,7 +22,8 @@ $chemical_weights = array("no2" => 46.01, "o3" => 48);
 foreach($lanuvstations as $cosmid => $identifier) {
 	$query_params = array($cosmid);
 	$result = pg_query_params($dbconn, "SELECT eggid FROM eggs WHERE cosmid=$1;", $query_params);
-	$eggid = pg_fetch_assoc($result)["eggid"];
+	$fetchresult = pg_fetch_assoc($result);
+	$eggid = $fetchresult["eggid"];
 
 	foreach($streams as $stream) {
 		$query_params = array($eggid);
