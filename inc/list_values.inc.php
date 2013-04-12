@@ -26,7 +26,7 @@ Foreach ($res as $k => $V) {
 
 //test if Egg was chosen
 if (empty($_POST["CosmID"])){
-	print "Bitte w&aumlhlen Sie ein Ei aus, von dem Sie die Daten ansehen möchten.";
+	print "Bitte w&aumlhlen Sie ein Ei aus, von dem Sie die Daten ansehen m&oumlchten.";
 	die();}
 
 //test if measuring parameter was chosen
