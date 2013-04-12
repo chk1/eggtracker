@@ -29,7 +29,7 @@ $tabelle.= '</table><p class="listtext">In dieser Tabelle werden alle Air Qualit
 						 die in einem Radius von 25km um das Stadtzentrum
 						 von Münster liegen und Luftdaten sammeln. Diese
 						 Daten werden dann von unserem System verarbeitet</table>';
-echo "<div class=\"listeggs\"><h3>Air Quality Eggs:</h3>".$tabelle;
+echo "<div class=\"listeggs\"><h3 style=\"margin-bottom:5px\">Air Quality Eggs:</h3>".$tabelle;
 
 $tabelle = "<table>
 	<tr>
@@ -65,7 +65,7 @@ $tabelle.= '</table><td><p style="listtext" >In dieser Tabelle werden alle benut
 echo "</br>";
 echo "</br>";
 
-echo "<h3>LANUV Messstationen:</h3>".$tabelle;
+echo "<h3 style=\"margin-bottom:5px\">LANUV Messstationen:</h3>".$tabelle;
 
 echo "Wenn Sie Daten zu den einzelnen Messstationen herunterladen möchten,
 nutzen Sie bitte unser <a href=\"http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=export_form\">Downloadformular</a>.</div>";

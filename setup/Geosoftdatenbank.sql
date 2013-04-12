@@ -9,6 +9,8 @@ create table eggs(
 	cosmid int not null unique,
 	eggid serial,
 	active boolean default true,
+	about text,
+	link text,
 	primary key (eggid)
 	);
 	
