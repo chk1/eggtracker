@@ -29,7 +29,8 @@ if(isset($_POST['submit'])) { // mail form was submitted
 		$sendmail = @mail($conf["email"], $subject, $mailbody, "From: $mail"); 
 
 		if($sendmail){ // email was sent successfully
-			echo 'Ihre Mail wurde erfolgreich an das Eggtracker-Team versandt. </br></br>
+			$success = true;
+			echo '<span style="color:green;text-align:justify;">Ihre Mail wurde erfolgreich an das Eggtracker-Team versandt.</span></br></br>
 					Der Vorgang wird unter folgendem Betreff bearbeitet: "'. $subject .'"</br>
 					Bitte speichern Sie diese ID für zukünftigen Kontakt in Bezug auf diese Email.</br>
 					</br>
