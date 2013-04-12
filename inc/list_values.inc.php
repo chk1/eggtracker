@@ -24,6 +24,31 @@ Foreach ($res as $k => $V) {
 	$res2 [$k] = $V ['cosmid'];
 }
 
+//test if Egg was chosen
+if (empty($_POST["CosmID"])){
+	print "Bitte w&aumlhlen Sie ein Ei aus, von dem Sie Daten exportieren m&oumlchten.";
+	die();}
+
+//test if measuring parameter was chosen
+if(empty($_POST["Parameter"])){
+	print "Bitte w&aumlhlen Sie einen Messparameter aus.";
+	die();}
+
+//test if datapoints were chosen
+if(empty($_POST["Wert"]["id"]) AND empty($_POST["Wert"]["time"]) AND empty($_POST["Wert"]["value"]) AND empty($_POST["Wert"]["validated"]) AND empty($_POST["Wert"]["outlier"])){
+	print "Bitte w&aumlhlen Sie mindestens einen der Datenpunkte aus.";
+	die();}
+
+//test if startdate was chosen
+if($_POST["von"] =="Von (YYYY-MM-TT)"){
+	print "Bitte w&aumlhlen Sie einen Anfangszeitpunkt aus.";
+	die();}
+
+//test if enddate was chosen	
+if($_POST["bis"] =="Bis (YYYY-MM-TT) "){
+	print "Bitte w&aumlhlen Sie einen Endzeitpunkt aus.";
+	die();}
+
 
 if (in_array ( $_POST["CosmID"], $res2) == true){
 	$ei = $_POST["CosmID"];
