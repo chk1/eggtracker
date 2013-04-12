@@ -14,18 +14,33 @@ setTimeout(fixSize, 1500);
 
 function onSelectFeatureFunction(feature, evt) {
 	var str = "<br><table>";
-	var str = str + "<tr><td class='l'>Cosm ID</td><td class='r'>"+ feature.attributes["cosmid"] +"</td></tr>";
+	if(feature.attributes['cosmid'] < 1000000){
+	var str = str + '<tr> <td class="l">Cosm ID</td> <td class="r"> <a href=\"http://www.cosm.com/feeds/'+ feature.attributes["cosmid"] + '\">' + feature.attributes["cosmid"] + '</a></td></tr>';
+	}
+	else var str = str + '<tr> <td class="l">Cosm ID</td> <td class="r"> <a href=\"http://www.cosm.com/feeds/'+ feature.attributes["cosmid"] + '\">' + feature.attributes["cosmid"] + '</a></td></tr>';
 	for(var attr in feature.attributes) {
 		if(attr != "eggid" && attr != "cosmid"){
 			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + feature.attributes[attr] + "</td></tr>";
 		}
+		
+		
+		
 	}
 	str = str + "</table>";
+	
+	if(feature.attributes['cosmid'] < 1000000){
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(200,180),
+		new OpenLayers.Size(200,170),
 		str,
 		true);
+		}
+	else popup = new OpenLayers.Popup(feature.id,
+		feature.geometry.getBounds().getCenterLonLat(),
+		new OpenLayers.Size(200,145),
+		str,
+		true);
+		
 	map.addPopup(popup);
 	map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
 }

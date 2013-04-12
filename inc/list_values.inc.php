@@ -26,7 +26,7 @@ Foreach ($res as $k => $V) {
 
 //test if Egg was chosen
 if (empty($_POST["CosmID"])){
-	print "Bitte w&aumlhlen Sie ein Ei aus, von dem Sie Daten exportieren m&oumlchten.";
+	print "Bitte w&aumlhlen Sie ein Ei aus, von dem Sie die Daten ansehen m&oumlchten.";
 	die();}
 
 //test if measuring parameter was chosen
@@ -97,10 +97,10 @@ if (!$result) {
 #Abfrage ob die Tabelle leer ist
 $leer = pg_num_rows($result);
  if ($leer >0){
-	echo "<strong>$leer total values for $wo from EggID $ei</strong>";
+	echo "<strong>$leer Werte f&uumlr $wo von EggID $ei</strong>";
  }
  else{
-	 echo "<strong>No values for $wo from EggID $ei</strong>";
+	 echo "<strong>Keine Werte f&uumlr $wo von EggID $ei</strong>";
  exit();
  }
 
@@ -166,6 +166,5 @@ while ($row = pg_fetch_row($result)) {
 echo "</tr>";
   }
 }
-//echo "Keine weiteren Werte";
 echo "</table>";
 ?>
