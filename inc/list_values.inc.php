@@ -123,64 +123,80 @@ $tabelle .= "</tr>";
 echo $tabelle;
 
 while ($row = pg_fetch_row($result)) {
+
   echo "<tr>";
   switch ($was) {
     case "id";
-    case "time";
     case "$wo";
 	case "validated";
     case "outlier";
     	echo "<td>", "$row[0]", "</td>";
-	break;
-    
-	case "id, time";
-	case "id, validated";
-	case "id, outlier";
-	case "id, $wo"; 
-	case "time, $wo";
-	case "time, validated";
-	case "time, outlier";
-	case "$wo, outlier";
-	case "$wo, validated";
-		echo "<td>", "$row[0]", "</td>";
-		echo "<td>", "$row[1]", "</td>";
-		break;
+    	break;
+    case "time";
+    	echo "<td>".date("Y-m-d H:i:s", strtotime($row[0]))."</td>";
+    	break;
 	
 	#10 Möglichkeiten
 	case "id, time";
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>".date("Y-m-d H:i:s", strtotime($row[1]))."</td>";
+    	break;
 	case "id, validated";
 	case "id, outlier";
 	case "id, $wo"; 
 	case "time, $wo";
 	case "time, validated";
 	case "time, outlier";
+		echo "<td>".date("Y-m-d H:i:s", strtotime($row[0]))."</td>";
+		echo "<td>", "$row[1]", "</td>";
+		break;
 	case "$wo, outlier";
 	case "$wo, validated";
 	case "validated, outlier";
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		break;
+		
 	#10 Möglichkeiten
 	case "id, time, $wo";
 	case "id, time, validated";
 	case "id, time, outlier";
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>".date("Y-m-d H:i:s", strtotime($row[1]))."</td>";
+		echo "<td>", "$row[2]", "</td>";
+    	break;
+    case "time, $wo, validated";
+	case "time, $wo, outlier";
+	case "time, validated, outlier";
+		echo "<td>".date("Y-m-d H:i:s", strtotime($row[0]))."</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		break;
 	case "id, $wo, validated";
-	case "id, $wo, outlier";
 	case "id, validated, outlier";
 	case "id, $wo, outlier";	
-	case "time, $wo, validated";
-	case "time, $wo, outlier";
 	case "$wo, validated, outlier";  
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		break;
+		
 	#5 Möglichkeiten	
 	case "id, time, $wo, validated"; 
 	case "id, time, $wo, outlier";
-	case "id, time, validated, outlier"; 
+	case "id, time, validated, outlier";
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>".date("Y-m-d H:i:s", strtotime($row[1]))."</td>";
+		echo "<td>", "$row[2]", "</td>";
+		echo "<td>", "$row[3]", "</td>";
+		break;
+	case "time, $wo, validated, outlier";
+		echo "<td>".date("Y-m-d H:i:s", strtotime($row[0]))."</td>";
+		echo "<td>", "$row[1]", "</td>";
+		echo "<td>", "$row[2]", "</td>";
+		echo "<td>", "$row[3]", "</td>";
+		break;
 	case "id, $wo, validated, outlier";
-	case "time, $wo, validated, outlier";		
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
@@ -189,7 +205,7 @@ while ($row = pg_fetch_row($result)) {
 	
 	case "id, time, $wo, validated, outlier"; 		
 		echo "<td>", "$row[0]", "</td>";
-		echo "<td>", "$row[1]", "</td>";
+		echo "<td>".date("Y-m-d H:i:s", strtotime($row[1]))."</td>";
 		echo "<td>", "$row[2]", "</td>";
 		echo "<td>", "$row[3]", "</td>";
 		echo "<td>", "$row[4]", "</td>";
