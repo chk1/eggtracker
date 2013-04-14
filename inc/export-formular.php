@@ -59,6 +59,9 @@ print '<p>
             Ausreißer?</div></th>
           </tr>
           <tr>
+        	<td><br></td>
+          </tr>
+          <tr>
             <td>Wählen Sie den Zeitraum aus.</td>
             <td>Datenformat</td>
           </tr>
@@ -67,6 +70,7 @@ print '<p>
               <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)">
               <br>
               <input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) ">
+              <br />
               <br />
             </td>
             <td><div align="left">
