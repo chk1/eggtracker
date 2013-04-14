@@ -1,4 +1,3 @@
-<br>
 <div class="tabledownload" >
 <h2>Rohdatenzugriff</h2>
 <table>
