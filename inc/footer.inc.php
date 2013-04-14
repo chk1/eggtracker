@@ -3,12 +3,12 @@
 
 <div id="footer">
 	<p>Powered by: 
-		<b>ifgi</b> - 
-		<b>air quality egg</b> - 
-		<b>cosm</b> - 
-		<b>openlayers</b> - 
-		<b>osm</b> - 
-		<b>github</b>
+		<a href="https://ifgi.uni-muenster.de/"><b>ifgi</b></a> - 
+		<a href="http://airqualityegg.com/"<b>air quality egg</b></a> - 
+		<a href="http://www.cosm.com/"<b>cosm</b></a> -  
+		<a href="http://www.openlayers.org/"><b>openlayers</b></a> - 
+		<a href="http://www.openlayers.de/"><b>osm</b></a> - 
+		<a href="http://www.github.com/"<b>github</b></a>
 	</p>
 </div>
 

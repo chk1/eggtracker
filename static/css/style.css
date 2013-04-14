@@ -15,8 +15,8 @@ body {
 }
 
 a { 
-	color:#555;
-	text-decoration: none;
+	color:#6E6E6E;
+	text-decoration: underline;
 }
 
 a:hover { 
@@ -117,8 +117,9 @@ div.abouttext, div.tabledownload, div.contactform, div.listeggs, div.listvalues 
 div.listvalues table{
 	border-collapse:collapse;
 }
-div.listvalues td, div.listvalues th{
-	border:1px solid #000;
+div.listvalues td{
+	border:1px solid #555;
+	padding:3px;
 }
 div.listvalues th{
 	border:2px solid #000;
@@ -169,11 +170,20 @@ div#footer {
 	display: table-row;
 }
 
-div#footer p {
+div#footer p{
 	position:absolute;
 	right: 10px;
 	font-size: 0.75em;
 	text-shadow: 2px 2px 2px #888; 
+}
+div#footer a{
+	color: #fff;
+	text-decoration: none;
+}
+
+div#footer a:hover { 
+	color:#555;
+	text-decoration: underline;
 }
 
 /*
@@ -347,7 +357,3 @@ div.baseLbl, div.baseLayersDiv, div.dataLbl {
 .ui-timepicker-rtl{ direction: rtl; }
 .ui-timepicker-rtl dl { text-align: right; }
 .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
-
-#ui-datepicker-div {
-	font-size: 0.8em;
-}

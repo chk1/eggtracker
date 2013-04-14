@@ -7,7 +7,7 @@ function createDropDown() {
 						" dbname=". $conf["db"]["db"] .
 						" user=". $conf["db"]["user"] .
 						" password=". $conf["db"]["pass"]);
-	$query = 'SELECT cosmid	FROM eggs';
+	$query = 'SELECT cosmid	FROM eggs WHERE active = true ';
 	$result = pg_query($dbconn, $query);
 	
 #DropDownMenue fuer die Eier und Lanuv Daten
