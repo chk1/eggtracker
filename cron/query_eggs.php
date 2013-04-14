@@ -34,7 +34,7 @@ function newEggs() {
 	// find eggs around 51.95N 7.63E with radius 25 kilometers
 	$params2 = "?lat=". urlencode($conf["location"]["lat"]) ."&lon=". urlencode($conf["location"]["lon"]) ."&distance=25.0&distance_units=kms&q=aqe";
 
-	if(!$result = pg_prepare($dbconn, 'egginsert', 'INSERT INTO eggs (cosmid, geom) VALUES ($1, ST_GeomFromText($2, 4326))'))
+	if(!$result = pg_prepare($dbconn, 'egginsert', 'INSERT INTO eggs (cosmid, geom, about, link) VALUES ($1, ST_GeomFromText($2, 4326), $3, $4)'))
 		echo "Prepared statement failed, please check database structure.<br>";
 
 	$f = @file_get_contents("http://api.cosm.com/v2/feeds/".$params2);
@@ -46,10 +46,9 @@ function newEggs() {
 		if(pg_num_rows($duplicate_result) >= 1) {
 			echo "Cosm id ".$egg["id"]." ignored, already in database<br>";
 		} else {
-
 			// insert new eggs into database
 			$point = "POINT(".$egg["location"]["lon"]." ".$egg["location"]["lat"].")";
-			if(!$result = @pg_execute($dbconn, 'egginsert', array($egg["id"], $point))) {
+			if(!$result = @pg_execute($dbconn, 'egginsert', array($egg["id"], $point, $egg["title"], "https://cosm.com/feeds/".$egg["id"]))) {
 				$error = pg_last_error();
 				echo $error."<br>";
 			} else {

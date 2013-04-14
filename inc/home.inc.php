@@ -40,7 +40,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"])) $id = $_GET["id"];
 							" dbname=". $conf["db"]["db"] .
 							" user=". $conf["db"]["user"] .
 							" password=". $conf["db"]["pass"]);
-		$result = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x FROM eggs WHERE active = true');
+		$result = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x, link, about FROM eggs WHERE active = true');
 		if(!$result) { die('SQL Error'); }
 		while($row = pg_fetch_assoc($result)) {
 			echo "\t"."var point = new OpenLayers.Geometry.Point(".$row['x'].", ".$row['y'].");".PHP_EOL;
@@ -56,6 +56,8 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"])) $id = $_GET["id"];
 			}
 			$attributes[] .= 'eggid: '. $row["eggid"] .'';
 			$attributes[] .= 'cosmid: '. $row["cosmid"] .'';
+			$attributes[] .= 'link: "'. $row["link"] .'"';
+			$attributes[] .= 'about: "'. $row["about"] .'"';
 
 			$attributestring = implode(", ", $attributes);
 			if($row["cosmid"] >= 1000000) {
