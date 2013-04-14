@@ -2,27 +2,31 @@ function onSelectFeatureFunction(feature, evt) {
 	var str = "<br><table>";
 	str = str + '<tr> <td style="text-align:center" colspan="2"><a href="'+ feature.attributes["link"] + '">' + feature.attributes["about"] + ' <img src="img/page_white_go.png" alt="Seite besuchen"></a></td></tr>';
 
+	if(feature.attributes["warning"] != null) {
+		str = str + '<tr> <td style="text-align:center;color:#f00;size:small" colspan="2">' + feature.attributes["warning"] + '</td></tr>';
+	}
+
 	for(var attr in feature.attributes) {
-		var dontshow = ["eggid", "cosmid", "link", "about"]
+		var dontshow = ["eggid", "cosmid", "link", "about", "warning"]
 		if(feature.attributes[attr] != "" && dontshow.indexOf(attr) == -1){
 			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + parseFloat(feature.attributes[attr]).toFixed(2) + "</td></tr>";
 		}
 	}
 	str = str + "</table>";
 	
-	if(feature.attributes['cosmid'] < 1000000){
+	var popupHeight = 170;
+	if(feature.attributes['cosmid'] > 1000000) {
+		popupHeight = 120
+	} 
+	if(feature.attributes["warning"] != null) {
+		popupHeight = popupHeight + 40;
+	}
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(200,170),
+		new OpenLayers.Size(200, popupHeight),
 		str,
 		true);
-		}
-	else popup = new OpenLayers.Popup(feature.id,
-		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(200,145),
-		str,
-		true);
-		
+
 	map.addPopup(popup);
 	map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
 }

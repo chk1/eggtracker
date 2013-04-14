@@ -49,11 +49,19 @@ if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, 
 
 			$attributes = array();
 			$streams = array("CO", "humidity", "NO2", "O3", "temperature");
+			$lastentrydate = 0;
 			foreach($streams as $stream) {
 				$query_params = array($row['eggid']);
 				$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 ORDER BY time DESC LIMIT 1 ", $query_params);
 				$row_ = pg_fetch_assoc($result_);
 				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
+				// find out if data is fairly recent (less than 24 hours old)
+				if($lastentrydate < strtotime($row_["time"])) {
+					$lastentrydate = strtotime($row_["time"]);
+				}
+			}
+			if(time()-$lastentrydate >= 24*60*60) {
+					$attributes[] .= 'warning: "Die Daten dieser Station sind veraltet"';
 			}
 			$attributes[] .= 'eggid: '. $row["eggid"] .'';
 			$attributes[] .= 'cosmid: '. $row["cosmid"] .'';
