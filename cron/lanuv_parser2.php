@@ -42,6 +42,7 @@ foreach($lanuvstations as $cosmid => $identifier) {
 			if($tmp_day <= strtotime($row_["last_entry_date"])) {
 				// find the earliest day from streams where data is present
 				$day = strtotime($row_["last_entry_date"])+3600*24; // add 1 day
+				if($day >= time()) { die("No new data available"); }
 			}
 		};
 	}

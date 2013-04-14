@@ -10,8 +10,14 @@ require_once("inc/config.inc.php");
 	or, when set and valid, the eggid's coordinates
 */
 if(isset($_GET["id"]) && is_numeric($_GET["id"])) $id = $_GET["id"];
-?>
 
+$dbconn = pg_connect("host=". $conf["db"]["host"] .
+					" port=". $conf["db"]["port"] . 
+					" dbname=". $conf["db"]["db"] .
+					" user=". $conf["db"]["user"] .
+					" password=". $conf["db"]["pass"]);
+if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, bitte versuchen Sie es später noch einmal.</p>'); }
+?>
 <div id="map"></div>
 
 <script src="static/openlayers/OpenLayers.debug.js"></script>
@@ -35,11 +41,6 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"])) $id = $_GET["id"];
 	map.setCenter(home, 13);
 
 <?php 
-		$dbconn = pg_connect("host=". $conf["db"]["host"] .
-							" port=". $conf["db"]["port"] . 
-							" dbname=". $conf["db"]["db"] .
-							" user=". $conf["db"]["user"] .
-							" password=". $conf["db"]["pass"]);
 		$result = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x, link, about FROM eggs WHERE active = true');
 		if(!$result) { die('SQL Error'); }
 		while($row = pg_fetch_assoc($result)) {
