@@ -59,7 +59,7 @@ if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, 
 				$query_params = array($row['eggid']);
 				$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 ORDER BY time DESC LIMIT 1 ", $query_params);
 				$row_ = pg_fetch_assoc($result_);
-				$attributes[] .= $name .': "'. $row_[strtolower($stream)] .'"';
+				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
 				// find out if data is fairly recent (less than 24 hours old)
 				if($lastentrydate < strtotime($row_["time"])) {
 					$lastentrydate = strtotime($row_["time"]);

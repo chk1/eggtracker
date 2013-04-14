@@ -1,3 +1,6 @@
+/*
+	Creates OpenLayers popup element when user clicked on a feature
+*/
 function onSelectFeatureFunction(feature, evt) {
 	var str = "<br><table>";
 	str = str + '<tr> <td style="text-align:center" colspan="2"><a href="'+ feature.attributes["link"] + '">' + feature.attributes["about"] + ' <img src="img/page_white_go.png" alt="Seite besuchen"></a></td></tr>';
@@ -6,12 +9,33 @@ function onSelectFeatureFunction(feature, evt) {
 		str = str + '<tr> <td style="text-align:center;color:#f00;size:small" colspan="2">' + feature.attributes["warning"] + '</td></tr>';
 	}
 
+	var names = new Array();
+	names["CO"] = "Kohlenstoffmonoxid";
+	names["humidity"] = "Luftfeuchtigkeit";
+	names["NO2"] = "Stickstoffdioxid";
+	names["O3"] = "Ozon";
+	names["temperature"] = "Temperatur";
+	var units = new Array();
+	units["CO"] = "ppb";
+	units["humidity"] = "%";
+	units["NO2"] = "ppb";
+	units["O3"] = "ppb";
+	units["temperature"] = "°C";
+	var limits = new Array();
+	limits["CO"] = 8.59*1000;
+	limits["NO2"] = 98.7*1000;
+	limits["O3"] = 47.3*1000;
+	
 	for(var attr in feature.attributes) {
 		var dontshow = ["eggid", "cosmid", "link", "about", "warning"]
-		if(feature.attributes[attr] != "" && dontshow.indexOf(attr) == -1){
-			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + parseFloat(feature.attributes[attr]).toFixed(2) + "</td></tr>";
+		if(feature.attributes[attr] != "" && dontshow.indexOf(attr) == -1) {
+			value = parseFloat(feature.attributes[attr]).toFixed(2)
+			var warn = "";
+			if(value >= limits[attr]) { warn = "color:#f00;font-weight:bold;" }
+			str = str + "<tr> <td class='l'>" + names[attr] + "</td> <td class='r' style='" + warn + "'>" + value + " " + units[attr] + "</td></tr>";
 		}
 	}
+
 	str = str + "</table>";
 	
 	var popupHeight = 170;
@@ -23,7 +47,7 @@ function onSelectFeatureFunction(feature, evt) {
 	}
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(250, popupHeight),
+		new OpenLayers.Size(275, popupHeight),
 		str,
 		true);
 
@@ -31,10 +55,17 @@ function onSelectFeatureFunction(feature, evt) {
 	map.panTo(new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y));
 }
 
+/*
+	Required so you can open more than one popup, or else site is "stuck"
+*/
 function onUnselectFeatureFunction(feature) {
 	return;
 }
 
+/*
+	Air Quality Egg layer
+	icon is an egg
+*/
 var egg_layer = new OpenLayers.Layer.Vector(
 	"<img src='./img/eggicon.png' class='legendicon'> Air Quality Egg",
 	{
@@ -45,6 +76,10 @@ var egg_layer = new OpenLayers.Layer.Vector(
 	}
 );
 
+/*
+	Lanuv station layer
+	icon is anemometer
+*/
 var lanuv_layer = new OpenLayers.Layer.Vector(
 	"<img src='./img/lanuvstation.png' class='legendicon'> Lanuv Station",
 	{
@@ -74,7 +109,6 @@ var map = new OpenLayers.Map({
 		}),
 		new OpenLayers.Control.Geolocate,
 		new OpenLayers.Control.Zoom()
-		// new OpenLayers.Control.LayerSwitcher()
 	],
 	layers: [
 		new OpenLayers.Layer.OSM("OpenStreetMap", null, {
@@ -86,6 +120,10 @@ var map = new OpenLayers.Map({
 	zoom: 12
 });
 
+
+/*
+	Define LayerSwitcher outside of the map element, so we can maximize it on page visit
+*/
 var switcherControl = new OpenLayers.Control.LayerSwitcher();
 map.addControl(switcherControl);
 switcherControl.maximizeControl();
@@ -106,8 +144,7 @@ function zoomToEggId(id) {
 }
 
 /*
-	Replace OpenLayers.SelectionControl in map object with the following lines,
-	because it doesn't work with multiple layers
+	Define Selection Control outside of map object because it doesn't work with multiple layers otherwise
 */
 var selectControl = new OpenLayers.Control.SelectFeature([egg_layer, lanuv_layer]);
 map.addControl(selectControl);
