@@ -15,6 +15,10 @@ $eggs = pg_query($dbconn, $abfrage);
 $i = 0;
 $res = array();
 
+echo "<div class= \"listvalues\">";
+
+echo "</br>Zurück zum <a href=\"/eggtracker/?action=list_values\">Ausgabeformular</a></br></br>";
+
 while ($helper = pg_fetch_assoc($eggs)){
 	$res[$i] = $helper;
 	$i++;
@@ -97,7 +101,7 @@ if (!$result) {
 #Abfrage ob die Tabelle leer ist
 $leer = pg_num_rows($result);
  if ($leer >0){
-	echo "<strong>$leer Werte f&uumlr $wo von EggID $ei</br></strong>";
+	echo "<h3>$leer Werte f&uumlr $wo von EggID $ei</br></h3>";
  }
  else{
 	 echo "<strong>Keine Werte f&uumlr $wo von EggID $ei</strong>";
@@ -105,7 +109,7 @@ $leer = pg_num_rows($result);
  }
 
 #Erstellung einer Tabelle mit den Ausgewählten Werten
-echo "<table border><tr>";
+echo "<table><tr>";
 $tabelle ="";
 #Tabellenüberschriften einfügen
 $header = explode (", ", $was);
@@ -142,26 +146,41 @@ while ($row = pg_fetch_row($result)) {
 		echo "<td>", "$row[1]", "</td>";
 		break;
 	
+	#10 Möglichkeiten
+	case "id, time";
+	case "id, validated";
+	case "id, outlier";
+	case "id, $wo"; 
+	case "time, $wo";
+	case "time, validated";
+	case "time, outlier";
+	case "$wo, outlier";
+	case "$wo, validated";
+	case "validated, outlier";
+		echo "<td>", "$row[0]", "</td>";
+		echo "<td>", "$row[1]", "</td>";
+		break;
+	#10 Möglichkeiten
 	case "id, time, $wo";
 	case "id, time, validated";
 	case "id, time, outlier";
 	case "id, $wo, validated";
 	case "id, $wo, outlier";
-	case "id, validated, outlier";	
+	case "id, validated, outlier";
+	case "id, $wo, outlier";	
 	case "time, $wo, validated";
 	case "time, $wo, outlier";
-	case "id, $wo, validated";
-	case "id, $wo, outlier";
 	case "$wo, validated, outlier";  
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
 		break;
-		
+	#5 Möglichkeiten	
 	case "id, time, $wo, validated"; 
 	case "id, time, $wo, outlier";
+	case "id, time, validated, outlier"; 
 	case "id, $wo, validated, outlier";
-	case "time, $wo, validated, outlier"; 	
+	case "time, $wo, validated, outlier";		
 		echo "<td>", "$row[0]", "</td>";
 		echo "<td>", "$row[1]", "</td>";
 		echo "<td>", "$row[2]", "</td>";
@@ -178,5 +197,6 @@ while ($row = pg_fetch_row($result)) {
 echo "</tr>";
   }
 }
-echo "</table>";
+echo "</table></br></br>";
+echo "</div>";
 ?>
