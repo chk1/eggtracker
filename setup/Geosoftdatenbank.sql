@@ -35,8 +35,8 @@ create table humidity(
 	eggid int not null,
 	time timestamp,
 	humidity numeric,
-	validated boolean,
-	outlier boolean default 'false',
+	validated boolean default 'false',
+	outlier boolean,
 	unique(eggid, time),
 	primary key (id),
 	foreign key (eggid) references eggs
@@ -49,8 +49,8 @@ create table co(
 	eggid int not null,
 	time timestamp,
 	co numeric,
-	validated boolean,
-	outlier boolean default 'false',
+	validated boolean default 'false',
+	outlier boolean,
 	unique(eggid, time),
 	primary key (id),
 	foreign key (eggid) references eggs
@@ -63,8 +63,8 @@ create table o3(
 	eggid int not null,
 	time timestamp,
 	o3 numeric,
-	validated boolean,
-	outlier boolean default 'false',
+	validated boolean default 'false',
+	outlier boolean,
 	unique(eggid, time),
 	primary key (id),
 	foreign key (eggid) references eggs
@@ -78,8 +78,8 @@ create table no2(
 	eggid int not null,
 	time timestamp,
 	no2 numeric,
-	validated boolean,
-	outlier boolean default 'false',
+	validated boolean default 'false',
+	outlier boolean,
 	unique(eggid, time),
 	primary key (id),
 	foreign key (eggid) references eggs

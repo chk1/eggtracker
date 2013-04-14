@@ -51,6 +51,9 @@ switch($action) {
 	case "list_values":
 		include("inc/list_values_formular.php"); 
 		break;
+	case "list_values_table":
+		include("inc/list_values.inc.php"); 
+		break;
 	case "contact":
 		include("inc/contact.inc.php");
 		break;

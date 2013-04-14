@@ -1,5 +1,5 @@
 <?php
-include("../inc/config.inc.php");
+include("inc/config.inc.php");
 #Übergabe der Verbindungsdaten
 $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" port=". $conf["db"]["port"] . 
