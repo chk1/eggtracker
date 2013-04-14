@@ -7,14 +7,14 @@ function createDropDown() {
 						" dbname=". $conf["db"]["db"] .
 						" user=". $conf["db"]["user"] .
 						" password=". $conf["db"]["pass"]);
-	$query = 'SELECT cosmid	FROM eggs WHERE active = true';
+	$query = 'SELECT * FROM eggs WHERE active = true';
 	$result = pg_query($dbconn, $query);
 	
 #dropdown menu fuer die Auswahl der Eier
 	$dropdown = '<select name="CosmID">
 	<option value="">Select...</option>';
 	while ($result2 = pg_fetch_assoc($result)) {
-			$dropdown .= '<option value="'.$result2['cosmid'].'">'."Cosm.com ID: ".$result2['cosmid'].'</option>'; 
+      $dropdown .= '<option value="'.$result2['cosmid'].'">'.$result2["about"].'</option>'; 
 	}		
 	$dropdown .= '</select>';
 
