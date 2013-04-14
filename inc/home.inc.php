@@ -48,13 +48,18 @@ if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, 
 			echo "\t"."point.transform(wgs84, osm_sphm);".PHP_EOL;
 
 			$attributes = array();
-			$streams = array("CO", "humidity", "NO2", "O3", "temperature");
+			$streams = array("CO" => "Kohlenstoffmonoxid", 
+				"humidity" => "Luftfeuchtigkeit", 
+				"NO2" => "Stickstoffdioxid", 
+				"O3" => "Ozon", 
+				"temperature" => "Temperatur");
+
 			$lastentrydate = 0;
-			foreach($streams as $stream) {
+			foreach($streams as $stream => $name) {
 				$query_params = array($row['eggid']);
 				$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 ORDER BY time DESC LIMIT 1 ", $query_params);
 				$row_ = pg_fetch_assoc($result_);
-				$attributes[] .= $stream .': "'. $row_[strtolower($stream)] .'"';
+				$attributes[] .= $name .': "'. $row_[strtolower($stream)] .'"';
 				// find out if data is fairly recent (less than 24 hours old)
 				if($lastentrydate < strtotime($row_["time"])) {
 					$lastentrydate = strtotime($row_["time"]);

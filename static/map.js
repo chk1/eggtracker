@@ -23,7 +23,7 @@ function onSelectFeatureFunction(feature, evt) {
 	}
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(200, popupHeight),
+		new OpenLayers.Size(250, popupHeight),
 		str,
 		true);
 

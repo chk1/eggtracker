@@ -11,7 +11,11 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 $eggs = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x, about FROM eggs WHERE active = true');
 if(!$eggs) { die('SQL Error'); }
 
-$streams = array("CO", "humidity", "NO2", "O3", "temperature");
+$streams = array("CO" => "Kohlenstoffmonoxid", 
+	"humidity" => "Luftfeuchtigkeit", 
+	"NO2" => "Stickstoffdioxid", 
+	"O3" => "Ozon", 
+	"temperature" => "Temperatur");
 ?>
 
 <script src="static/jquery/jquery-1.9.1.min.js"></script>
@@ -21,8 +25,8 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 
 <div style="margin:20px;">
 <?php
-	foreach($streams as $stream) {
-		echo '<h2>'.$stream.'</h2>'.PHP_EOL;
+	foreach($streams as $stream => $name) {
+		echo '<h2>'.$name.'</h2>'.PHP_EOL;
 		echo '<div class="flotgraph" id="'.$stream.'"></div>'.PHP_EOL;
 	}
 ?>
@@ -48,14 +52,14 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 	var data = [];
 <?php
 	// create empty arrays for all possible datastreams
-	foreach($streams as $stream) {
+	foreach($streams as $stream => $name) {
 		echo "var data".$stream." = [];".PHP_EOL;
 		echo 'data["'.$stream.'"] = [];'.PHP_EOL;
 	}
 
 	// fill each datastream array with data identified by eggid & datastream
 	while($egg = pg_fetch_assoc($eggs)) { // for each egg do...
-		foreach($streams as $stream) {
+		foreach($streams as $stream => $name) {
 			// fetch the latest data
 			$values[$stream] = array();
 
@@ -88,7 +92,7 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 	}
 
 	// make one graph per datastream
-	foreach($streams as $stream) {
+	foreach($streams as $stream => $name) {
 		echo '$.plot("#'.$stream.'", data["'.$stream.'"], options);'.PHP_EOL;
 	}
 ?>
