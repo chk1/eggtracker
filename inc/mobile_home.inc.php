@@ -1,4 +1,4 @@
-<p>
+<p align="center">
 <a href="./?action="><img src="/eggtracker/img/mobile_mapview.png" /></a><br>
 
 <a href="./?action=diagram"><img src="/eggtracker/img/mobile_chartview.png"/></a><br>
