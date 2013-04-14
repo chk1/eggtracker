@@ -56,7 +56,7 @@ print '<p>
               Zeitstempel<br />
               <input type="checkbox" name="Wert[value]" value="1" />
               Wert<br />
-              <input type="checkbox" name="Wert[valid]" value="1" />
+              <input type="checkbox" name="Wert[validated]" value="1" />
               Validiert?<br />
               <input type="checkbox" name="Wert[outlier]" value="1" />
             Ausreißer?</div></th>
@@ -86,7 +86,7 @@ print '<p>
 <script src="static/jquery/jquery-ui-1.10.2.custom.min.js"></script> <!-- custom = Core + Datepicker + Slider -->
 <script src="static/jquery/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript">
-var options = { dateFormat: "yy-mm-dd", timeFormat: "hh:mm" };
+var options = { dateFormat: "yy-mm-dd", timeFormat: "HH:mm" };
 $('#datumvon').datetimepicker(options);
 $('#datumbis').datetimepicker(options);
 </script>

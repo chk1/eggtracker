@@ -97,7 +97,7 @@ if (!$result) {
 #Abfrage ob die Tabelle leer ist
 $leer = pg_num_rows($result);
  if ($leer >0){
-	echo "<strong>$leer Werte f&uumlr $wo von EggID $ei</strong>";
+	echo "<strong>$leer Werte f&uumlr $wo von EggID $ei</br></strong>";
  }
  else{
 	 echo "<strong>Keine Werte f&uumlr $wo von EggID $ei</strong>";
@@ -105,7 +105,19 @@ $leer = pg_num_rows($result);
  }
 
 #Erstellung einer Tabelle mit den Ausgewählten Werten
-echo "<table border>";
+echo "<table border><tr>";
+$tabelle ="";
+#Tabellenüberschriften einfügen
+$header = explode (", ", $was);
+$i = 0;
+while($i <= count($header)-1){
+	$tabelle .= "<th>".$header[$i]."</th>";
+	$i++;
+}
+
+$tabelle .= "</tr>";
+echo $tabelle;
+
 while ($row = pg_fetch_row($result)) {
   echo "<tr>";
   switch ($was) {
