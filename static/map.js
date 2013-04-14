@@ -1,16 +1,12 @@
 function onSelectFeatureFunction(feature, evt) {
 	var str = "<br><table>";
-	if(feature.attributes['cosmid'] < 1000000){
-	var str = str + '<tr> <td class="l">Cosm ID</td> <td class="r"> <a href=\"http://www.cosm.com/feeds/'+ feature.attributes["cosmid"] + '\">' + feature.attributes["cosmid"] + '</a></td></tr>';
-	}
-	else var str = str + '<tr> <td class="l">Cosm ID</td> <td class="r"> <a href=\"http://www.cosm.com/feeds/'+ feature.attributes["cosmid"] + '\">' + feature.attributes["cosmid"] + '</a></td></tr>';
+	str = str + '<tr> <td style="text-align:center" colspan="2"><a href="'+ feature.attributes["link"] + '">' + feature.attributes["about"] + ' <img src="img/page_white_go.png" alt="Seite besuchen"></a></td></tr>';
+
 	for(var attr in feature.attributes) {
-		if(attr != "eggid" && attr != "cosmid"){
+		var dontshow = ["eggid", "cosmid", "link", "about"]
+		if(feature.attributes[attr] != "" && dontshow.indexOf(attr)){
 			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + feature.attributes[attr] + "</td></tr>";
 		}
-		
-		
-		
 	}
 	str = str + "</table>";
 	

@@ -8,7 +8,7 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
-$eggs = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x FROM eggs WHERE active = true');
+$eggs = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x, about FROM eggs WHERE active = true');
 if(!$eggs) { die('SQL Error'); }
 
 $streams = array("CO", "humidity", "NO2", "O3", "temperature");
@@ -59,9 +59,8 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 			// fetch the latest data
 			$values[$stream] = array();
 
-			// remove time..BETWEEN later, just for demo
 			$query_params = array($egg['eggid']);
-			$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 AND validated = 'true' AND outlier = 'false' ORDER BY TIME DESC", $query_params);// AND time BETWEEN '2012-11-05' AND '2012-11-07' ORDER BY time DESC", $query_params);
+			$result_ = pg_query_params($dbconn, "SELECT time, {$stream} FROM {$stream} WHERE eggid = $1 AND validated = 'true' AND outlier = 'false' AND id % 10 = 0 ORDER BY TIME DESC", $query_params);// AND time BETWEEN '2012-11-05' AND '2012-11-07' ORDER BY time DESC", $query_params);
 			while($row_ = pg_fetch_assoc($result_)) {
 				 $values[$stream][] = "[". strtotime($row_["time"])*1000 .", ".$row_[strtolower($stream)]."]";
 			}
@@ -70,12 +69,14 @@ $streams = array("CO", "humidity", "NO2", "O3", "temperature");
 			// for each egg<->datastream combination, create a dataset...
 			echo "var dataset = {";
 				echo '"egg'.$egg['eggid'].''.$stream .'": { '.PHP_EOL;
-					if($egg['cosmid'] >= 1000000) {
+					/*if($egg['cosmid'] >= 1000000) {
 						echo "\t".'label: "LANUV '.$egg['eggid'].' '.$stream.'", '.PHP_EOL;
 					} else {
 						echo "\t".'label: "Egg '.$egg['eggid'].' '.$stream.'", '.PHP_EOL;
 					}
-					
+					*/
+					echo "\t".'label: "'.$egg['about'].'", '.PHP_EOL;
+
 					echo "\t"."data: [". $datastring ."],".PHP_EOL;
 				echo "}";
 			echo "};".PHP_EOL;
