@@ -105,7 +105,19 @@ $leer = pg_num_rows($result);
  }
 
 #Erstellung einer Tabelle mit den Ausgewählten Werten
-echo "<table border>";
+echo "<table border><tr>";
+$tabelle ="";
+#Tabellenüberschriften einfügen
+$header = explode (", ", $was);
+$i = 0;
+while($i <= count($header)-1){
+	$tabelle .= "<th>".$header[$i]."</th>";
+	$i++;
+}
+
+$tabelle .= "</tr>";
+echo $tabelle;
+
 while ($row = pg_fetch_row($result)) {
   echo "<tr>";
   switch ($was) {

@@ -56,7 +56,7 @@ print '<p>
               Zeitstempel<br />
               <input type="checkbox" name="Wert[value]" value="1" />
               Wert<br />
-              <input type="checkbox" name="Wert[valid]" value="1" />
+              <input type="checkbox" name="Wert[validated]" value="1" />
               Validiert?<br />
               <input type="checkbox" name="Wert[outlier]" value="1" />
             Ausreißer?</div></th>
