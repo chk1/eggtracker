@@ -86,7 +86,7 @@ print '<p>
 <script src="static/jquery/jquery-ui-1.10.2.custom.min.js"></script> <!-- custom = Core + Datepicker + Slider -->
 <script src="static/jquery/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript">
-var options = { dateFormat: "yy-mm-dd", timeFormat: "hh:mm" };
+var options = { dateFormat: "yy-mm-dd", timeFormat: "HH:mm" };
 $('#datumvon').datetimepicker(options);
 $('#datumbis').datetimepicker(options);
 </script>

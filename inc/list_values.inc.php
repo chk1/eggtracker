@@ -97,7 +97,7 @@ if (!$result) {
 #Abfrage ob die Tabelle leer ist
 $leer = pg_num_rows($result);
  if ($leer >0){
-	echo "<strong>$leer Werte f&uumlr $wo von EggID $ei</strong>";
+	echo "<strong>$leer Werte f&uumlr $wo von EggID $ei</br></strong>";
  }
  else{
 	 echo "<strong>Keine Werte f&uumlr $wo von EggID $ei</strong>";
