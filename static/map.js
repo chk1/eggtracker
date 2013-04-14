@@ -5,7 +5,7 @@ function onSelectFeatureFunction(feature, evt) {
 	for(var attr in feature.attributes) {
 		var dontshow = ["eggid", "cosmid", "link", "about"]
 		if(feature.attributes[attr] != "" && dontshow.indexOf(attr) == -1){
-			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + feature.attributes[attr] + "</td></tr>";
+			str = str + "<tr> <td class='l'>" + attr + "</td> <td class='r'>" + parseFloat(feature.attributes[attr]).toFixed(2) + "</td></tr>";
 		}
 	}
 	str = str + "</table>";
