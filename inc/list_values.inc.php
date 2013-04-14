@@ -15,6 +15,10 @@ $eggs = pg_query($dbconn, $abfrage);
 $i = 0;
 $res = array();
 
+echo "<div class= \"listvalues\">";
+
+echo "</br>Zurück zum <a href=\"/eggtracker/?action=list_values\">Ausgabeformular</a></br></br>";
+
 while ($helper = pg_fetch_assoc($eggs)){
 	$res[$i] = $helper;
 	$i++;
@@ -97,7 +101,7 @@ if (!$result) {
 #Abfrage ob die Tabelle leer ist
 $leer = pg_num_rows($result);
  if ($leer >0){
-	echo "<strong>$leer Werte f&uumlr $wo von EggID $ei</br></strong>";
+	echo "<h3>$leer Werte f&uumlr $wo von EggID $ei</br></h3>";
  }
  else{
 	 echo "<strong>Keine Werte f&uumlr $wo von EggID $ei</strong>";
@@ -105,7 +109,7 @@ $leer = pg_num_rows($result);
  }
 
 #Erstellung einer Tabelle mit den Ausgewählten Werten
-echo "<table border><tr>";
+echo "<table><tr>";
 $tabelle ="";
 #Tabellenüberschriften einfügen
 $header = explode (", ", $was);
@@ -178,5 +182,6 @@ while ($row = pg_fetch_row($result)) {
 echo "</tr>";
   }
 }
-echo "</table>";
+echo "</table></br></br>";
+echo "</div>";
 ?>

@@ -108,10 +108,23 @@ div#content form {
 	font-size: 10px; 
 }
 
-div.abouttext, div.tabledownload, div.contactform, div.listeggs {
+div.abouttext, div.tabledownload, div.contactform, div.listeggs, div.listvalues {
 	width:60%;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+div.listvalues table{
+	border-collapse:collapse;
+}
+div.listvalues td, div.listvalues th{
+	border:1px solid #000;
+}
+div.listvalues th{
+	border:2px solid #000;
+}
+div.listvalues h3{
+	margin-top:0px
 }
 
 div.listeggs p {
