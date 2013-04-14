@@ -10,7 +10,7 @@ include("config.inc.php");
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta http-equiv="X-UA-Compatible" content="IE=9" />
 	<link rel="stylesheet" type="text/css" href="static/css/style.css">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="eggicon.gif" type="image/gif">
 	<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="static/css/style-ie.css" />
 	<![endif]-->
