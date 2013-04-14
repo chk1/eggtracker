@@ -27,7 +27,7 @@ $dropped = createDropDown();
 
 print '<p>
 
-<form method="POST" action="inc/list_values.inc.php" target="_blank">
+<form method="POST" action="list_values.php" target="_blank">
   <div class="tabledownload" align="left"><h2>Tabellenansicht</h2>
     Von welchem Ei möchen Sie die Daten sehen?<br>
         '.$dropped.'<br />
