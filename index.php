@@ -57,6 +57,9 @@ switch($action) {
 	case "contact":
 		include("inc/contact.inc.php");
 		break;
+	case "blank":
+		include("inc/hintergrund.php");
+		break;
 }
 
 /*
