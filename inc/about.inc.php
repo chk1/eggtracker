@@ -13,20 +13,12 @@ Die Luftdaten werden dabei von Air Quality Eggs (<a href="http://airqualityegg.c
 Alle verarbeiteten <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=list">Datenquellen</a> werden in einer zentralen Tabelle angezeigt.
 Ein <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=export_form">Datenexport</a> ist als XML, CSV oder JSON möglich.</p>
 
-<table style="width:100%">
-<tr>
-<td style="text-align:center">
+<div style="width:100%;text-align:center">
 <a href="https://ifgi.uni-muenster.de/"><img src="img/logo_ifgi.png" alt="ifgi" class="poweredby logo"></a> 
-</td><td style="text-align:center">
 <a href="http://www.airqualityegg.com"><img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo"></a> 
-</td><td style="text-align:center">
 <a href="http://www.cosm.com"><img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo"></a> 
-</td><td style="text-align:center">
 <a href="http://www.openlayers.org/"><img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo"></a> 
-</td><td style="text-align:center">
 <a href="http://www.famfamfam.com/"><img src="img/logo_fff.png" alt="FamFamFam" class="poweredby logo"></a> 
-</td>
-</tr>
-</table>
+</div>
 
 </div>
