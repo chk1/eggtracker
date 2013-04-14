@@ -32,10 +32,9 @@ print '<p>
     Von welchem Ei möchen Sie die Daten sehen?<br>
         '.$dropped.'<br />
         <br>
-    <table width="650">
+    <table>
           <tr>
             <th><div align="left">Was möchten Sie sehen?</div></th>
-            <th><div align="left">Welche Parameter möchten Sie anzeigen lassen?</div></th>
           </tr>
           <tr>
             <th width="260"><div align="left">
@@ -48,8 +47,18 @@ print '<p>
               <input type="radio" name="Parameter" value="4" />
               Temperatur<br />
               <input type="radio" name="Parameter" value="5" />
-            Luftfeuchtigkeit</div></th>
-            <th width="378"><div align="left">
+            Luftfeuchtigkeit</div>
+            </th>
+          </tr>
+    </table></br>
+    <table>
+    	<tr>
+        	<th>
+        		<div align="left">Welche Parameter möchten Sie anzeigen lassen?</div>
+        	</th>
+        </tr>
+       	<tr>
+       		<td width="378"><div align="left">
               <input type="checkbox" name="Wert[id]" value="1" />
               Werte ID<br />
               <input type="checkbox" name="Wert[time]" value="1" />
@@ -59,16 +68,23 @@ print '<p>
               <input type="checkbox" name="Wert[validated]" value="1" />
               Validiert?<br />
               <input type="checkbox" name="Wert[outlier]" value="1" />
-            Ausreißer?</div></th>
-          </tr>
-          <tr>
-            <td><br />
+            	Ausreißer?</div>
+            </td>
+        </tr>
+    </table></br>
+	
+	<table>	 
+		<tr>
+			<th>        
               Wählen Sie den Zeitraum aus.<br />
-              <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
-		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
-		</td>
-            <td>&nbsp;</td>
-          </tr>
+            </th>
+        </tr>
+		<tr>
+			<td>
+        		<input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
+				<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
+			</td>
+		</tr>
     </table>
         <br />
         <input type="submit" value="Abrufen"/>
