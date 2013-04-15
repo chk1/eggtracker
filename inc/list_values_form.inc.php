@@ -7,6 +7,7 @@ function createDropDown() {
 						" dbname=". $conf["db"]["db"] .
 						" user=". $conf["db"]["user"] .
 						" password=". $conf["db"]["pass"]);
+	if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, bitte versuchen Sie es später noch einmal.</p>'); }
 	$query = 'SELECT *	FROM eggs WHERE active = true ';
 	$result = pg_query($dbconn, $query);
 	
@@ -28,51 +29,51 @@ $dropped = createDropDown();
 print '<p>
 
 <form method="POST" action="?action=list_values_table" target="_blank">
-  <div class="tabledownload" align="left"><h2>Tabellenansicht</h2>
-    Von welchem Ei möchen Sie die Daten sehen?<br>
-        '.$dropped.'<br />
-        <br>
-    <table width="650">
-          <tr>
-            <th><div align="left">Was möchten Sie sehen?</div></th>
-            <th><div align="left">Welche Parameter möchten Sie anzeigen lassen?</div></th>
-          </tr>
-          <tr>
-            <th width="260"><div align="left">
-              <input type="radio" name="Parameter" value="1" />
-              Ozon<br />
-              <input type="radio" name="Parameter" value="2" />
-              Stickstoffdioxid<br />
-              <input type="radio" name="Parameter" value="3" />
-              Kohlenstoffmonoxid<br />
-              <input type="radio" name="Parameter" value="4" />
-              Temperatur<br />
-              <input type="radio" name="Parameter" value="5" />
-            Luftfeuchtigkeit</div></th>
-            <th width="378"><div align="left">
-              <input type="checkbox" name="Wert[id]" value="1" />
-              Werte ID<br />
-              <input type="checkbox" name="Wert[time]" value="1" />
-              Zeitstempel<br />
-              <input type="checkbox" name="Wert[value]" value="1" />
-              Wert<br />
-              <input type="checkbox" name="Wert[validated]" value="1" />
-              Validiert?<br />
-              <input type="checkbox" name="Wert[outlier]" value="1" />
-            Ausreißer?</div></th>
-          </tr>
-          <tr>
-            <td><br />
-              Wählen Sie den Zeitraum aus.<br />
-              <input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
+	<div class="tabledownload" align="left"><h2>Tabellenansicht</h2>
+		Von welchem Ei möchen Sie die Daten sehen?<br>
+				'.$dropped.'<br />
+				<br>
+		<table width="650">
+					<tr>
+						<th><div align="left">Was möchten Sie sehen?</div></th>
+						<th><div align="left">Welche Parameter möchten Sie anzeigen lassen?</div></th>
+					</tr>
+					<tr>
+						<th width="260"><div align="left">
+							<input type="radio" name="Parameter" value="1" />
+							Ozon<br />
+							<input type="radio" name="Parameter" value="2" />
+							Stickstoffdioxid<br />
+							<input type="radio" name="Parameter" value="3" />
+							Kohlenstoffmonoxid<br />
+							<input type="radio" name="Parameter" value="4" />
+							Temperatur<br />
+							<input type="radio" name="Parameter" value="5" />
+						Luftfeuchtigkeit</div></th>
+						<th width="378"><div align="left">
+							<input type="checkbox" name="Wert[id]" value="1" />
+							Werte ID<br />
+							<input type="checkbox" name="Wert[time]" value="1" />
+							Zeitstempel<br />
+							<input type="checkbox" name="Wert[value]" value="1" />
+							Wert<br />
+							<input type="checkbox" name="Wert[validated]" value="1" />
+							Validiert?<br />
+							<input type="checkbox" name="Wert[outlier]" value="1" />
+						Ausreißer?</div></th>
+					</tr>
+					<tr>
+						<td><br />
+							Wählen Sie den Zeitraum aus.<br />
+							<input id="datumvon" type="text" name="von" value="Von (YYYY-MM-TT)"><br>
 		<input id="datumbis" type="text" name="bis" value="Bis (YYYY-MM-TT) "><br>
 		</td>
-            <td>&nbsp;</td>
-          </tr>
-    </table>
-        <br />
-        <input type="submit" value="Abrufen"/>
-  </div>
+						<td>&nbsp;</td>
+					</tr>
+		</table>
+				<br />
+				<input type="submit" value="Abrufen"/>
+	</div>
 </form>
 
 

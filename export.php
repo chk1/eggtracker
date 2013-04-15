@@ -6,12 +6,11 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
+if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, bitte versuchen Sie es später noch einmal.</p>'); }
 
-#Abfrage des Dropdownmenüs
 $abfrage = "SELECT cosmid FROM eggs";
 $eggs = pg_query($dbconn, $abfrage);
 
-#Prüfung ob cosmID auch wirklich in der Datenbank ist
 $i = 0;
 $res = array();
 

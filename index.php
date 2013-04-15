@@ -46,10 +46,10 @@ switch($action) {
 		include("inc/mobile_home.inc.php"); 
 		break;
 	case "export_form":
-		include("inc/export-formular.php"); 
+		include("inc/export_form.inc.php"); 
 		break;
 	case "list_values":
-		include("inc/list_values_formular.php"); 
+		include("inc/list_values_for.inc.php"); 
 		break;
 	case "list_values_table":
 		include("inc/list_values.inc.php"); 
@@ -58,7 +58,7 @@ switch($action) {
 		include("inc/contact.inc.php");
 		break;
 	case "blank":
-		include("inc/hintergrund.php");
+		include("inc/template.php");
 		break;
 }
 

@@ -6,6 +6,7 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
+if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, bitte versuchen Sie es später noch einmal.</p>'); }
 
 $tabelle = "<table>
 	<tr>
@@ -25,7 +26,7 @@ while($row = pg_fetch_assoc($result)) {
 			</td>
 		</tr>';
 }
-$tabelle.= '</table><p class="listtext">In dieser Tabelle werden alle Air Quality Eggs,
+$tabelle.= '</table><p class="listtext">In dieser Tabelle werden alle Air Quality Eggs gelistet,
 						 die in einem Radius von 25km um das Stadtzentrum
 						 von Münster liegen und Luftdaten sammeln. Diese
 						 Daten werden dann von unserem System verarbeitet</table>';

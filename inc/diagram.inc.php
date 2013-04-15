@@ -8,6 +8,8 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 					" dbname=". $conf["db"]["db"] .
 					" user=". $conf["db"]["user"] .
 					" password=". $conf["db"]["pass"]);
+if(!$dbconn) { die('<p>Die Datenbankverbindung konnte nicht hergestellt werden, bitte versuchen Sie es später noch einmal.</p>'); }
+
 $eggs = pg_query($dbconn, 'SELECT eggid, cosmid, ST_Y(geom) as y, ST_X(geom) as x, about FROM eggs WHERE active = true');
 if(!$eggs) { die('SQL Error'); }
 
