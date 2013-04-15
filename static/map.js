@@ -126,7 +126,8 @@ var map = new OpenLayers.Map({
 			}
 		}),
 		new OpenLayers.Control.Geolocate,
-		new OpenLayers.Control.Zoom()
+		new OpenLayers.Control.Zoom(),
+		new OpenLayers.Control.Navigation()
 	],
 	layers: [
 		new OpenLayers.Layer.OSM("OpenStreetMap", null, {
