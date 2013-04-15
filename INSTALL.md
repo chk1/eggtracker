@@ -37,18 +37,18 @@ Afterwards, add the cosmid and unique identifier to the parser `cron/lanuv_parse
 Change your directories accordingly.
 * Set up cron jobs for Air Quality Egg data collection
 
-        */3 * * * * (cd /var/www/eggtracker/cron && php fetch_historic_data.php) > /var/www/eggtracker/log/log.txt
+        */3 * * * * (cd /var/www/eggtracker/cron && php fetch_historic_data.php) > /var/www/eggtracker/logs/log.txt
 
 * Set up cron jobs for Lanuv data collection
 
-        */5 * * * * (cd /var/www/eggtracker/cron && php lanuv_parser2.php) > /var/www/eggtracker/log/log.txt
+        */5 * * * * (cd /var/www/eggtracker/cron && php lanuv_parser2.php) > /var/www/eggtracker/logs/log.txt
 
 * Set up cron jobs for data validation
 
-        */5 * * * * (cd /var/www/eggtracker/cron && php validate.php) > /var/www/eggtracker/log/log.txt
+        */5 * * * * (cd /var/www/eggtracker/cron && php validate.php) > /var/www/eggtracker/logs/log.txt
 
 * Set up daily cron jobs for egg radius search
 
-        0 0 * * * (cd /var/www/eggtracker/cron && php query_eggs.php) > /var/www/eggtracker/log/log.txt
+        0 0 * * * (cd /var/www/eggtracker/cron && php query_eggs.php) > /var/www/eggtracker/logs/log.txt
 
 Periodically it can happen that the parser is stuck and won't insert new data. This is the case when the Lanuv station or Air Quality Egg have a data hole, i.e. don't deliver data for a short window of time. 
