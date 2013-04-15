@@ -49,7 +49,7 @@ switch($action) {
 		include("inc/export_form.inc.php"); 
 		break;
 	case "list_values":
-		include("inc/list_values_for.inc.php"); 
+		include("inc/list_values_form.inc.php"); 
 		break;
 	case "list_values_table":
 		include("inc/list_values.inc.php"); 
