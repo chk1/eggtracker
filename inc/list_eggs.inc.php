@@ -25,7 +25,7 @@ while($row = pg_fetch_assoc($result)) {
 			</td>
 		</tr>';
 }
-$tabelle.= '</table><p class="listtext">In dieser Tabelle werden alle Air Quality Eggs,
+$tabelle.= '</table><p class="listtext">In dieser Tabelle werden alle Air Quality Eggs gelistet,
 						 die in einem Radius von 25km um das Stadtzentrum
 						 von Münster liegen und Luftdaten sammeln. Diese
 						 Daten werden dann von unserem System verarbeitet</table>';
