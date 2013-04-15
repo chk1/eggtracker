@@ -58,7 +58,7 @@ switch($action) {
 		include("inc/contact.inc.php");
 		break;
 	case "blank":
-		include("inc/template.php");
+		include("inc/template.inc.php");
 		break;
 }
 
