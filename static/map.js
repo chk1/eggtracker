@@ -66,7 +66,7 @@ function onSelectFeatureFunction(feature, evt) {
 	// create the openlayers popup element and display
 	popup = new OpenLayers.Popup(feature.id,
 		feature.geometry.getBounds().getCenterLonLat(),
-		new OpenLayers.Size(275, popupHeight),
+		new OpenLayers.Size(285, popupHeight),
 		str,
 		true);
 	map.addPopup(popup);
