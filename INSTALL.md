@@ -27,6 +27,12 @@ Use your database tool (pgAdmin or command line tool) to add Lanuv Stations to t
     cosmid   id  geom  active  about       link
     1000001  81  ...   TRUE    Lanuv MSGE  http://www.lanuv.nrw.de/luft/temes/heut/MSGE.htm
 
+Afterwards, add the cosmid and unique identifier to the parser `cron/lanuv_parser2.php`:
+
+    $lanuvstations = array(
+	1000001 => "MSGE"
+    );
+
 ### Cronjobs
 Change your directories accordingly.
 * Set up cron jobs for Air Quality Egg data collection
@@ -44,3 +50,5 @@ Change your directories accordingly.
 * Set up daily cron jobs for egg radius search
 
         0 0 * * * (cd /var/www/eggtracker/cron && php query_eggs.php) > /var/www/eggtracker/log/log.txt
+
+Periodically it can happen that the parser is stuck and won't insert new data. This is the case when the Lanuv station or Air Quality Egg have a data hole, i.e. don't deliver data for a short window of time. 

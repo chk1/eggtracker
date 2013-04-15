@@ -19,6 +19,10 @@ $dbconn = pg_connect("host=". $conf["db"]["host"] .
 $streams = array("no2", "o3");
 $chemical_weights = array("no2" => 46.01, "o3" => 48);
 
+/*
+	For each Lanuv station iterate over all possible streams/parameters. 
+	Check when the last measurement was inserted and then fetch data for the day afterwards.
+*/
 foreach($lanuvstations as $cosmid => $identifier) {
 	$query_params = array($cosmid);
 	$result = pg_query_params($dbconn, "SELECT eggid FROM eggs WHERE cosmid=$1;", $query_params);
@@ -52,6 +56,9 @@ foreach($lanuvstations as $cosmid => $identifier) {
 
 
 /*
+	This is the function that actually parses Lanuv's website and extracts the information.
+	Calls insertIntoDatabase() to insert the data.
+
 	$day format: md (example: november 1st is 1101)
 	$identifier: LANUV station identifier
 	$cosmid: 	 unique database id for that station
@@ -92,6 +99,9 @@ function getDataSince($timestamp, $eggid, $identifier) {
 	}
 }
 
+/*
+	Insert function for measurements
+*/
 function insertIntoDatabase($eggid, $stream, $data_value, $data_datetime) {
 	global $dbconn;
 	// use "upsert" technique to INSERT only when no duplicate key exists and thereby eliminating script errors
@@ -111,6 +121,9 @@ function insertIntoDatabase($eggid, $stream, $data_value, $data_datetime) {
 	return false;
 }
 
+/*
+	Convert Lanuv's measurement units from microgram per m^3 (um/m3) to parts per billion (ppb, like AQE on Cosm)
+*/
 function microgramPerMeterToPPB($value, $chemical_weight) {
 	// more information: http://www.smarte.org/smarte/dynamic/resource/sn-units-of-measure.xml.pdf
 	$ppm = 24.25 * $value / $chemical_weight;
