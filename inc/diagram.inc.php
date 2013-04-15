@@ -18,6 +18,13 @@ $streams = array("CO" => "Kohlenstoffmonoxid",
 	"NO2" => "Stickstoffdioxid", 
 	"O3" => "Ozon", 
 	"temperature" => "Temperatur");
+
+$units["CO"] = '<span title="parts per billion">ppb</span>';
+$units["humidity"] = "%";
+$units["NO2"] = '<span title="parts per billion">ppb</span>';
+$units["O3"] = '<span title="parts per billion">ppb</span>';
+$units["temperature"] = "°C";
+
 ?>
 
 <script src="static/jquery/jquery-1.9.1.min.js"></script>
@@ -28,7 +35,7 @@ $streams = array("CO" => "Kohlenstoffmonoxid",
 <div style="margin:20px;">
 <?php
 	foreach($streams as $stream => $name) {
-		echo '<h2>'.$name.'</h2>'.PHP_EOL;
+		echo '<h2>'. $name .' (in '. $units[$stream] .')</h2>'.PHP_EOL;
 		echo '<div class="flotgraph" id="'.$stream.'"></div>'.PHP_EOL;
 	}
 ?>

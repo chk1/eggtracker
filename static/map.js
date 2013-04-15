@@ -23,10 +23,10 @@ function onSelectFeatureFunction(feature, evt) {
 	
 	// measurement units
 	var units = new Array();
-	units["CO"] = "ppb";
+	units["CO"] = '<span title="parts per billion">ppb</span>';
 	units["humidity"] = "%";
-	units["NO2"] = "ppb";
-	units["O3"] = "ppb";
+	units["NO2"] = '<span title="parts per billion">ppb</span>';
+	units["O3"] = '<span title="parts per billion">ppb</span>';
 	units["temperature"] = "°C";
 
 	// high limits for measurements (multiplied by 1000 to match 'parts per billion')
