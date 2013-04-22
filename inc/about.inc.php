@@ -18,7 +18,11 @@ Ein <a href="http://giv-geosoft2a.uni-muenster.de/eggtracker/?action=export_form
 <a href="http://www.airqualityegg.com"><img src="img/logo_aqe.png" alt="Air Quality Egg" class="poweredby logo"></a> 
 <a href="http://www.cosm.com"><img src="img/logo_cosm.png" alt="Cosm" class="poweredby logo"></a> 
 <a href="http://www.openlayers.org/"><img src="img/logo_ol.png" alt="Open Layers" class="poweredby logo"></a> 
-<a href="http://www.famfamfam.com/"><img src="img/logo_fff.png" alt="FamFamFam" class="poweredby logo"></a> 
 </div>
+
+<br>
+<hr style="width:100px">
+
+<p align="justify" style="font-size:smaller">Eggtracker ist kostenlose, freie Software, bereitgestellt unter der <a href="http://www.gnu.org/licenses/lgpl-3.0.txt" target="_blank">LGPL</a>. Der Quelltext kann <a href="https://github.com/chk1/eggtracker" target="_blank">über Github bezogen werden</a>. Die Rechte an den Logos vom Institut für Geoinformatik, Air Quality Egg, Cosm, OpenLayers sowie Icons von <a href="http://www.famfamfam.com/" target="_blank">FamFamFam</a> unterliegen ihren jeweiligen Eigentümern. Kartenmaterial wird von <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> bereitgestellt.</p>
 
 </div>
